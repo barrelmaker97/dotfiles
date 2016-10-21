@@ -22,7 +22,7 @@ alias ll='ls -alhFo'
 alias la='ls -A'
 alias l='ls -CF'
 
-# tmux sesion alias
+# tmux session alias
 alias mux='tmux new -s Home'
 
 # typing is hard
