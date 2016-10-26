@@ -1,6 +1,4 @@
-#
 # .bash_aliases
-#
 
 # ssh aliases
 alias tiger='ssh z1766022@tiger.cs.niu.edu'

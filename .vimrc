@@ -1,3 +1,5 @@
+" .vimrc
+
 "Plugins
 call plug#begin()
 Plug 'morhetz/gruvbox'
