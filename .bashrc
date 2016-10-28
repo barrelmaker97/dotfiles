@@ -12,7 +12,9 @@ HISTCONTROL=ignoreboth
 # Append to history file, don't overwrite
 shopt -s histappend
 
-# Set history length
+# Set history options
+export HISTIGNORE="exit:ls:ll:la:c:clear:cd"
+HISTTIMEFORMAT='%F %T '
 HISTSIZE=1000
 HISTFILESIZE=2000
 
