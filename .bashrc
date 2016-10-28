@@ -24,8 +24,37 @@ shopt -s checkwinsize
 # Make less more friendly for non-text input files
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Set prompt
-PS1='\e[1;32m\u@\h\e[m:\e[1;34m\w\e[m\$ '
+Red='\[\e[01;31m\]'
+Green='\[\e[01;32m\]'
+Yellow='\[\e[01;33m\]'
+Blue='\[\e[01;34m\]'
+Cyan='\[\e[01;36m\]'
+White='\[\e[01;37m\]'
+Reset='\[\e[00m\]'
+
+parse_git_branch()
+{
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+parse_git_dirty()
+{
+	if [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]]; then
+		echo "$Yellow$(parse_git_branch)"
+	else
+		echo "$Cyan$(parse_git_branch)"
+	fi
+}
+
+set_prompt ()
+{
+	PS1="$Green\u@\h$White:$Blue\w"
+	if [ -n "$(parse_git_branch)" ]; then
+		PS1+="$White on $(parse_git_dirty)"
+	fi
+	PS1+="$White\$ $Reset"
+}
+PROMPT_COMMAND='set_prompt'
 
 # If this is an xterm set title to user@host:dir
 case "$TERM" in
