@@ -32,28 +32,30 @@ Cyan='\[\e[01;36m\]'
 White='\[\e[01;37m\]'
 Reset='\[\e[00m\]'
 
-parse_git_branch()
+# Set prompt
+git_branch()
 {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-parse_git_dirty()
+git_clean()
 {
-	if [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]]; then
-		echo "$Yellow$(parse_git_branch)"
+	if [[ $(git status 2> /dev/null | tail -1) != "nothing to commit, working directory clean" ]]; then
+		echo "$Yellow$(git_branch)"
 	else
-		echo "$Cyan$(parse_git_branch)"
+		echo "$Cyan$(git_branch)"
 	fi
 }
 
 set_prompt ()
 {
 	PS1="$Green\u@\h$White:$Blue\w"
-	if [ -n "$(parse_git_branch)" ]; then
-		PS1+="$White on $(parse_git_dirty)"
+	if [ -n "$(git_branch)" ]; then
+		PS1+="$White on $(git_clean)"
 	fi
 	PS1+="$White\$ $Reset"
 }
+
 PROMPT_COMMAND='set_prompt'
 
 # If this is an xterm set title to user@host:dir
