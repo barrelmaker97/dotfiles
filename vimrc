@@ -30,8 +30,8 @@ set smartindent
 
 "Show whitespace characters
 set list
-set listchars=eol:»,tab:\|\ ,trail:_,extends:>,precedes:<,nbsp:~
-set showbreak=>>>
+set listchars=eol:»,tab:⁞\ ,trail:·
+set showbreak=›››
 
 "Split opening positions
 set splitright
@@ -45,3 +45,15 @@ set t_ut=
 
 "Single character insertion
 nnoremap <Space> i_<Esc>r
+
+"Fingers are already there...
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
+vnoremap <C-j> <C-d>
+vnoremap <C-k> <C-u>
+
+"Because shift is hard to let go of okay
+command! Wq wq
+command! WQ wq
+command! W w
+command! Q q
