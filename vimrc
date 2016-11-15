@@ -8,7 +8,11 @@ Plug 'itchyny/lightline.vim'
 call plug#end()
 
 "Colorscheme
-set termguicolors
+if has("termguicolors")
+	set termguicolors
+else
+	let g:gruvbox_termcolors=16
+endif
 syntax enable
 colorscheme gruvbox
 set background=dark
