@@ -47,6 +47,10 @@ set t_ut=
 set noerrorbells
 set visualbell
 
+"Autocomplete
+set completeopt=menu,menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 "Single character insertion
 nnoremap <Space> i_<Esc>r
 
