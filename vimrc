@@ -43,6 +43,10 @@ set cursorline
 "Disable background clearing
 set t_ut=
 
+"These are obnoxious
+set noerrorbells
+set visualbell
+
 "Single character insertion
 nnoremap <Space> i_<Esc>r
 
