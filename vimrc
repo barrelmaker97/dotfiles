@@ -47,6 +47,9 @@ set t_ut=
 set noerrorbells
 set visualbell
 
+"Keep cursor relatively centered
+set scrolloff=10
+
 "Autocomplete
 set completeopt=menu,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
