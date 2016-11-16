@@ -1,6 +1,8 @@
 [user]
 	name = Nolan Cooper
 	email = nolancooper97@gmail.com
+[credential]
+	helper = cache
 [core]
 	editor = vim
 	excludesfile = /home/barrelmaker/.gitignore
