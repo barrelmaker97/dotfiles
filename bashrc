@@ -21,10 +21,11 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 Red='\[\e[01;31m\]'
-Green='\[\e[01;32m\]'
+Orange='\[\e[38;5;208m\]'
 Yellow='\[\e[01;33m\]'
-Blue='\[\e[01;34m\]'
+Green='\[\e[01;32m\]'
 Cyan='\[\e[01;36m\]'
+Blue='\[\e[01;34m\]'
 White='\[\e[01;37m\]'
 Reset='\[\e[00m\]'
 
@@ -37,7 +38,7 @@ git_branch()
 git_clean()
 {
 	if [[ $(git status 2> /dev/null | tail -1) != "nothing to commit, working directory clean" ]]; then
-		echo "$Yellow$(git_branch)"
+		echo "$Red$(git_branch)"
 	else
 		echo "$Cyan$(git_branch)"
 	fi
@@ -48,7 +49,7 @@ set_prompt ()
 	if [ $HOSTNAME == "hopper" ]; then
 		PS1="$Yellow\u@\h$White:$Blue\w"
 	elif [ $HOSTNAME == "tiger" ]; then
-		PS1="$Red\u@\h$White:$Blue\w"
+		PS1="$Orange\u@\h$White:$Blue\w"
 	else
 		PS1="$Green\u@\h$White:$Blue\w"
 	fi
