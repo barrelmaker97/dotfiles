@@ -25,3 +25,6 @@ alias mux='tmux new -s Home'
 
 # typing is hard
 alias c='clear'
+
+#sql
+alias mysql='mysql -h courses -u z1766022 -p z1766022'
