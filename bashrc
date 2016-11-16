@@ -45,7 +45,13 @@ git_clean()
 
 set_prompt ()
 {
-	PS1="$Green\u@\h$White:$Blue\w"
+	if [ $HOSTNAME == "hopper" ]; then
+		PS1="$Yellow\u@\h$White:$Blue\w"
+	elif [ $HOSTNAME == "tiger" ]; then
+		PS1="$Red\u@\h$White:$Blue\w"
+	else
+		PS1="$Green\u@\h$White:$Blue\w"
+	fi
 	if [ -n "$(git_branch)" ]; then
 		PS1+="$White on $(git_clean)"
 	fi
