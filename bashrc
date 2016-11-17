@@ -17,9 +17,6 @@ HISTFILESIZE=2000
 # Check window size after each command
 shopt -s checkwinsize
 
-# Make less more friendly for non-text input files
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
 Red='\[\e[01;31m\]'
 Orange='\[\e[38;5;208m\]'
 Yellow='\[\e[01;33m\]'
