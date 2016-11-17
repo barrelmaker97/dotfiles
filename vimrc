@@ -7,12 +7,15 @@ Plug 'keith/tmux.vim'
 Plug 'itchyny/lightline.vim'
 call plug#end()
 
-"Colorscheme
+"Changes for older Vim versions
 if has("termguicolors")
 	set termguicolors
+	set cursorline
 else
 	let g:gruvbox_termcolors=16
 endif
+
+"Colorscheme
 syntax enable
 colorscheme gruvbox
 set background=dark
@@ -40,9 +43,6 @@ set showbreak=›››
 "Split opening positions
 set splitright
 set splitbelow
-
-"Highlight line cursor is on
-set cursorline
 
 "Disable background clearing
 set t_ut=
