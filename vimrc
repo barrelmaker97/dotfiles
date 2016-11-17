@@ -5,6 +5,7 @@ call plug#begin()
 Plug 'morhetz/gruvbox'
 Plug 'keith/tmux.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 "Changes for older Vim versions
@@ -13,6 +14,7 @@ if has("termguicolors")
 	set cursorline
 else
 	let g:gruvbox_termcolors=16
+	set nocursorline
 endif
 
 "Colorscheme
@@ -21,6 +23,7 @@ colorscheme gruvbox
 set background=dark
 
 "Lightline
+set noshowmode
 set laststatus=2
 let g:lightline = { 'colorscheme': 'gruvbox' }
 
@@ -31,11 +34,11 @@ set number
 set tabstop=4
 set shiftwidth=4
 
-"Smart indentation
+"Indentation
 set autoindent
 set smartindent
 
-"Show whitespace characters
+"Show whitespace
 set list
 set listchars=eol:»,tab:⁞\ ,trail:·
 set showbreak=›››
@@ -44,9 +47,6 @@ set showbreak=›››
 set splitright
 set splitbelow
 
-"Disable background clearing
-set t_ut=
-
 "These are obnoxious
 set noerrorbells
 set visualbell
@@ -54,7 +54,21 @@ set visualbell
 "Keep cursor relatively centered
 set scrolloff=10
 
+"Performance improvements
+set lazyredraw
+set ttyfast
+set t_ut=
+
+"Search
+set incsearch
+set ignorecase
+set smartcase
+
+"Read if file changes
+set autoread
+
 "Autocomplete
+set wildmenu
 set completeopt=menu,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
