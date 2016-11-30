@@ -6,7 +6,8 @@ from helpful people from around the web.
 
 ### Requirements
 
+* Windows 10 with Subsystem for Linux
 * 24-bit colour support in terminal (including tmux)
-* Vim 8.0 or higher
-* Git
 * Tmux 2.2 or higher
+* Vim
+* Git
