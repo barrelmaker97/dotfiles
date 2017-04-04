@@ -11,11 +11,16 @@ call plug#end()
 "Changes for older Vim versions
 if has("termguicolors")
 	set termguicolors
-	set cursorline
 else
 	let g:gruvbox_termcolors=16
-	set nocursorline
-endif
+end
+
+"Turn on cursorline for gvim
+if has('gui')
+  set cursorline
+else
+  set nocursorline
+end
 
 "Colorscheme
 syntax enable
