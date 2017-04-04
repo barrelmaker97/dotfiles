@@ -6,6 +6,7 @@ Plug 'morhetz/gruvbox'
 Plug 'keith/tmux.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 "Changes for older Vim versions
@@ -17,25 +18,41 @@ end
 
 "Turn on cursorline for gvim
 if has('gui')
-  set cursorline
+   set cursorline
+   set guifont=Consolas:h14
+   set guioptions-=T  "remove toolbar
+   set guioptions-=t  "remove tearoff options
+   set guioptions-=L  "remove left-hand scroll bar
+set lines=40 columns=85
+  
 else
   set nocursorline
 end
 
-"Colorscheme
+"Colors
 syntax enable
 colorscheme gruvbox
 set background=dark
+
+"Encoding
+set encoding=utf-8
 
 "Lightline
 set noshowmode
 set laststatus=2
 let g:lightline = { 'colorscheme': 'gruvbox' }
 
+"GitGutter
+set updatetime=250
+let g:gitgutter_sign_modified = 'Δ'
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_removed = 'X'
+highlight link GitGutterChange GruvboxYellowSign
+
 "Line numbers
 set number
 
-"Set tab size to 4
+"Tabs
 set tabstop=4
 set shiftwidth=4
 
@@ -43,7 +60,7 @@ set shiftwidth=4
 set autoindent
 set smartindent
 
-"Show whitespace
+"Whitespace
 set list
 set listchars=eol:»,tab:⁞\ ,trail:·
 set showbreak=›››
