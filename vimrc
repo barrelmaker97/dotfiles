@@ -16,17 +16,16 @@ else
 	let g:gruvbox_termcolors=16
 end
 
-"Turn on cursorline for gvim
+"GUI Options
 if has('gui')
-   set cursorline
-   set guifont=Consolas:h14
-   set guioptions-=T  "remove toolbar
-   set guioptions-=t  "remove tearoff options
-   set guioptions-=L  "remove left-hand scroll bar
-set lines=40 columns=85
-  
+	set cursorline
+	set guifont=Consolas:h14
+	set guioptions-=T  "remove toolbar
+	set guioptions-=t  "remove tearoff options
+	set guioptions-=L  "remove left-hand scroll bar
+	set lines=40 columns=85
 else
-  set nocursorline
+	set nocursorline
 end
 
 "Colors
@@ -44,10 +43,12 @@ let g:lightline = { 'colorscheme': 'gruvbox' }
 
 "GitGutter
 set updatetime=250
-let g:gitgutter_sign_modified = 'Δ'
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_removed = 'X'
+let g:gitgutter_sign_modified = 'Δ'
+let g:gitgutter_sign_modified_removed = 'ΔX'
 highlight link GitGutterChange GruvboxYellowSign
+highlight link GitGutterChangeDelete GruvboxYellowSign
 
 "Line numbers
 set number
@@ -60,6 +61,9 @@ set shiftwidth=4
 set autoindent
 set smartindent
 
+"Fix backspace
+set backspace=2
+
 "Whitespace
 set list
 set listchars=eol:»,tab:⁞\ ,trail:·
@@ -69,9 +73,9 @@ set showbreak=›››
 set splitright
 set splitbelow
 
-"These are obnoxious
-set noerrorbells
-set visualbell
+"Remove error bells
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 "Keep cursor relatively centered
 set scrolloff=10
@@ -108,3 +112,6 @@ command! Wq wq
 command! WQ wq
 command! W w
 command! Q q
+
+"Filetypes
+autocmd FileType hlasm set expandtab tabstop=3 shiftwidth=3
