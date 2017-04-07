@@ -19,7 +19,7 @@ end
 "GUI Options
 if has('gui')
 	set cursorline
-	set guifont=Fira_Mono:h14
+	set guifont=Consolas:h14
 	set guioptions-=T  "remove toolbar
 	set guioptions-=t  "remove tearoff options
 	set guioptions-=L  "remove left-hand scroll bar
