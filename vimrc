@@ -19,11 +19,12 @@ end
 "GUI Options
 if has('gui')
 	set cursorline
-	set guifont=Consolas:h14
+	set guifont=Fira_Mono:h14
 	set guioptions-=T  "remove toolbar
 	set guioptions-=t  "remove tearoff options
 	set guioptions-=L  "remove left-hand scroll bar
 	set lines=40 columns=85
+	set shell=C:\WINDOWS\system32\cmd.exe
 else
 	set nocursorline
 end
@@ -66,7 +67,7 @@ set backspace=2
 
 "Whitespace
 set list
-set listchars=eol:»,tab:⁞\ ,trail:·
+set listchars=eol:»,tab:\|\ ,trail:·
 set showbreak=›››
 
 "Split opening positions
