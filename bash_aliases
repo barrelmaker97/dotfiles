@@ -3,8 +3,6 @@
 # ssh aliases
 alias tiger='ssh z1766022@tiger.cs.niu.edu'
 alias hopper='ssh z1766022@hopper.cs.niu.edu'
-alias rypi='ssh pi@10.157.1.69'
-alias alarm='ssh alarm@10.157.2.12'
 
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
