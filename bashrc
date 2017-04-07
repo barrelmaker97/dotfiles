@@ -34,7 +34,7 @@ git_branch()
 
 git_clean()
 {
-	if [[ $(git status 2> /dev/null | tail -1) == *"clean"* ]]; then
+	if [[ -z $(git status -s) ]]; then
 		echo "$Cyan$(git_branch)"
 	else
 		echo "$Red$(git_branch)"
