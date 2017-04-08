@@ -7,6 +7,7 @@ Plug 'keith/tmux.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-startify'
 call plug#end()
 
 "Changes for older Vim versions
@@ -20,9 +21,7 @@ end
 if has('gui')
 	set cursorline
 	set guifont=Consolas:h14
-	set guioptions-=T  "remove toolbar
-	set guioptions-=t  "remove tearoff options
-	set guioptions-=L  "remove left-hand scroll bar
+	set guioptions=egmr
 	set lines=40 columns=85
 	set shell=C:\WINDOWS\system32\cmd.exe
 else
@@ -51,6 +50,30 @@ let g:gitgutter_sign_modified_removed = 'ΔX'
 highlight link GitGutterChange GruvboxYellowSign
 highlight link GitGutterChangeDelete GruvboxYellowSign
 
+"Startify
+let g:startify_files_number = 8
+let g:startify_fortune_use_unicode = 1
+let g:startify_list_order = [
+	\ ['   Recent files'], 'files',
+	\ ['   Sessions:'], 'sessions',
+	\ ['   Bookmarks:'], 'bookmarks',
+	\ ['   Commands:'], 'commands',
+	\ ]
+let g:startify_bookmarks = [
+	\ {'v': '~/_vimrc'},
+	\ {'c': '~/.bashrc'}
+	\ ]
+function! s:filter_header(lines) abort
+	let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
+	let centered_lines = map(copy(a:lines),
+		\ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+	return centered_lines
+endfunction
+let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
+highlight link StartifyHeader PreProc
+highlight link StartifySection Constant
+highlight link StartifyNumber Type
+
 "Line numbers
 set number
 
@@ -73,6 +96,7 @@ set showbreak=›››
 "Split opening positions
 set splitright
 set splitbelow
+autocmd FileType help wincmd L
 
 "Remove error bells
 set noerrorbells visualbell t_vb=
