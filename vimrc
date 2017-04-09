@@ -17,6 +17,9 @@ else
 	let g:gruvbox_termcolors=16
 end
 
+"Set leader
+let mapleader="\<Space>"
+
 "GUI Options
 if has('gui')
 	set cursorline
@@ -60,7 +63,7 @@ let g:startify_list_order = [
 	\ ['   Commands:'], 'commands',
 	\ ]
 let g:startify_bookmarks = [
-	\ {'v': '~/_vimrc'},
+	\ {'f': $MYVIMRC},
 	\ {'c': '~/.bashrc'}
 	\ ]
 function! s:filter_header(lines) abort
@@ -124,7 +127,7 @@ set completeopt=menu,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "Single character insertion
-nnoremap <Space> i_<Esc>r
+nnoremap <Leader><Space> i_<Esc>r
 
 "Fingers are already there...
 nnoremap <C-j> <C-d>
@@ -138,5 +141,20 @@ command! WQ wq
 command! W w
 command! Q q
 
+"Easy config reload
+command! Reload :so $MYVIMRC
+
 "Filetypes
 autocmd FileType hlasm set expandtab tabstop=3 shiftwidth=3
+
+" Trim trailing whitespace
+function! TrimWhitespace()
+	  let l = line('.')
+	  let c = col('.')
+	  %s/\s\+$//e
+	  call cursor(l, c)
+endfunction
+
+"Whitespace trimming
+nnoremap <Leader>tw :call TrimWhitespace()<CR>
+
