@@ -8,6 +8,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
+Plug 'vim-scripts/hlasm.vim'
 call plug#end()
 
 "Changes for older Vim versions
@@ -25,7 +26,7 @@ if has('gui')
 	set cursorline
 	set guifont=Consolas:h14
 	set guioptions=egmr
-	set lines=40 columns=85
+	set lines=42 columns=85
 	set shell=C:\WINDOWS\system32\cmd.exe
 else
 	set nocursorline
@@ -129,6 +130,9 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 "Single character insertion
 nnoremap <Leader><Space> i_<Esc>r
 
+"Whitespace trimming
+nnoremap <Leader>tw :call TrimWhitespace()<CR>
+
 "Fingers are already there...
 nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-u>
@@ -147,14 +151,10 @@ command! Reload :so $MYVIMRC
 "Filetypes
 autocmd FileType hlasm set expandtab tabstop=3 shiftwidth=3
 
-" Trim trailing whitespace
+"Trim trailing whitespace
 function! TrimWhitespace()
 	  let l = line('.')
 	  let c = col('.')
 	  %s/\s\+$//e
 	  call cursor(l, c)
 endfunction
-
-"Whitespace trimming
-nnoremap <Leader>tw :call TrimWhitespace()<CR>
-
