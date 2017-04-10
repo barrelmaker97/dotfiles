@@ -24,6 +24,7 @@
 	untracked = red
 	branch = cyan
 [alias]
+	amend = commit -a --amend
 	cm = commit -m
 	br = branch
 	ba = branch -a
