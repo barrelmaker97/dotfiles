@@ -9,6 +9,7 @@ Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
 Plug 'vim-scripts/hlasm.vim'
+Plug 'davdai01/jcl.vim'
 call plug#end()
 
 "Changes for older Vim versions
