@@ -128,6 +128,9 @@ set wildmenu
 set completeopt=menu,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+"Easy escape
+inoremap jk <Esc>
+
 "Single character insertion
 nnoremap <Leader><Space> i_<Esc>r
 
