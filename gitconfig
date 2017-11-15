@@ -33,6 +33,6 @@
 	hist = log --all --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	sum = log --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	destroy = reset --hard HEAD
-	update = pull --rebase
+	up = pull --rebase
 [push]
 	default = simple
