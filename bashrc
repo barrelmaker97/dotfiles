@@ -23,6 +23,7 @@ Yellow='\[\e[01;33m\]'
 Green='\[\e[01;32m\]'
 Cyan='\[\e[01;36m\]'
 Blue='\[\e[01;34m\]'
+Purple='\[\e[01;35m\]'
 White='\[\e[01;37m\]'
 Reset='\[\e[00m\]'
 
@@ -47,6 +48,8 @@ set_prompt ()
 		PS1="$Yellow\u@\h$White:$Blue\w"
 	elif [ $HOSTNAME == "tiger" ]; then
 		PS1="$Orange\u@\h$White:$Blue\w"
+	elif [ $HOSTNAME == "raspberrypi" ]; then
+		PS1="$Purple\u@\h$White:$Blue\w"
 	else
 		PS1="$Green\u@\h$White:$Blue\w"
 	fi
