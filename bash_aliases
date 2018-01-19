@@ -24,6 +24,7 @@ alias mux='tmux new -s Home'
 
 # typing is hard
 alias c='clear'
+alias update='sudo apt-get -y update && sudo apt-get -y upgrade'
 
 #sql
 alias mysql='mysql -h courses -u z1766022 -p z1766022'
