@@ -94,8 +94,5 @@ fi
 # Set PATH to include current directory
 PATH=".:${PATH}"
 
-# Set TERM to support colors
-TERM='xterm-256color'
-
 # Cycle through options on autocomplete
 bind TAB:menu-complete

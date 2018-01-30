@@ -28,3 +28,12 @@ alias update='sudo apt-get -y update && sudo apt-get -y upgrade'
 
 #sql
 alias mysql='mysql -h courses -u z1766022 -p z1766022'
+
+# windows aliases
+if [ $TERM == "cygwin" ]; then
+	alias vim='/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe'
+	alias view='/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe -R'
+	alias vimdiff='/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe -d'
+	alias gvim='/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe'
+	alias gvimdiff='/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe -d'
+	fi
