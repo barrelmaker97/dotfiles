@@ -137,6 +137,9 @@ nnoremap <Leader><Space> i_<Esc>r
 "Whitespace trimming
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
+"Quick make
+nnoremap <F5> :make!<cr>
+
 "Fingers are already there...
 nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-u>
