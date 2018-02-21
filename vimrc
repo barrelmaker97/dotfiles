@@ -10,6 +10,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
 Plug 'vim-scripts/hlasm.vim'
 Plug 'davdai01/jcl.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 "Changes for older Vim versions
@@ -78,6 +79,16 @@ let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
 highlight link StartifyHeader PreProc
 highlight link StartifySection Constant
 highlight link StartifyNumber Type
+
+"vim-fugitive
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gl :Glog<CR>:copen<CR>
+nnoremap <Leader>gv :GV!<CR>
+vnoremap <Leader>gv :GV!<CR>
 
 "Line numbers
 set number
