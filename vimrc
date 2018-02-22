@@ -78,6 +78,7 @@ set smartcase
 
 " Read if file changes
 set autoread
+set noswapfile
 
 " Keep cursor relatively centered
 set scrolloff=10
@@ -155,7 +156,7 @@ nnoremap <Leader><Space> i_<Esc>r
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
 " Quick make
-nnoremap <F5> :make!<cr>
+nnoremap <F5> :make!<CR>
 
 " Fingers are already there...
 nnoremap <C-j> <C-d>
@@ -176,6 +177,11 @@ command! Reload :so $MYVIMRC
 autocmd FileType hlasm set expandtab tabstop=3 shiftwidth=3
 autocmd GUIEnter * set visualbell t_vb=
 autocmd FileType help wincmd L
+
+" Spell checking
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
+autocmd FileType text setlocal spell
 
 " Trim trailing whitespace
 function! TrimWhitespace()
