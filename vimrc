@@ -1,6 +1,6 @@
 " .vimrc
 
-"Plugins
+" Plugins
 call plug#begin()
 Plug 'morhetz/gruvbox'
 Plug 'keith/tmux.vim'
@@ -13,17 +13,17 @@ Plug 'davdai01/jcl.vim'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
-"Changes for older Vim versions
+" Changes for older Vim versions
 if has("termguicolors")
 	set termguicolors
 else
 	let g:gruvbox_termcolors=16
 end
 
-"Set leader
+" Set leader
 let mapleader="\<Space>"
 
-"GUI Options
+" GUI Options
 if has('gui')
 	set cursorline
 	set guifont=Consolas:h14
@@ -34,21 +34,71 @@ else
 	set nocursorline
 end
 
-"Colors
+" Colors
 syntax enable
 colorscheme gruvbox
 set background=dark
 
-"Encoding
+" Encoding
 set encoding=utf-8
 
-"Lightline
+" Status line
 set noshowmode
 set laststatus=2
+
+" Line numbers
+set number
+
+" Tabs
+set tabstop=4
+set shiftwidth=4
+
+" Indentation
+set autoindent
+set smartindent
+
+" Fix backspace
+set backspace=2
+
+" Whitespace
+set list
+set listchars=eol:»,tab:\|\ ,trail:·
+set showbreak=›››
+
+" Performance
+set updatetime=250
+set lazyredraw
+set ttyfast
+set t_ut=
+
+" Search
+set incsearch
+set ignorecase
+set smartcase
+
+" Read if file changes
+set autoread
+
+" Keep cursor relatively centered
+set scrolloff=10
+
+" Split opening positions
+set splitright
+set splitbelow
+
+" Remove error bells
+set noerrorbells visualbell t_vb=
+
+" Autocomplete
+set wildmenu
+set completeopt=menu,menuone
+
+" PLUGINS
+
+" Lightline
 let g:lightline = { 'colorscheme': 'gruvbox' }
 
-"GitGutter
-set updatetime=250
+" GitGutter
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_removed = 'X'
 let g:gitgutter_sign_modified = 'Δ'
@@ -56,7 +106,7 @@ let g:gitgutter_sign_modified_removed = 'ΔX'
 highlight link GitGutterChange GruvboxYellowSign
 highlight link GitGutterChangeDelete GruvboxYellowSign
 
-"Startify
+" Startify
 let g:startify_files_number = 8
 let g:startify_fortune_use_unicode = 1
 let g:startify_list_order = [
@@ -80,7 +130,12 @@ highlight link StartifyHeader PreProc
 highlight link StartifySection Constant
 highlight link StartifyNumber Type
 
-"vim-fugitive
+" MAPPINGS
+
+" Autocomplete remap
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" vim-fugitive
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
@@ -90,86 +145,39 @@ nnoremap <Leader>gl :Glog<CR>:copen<CR>
 nnoremap <Leader>gv :GV!<CR>
 vnoremap <Leader>gv :GV!<CR>
 
-"Line numbers
-set number
-
-"Tabs
-set tabstop=4
-set shiftwidth=4
-
-"Indentation
-set autoindent
-set smartindent
-
-"Fix backspace
-set backspace=2
-
-"Whitespace
-set list
-set listchars=eol:»,tab:\|\ ,trail:·
-set showbreak=›››
-
-"Split opening positions
-set splitright
-set splitbelow
-autocmd FileType help wincmd L
-
-"Remove error bells
-set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
-
-"Keep cursor relatively centered
-set scrolloff=10
-
-"Performance improvements
-set lazyredraw
-set ttyfast
-set t_ut=
-
-"Search
-set incsearch
-set ignorecase
-set smartcase
-
-"Read if file changes
-set autoread
-
-"Autocomplete
-set wildmenu
-set completeopt=menu,menuone
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-"Easy escape
+" Easy escape
 inoremap jk <Esc>
 
-"Single character insertion
+" Single character insertion
 nnoremap <Leader><Space> i_<Esc>r
 
-"Whitespace trimming
+" Whitespace trimming
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
-"Quick make
+" Quick make
 nnoremap <F5> :make!<cr>
 
-"Fingers are already there...
+" Fingers are already there...
 nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-u>
 vnoremap <C-j> <C-d>
 vnoremap <C-k> <C-u>
 
-"Because shift is hard to let go of okay
+" Because shift is hard to let go of okay
 command! Wq wq
 command! WQ wq
 command! W w
 command! Q q
 
-"Easy config reload
+" Easy config reload
 command! Reload :so $MYVIMRC
 
-"Filetypes
+" Autocommands
 autocmd FileType hlasm set expandtab tabstop=3 shiftwidth=3
+autocmd GUIEnter * set visualbell t_vb=
+autocmd FileType help wincmd L
 
-"Trim trailing whitespace
+" Trim trailing whitespace
 function! TrimWhitespace()
 	  let l = line('.')
 	  let c = col('.')
