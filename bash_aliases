@@ -26,8 +26,11 @@ alias mux='tmux new -s Home'
 alias c='clear'
 alias update='sudo apt-get -y update && sudo apt-get -y upgrade'
 
-#sql
+# sql
 alias mysql='mysql -h courses -u z1766022 -p z1766022'
+
+# cleanup git directories
+alias glean='find -name "*.git" -type d -exec ~/dotfiles/bin/gitgc.sh "{}" ";"'
 
 # windows aliases
 if [ $TERM == "cygwin" ]; then
