@@ -91,8 +91,5 @@ if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
 fi
 
-# Set PATH to include current directory
-PATH=".:${PATH}"
-
 # Cycle through options on autocomplete
 bind TAB:menu-complete
