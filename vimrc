@@ -1,16 +1,18 @@
 " .vimrc
 
-" Plugins
 call plug#begin()
+" Misc
 Plug 'morhetz/gruvbox'
-Plug 'keith/tmux.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
-Plug 'vim-scripts/hlasm.vim'
-Plug 'davdai01/jcl.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+
+" Syntax Highlighting
+Plug 'keith/tmux.vim'
+Plug 'davdai01/jcl.vim'
+Plug 'vim-scripts/hlasm.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
 call plug#end()
 
 " Changes for older Vim versions
@@ -94,7 +96,7 @@ set noerrorbells visualbell t_vb=
 set wildmenu
 set completeopt=menu,menuone
 
-" PLUGINS
+" PLUGIN SETTINGS
 
 " Lightline
 let g:lightline = { 'colorscheme': 'gruvbox' }
