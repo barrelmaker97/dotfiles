@@ -144,8 +144,6 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>gl :Glog<CR>:copen<CR>
-nnoremap <Leader>gv :GV!<CR>
-vnoremap <Leader>gv :GV!<CR>
 
 " Easy escape
 inoremap jk <Esc>
