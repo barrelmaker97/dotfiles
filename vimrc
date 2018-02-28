@@ -102,7 +102,6 @@ set completeopt=menu,menuone
 let g:lightline = { 'colorscheme': 'gruvbox' }
 
 " GitGutter
-let g:gitgutter_async=0
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_removed = 'X'
 let g:gitgutter_sign_modified = 'Δ'
