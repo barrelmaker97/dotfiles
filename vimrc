@@ -10,7 +10,7 @@ Plug 'tpope/vim-fugitive'
 
 " Syntax Highlighting
 Plug 'keith/tmux.vim'
-Plug 'davdai01/jcl.vim'
+Plug 'barrelmaker97/jcl.vim'
 Plug 'vim-scripts/hlasm.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 call plug#end()
