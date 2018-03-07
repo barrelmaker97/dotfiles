@@ -1,10 +1,14 @@
 " .vimrc
 
 call plug#begin()
-" Misc
+" Colors
 Plug 'morhetz/gruvbox'
+
+" Appearance
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
+
+" Git plugins
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
