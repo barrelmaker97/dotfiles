@@ -50,6 +50,8 @@ set_prompt ()
 		PS1="$Orange\u@\h$White:$Blue\w"
 	elif [ $HOSTNAME == "raspberrypi" ]; then
 		PS1="$Purple\u@\h$White:$Blue\w"
+	elif [ $HOSTNAME == "hartley" ]; then
+		PS1="$Red\u@\h$White:$Blue\w"
 	else
 		PS1="$Green\u@\h$White:$Blue\w"
 	fi
