@@ -35,9 +35,9 @@ alias glean='find -name "*.git" -type d -exec ~/dotfiles/bin/gitgc.sh "{}" ";"'
 
 # windows aliases
 if [ $TERM == "cygwin" ]; then
-	alias vim='/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe'
-	alias view='/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe -R'
-	alias vimdiff='/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe -d'
-	alias gvim='/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe'
-	alias gvimdiff='/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe -d'
+	alias vim='/c/Program\ Files/Vim/vim81/gvim.exe'
+	alias view='/c/Program\ Files/Vim/vim81/gvim.exe -R'
+	alias vimdiff='/c/Program\ Files/Vim/vim81/gvim.exe -d'
+	alias gvim='/c/Program\ Files/Vim/vim81/gvim.exe'
+	alias gvimdiff='/c/Program\ Files/Vim/vim81/gvim.exe -d'
 	fi
