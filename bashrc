@@ -44,14 +44,8 @@ git_clean()
 
 set_prompt ()
 {
-	if [ $HOSTNAME == "hopper" ]; then
-		PS1="$Yellow\u@\h$White:$Blue\w"
-	elif [ $HOSTNAME == "tiger" ]; then
-		PS1="$Orange\u@\h$White:$Blue\w"
-	elif [ $HOSTNAME == "raspberrypi" ]; then
+	if [ $HOSTNAME == "raspberrypi" ]; then
 		PS1="$Purple\u@\h$White:$Blue\w"
-	elif [ $HOSTNAME == "hartley" ]; then
-		PS1="$Red\u@\h$White:$Blue\w"
 	else
 		PS1="$Green\u@\h$White:$Blue\w"
 	fi
