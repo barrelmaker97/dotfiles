@@ -1,11 +1,5 @@
 # .bash_aliases
 
-# ssh aliases
-alias tiger='ssh z1766022@tiger.cs.niu.edu'
-alias hopper='ssh z1766022@hopper.cs.niu.edu'
-alias hartley='ssh z1766022@hartley.cs.niu.edu'
-alias pi='ssh pi@10.157.1.156'
-
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -26,9 +20,6 @@ alias mux='tmux new -s Home'
 # typing is hard
 alias c='clear'
 alias update='sudo apt-get -y update && sudo apt-get -y upgrade'
-
-# sql
-alias mysql='mysql -h courses -u z1766022 -p z1766022'
 
 # cleanup git directories
 alias glean='find -name "*.git" -type d -exec ~/dotfiles/bin/gitgc.sh "{}" ";"'
