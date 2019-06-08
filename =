@@ -1,7 +1,0 @@
-Searching for invalid plugins in C:\Users\Nolan\vimfiles/plugged
-[======]
-
-Removed 1 directories.
-
-~ C:\Users\Nolan\vimfiles\plugged\gruvbox\
-    Invalid URI: https://git::@github.com/morhetz/gruvbox.git
