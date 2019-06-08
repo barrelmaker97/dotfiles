@@ -2,7 +2,7 @@
 
 call plug#begin()
 " Colors
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 
 " Appearance
 Plug 'itchyny/lightline.vim'
