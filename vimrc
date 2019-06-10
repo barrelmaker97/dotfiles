@@ -1,6 +1,9 @@
 " .vimrc
 
 call plug#begin()
+" Font checking
+Plug 'drmikehenry/vim-fontdetect'
+
 " Colors
 Plug 'gruvbox-community/gruvbox'
 
@@ -30,9 +33,16 @@ let mapleader="\<Space>"
 if has('gui')
 	set cursorline
 	set guifont=Consolas:h14
+	if fontdetect#hasFontFamily('Consolas')
+		let &guifont = 'Consolas:h14'
+	else
+		let &guifont = 'Monospace 12'
+	endif
 	set guioptions=egmr
 	set lines=42 columns=85
-	set shell=C:\WINDOWS\system32\cmd.exe
+	if has('win32')
+		set shell=C:\WINDOWS\system32\cmd.exe
+	endif
 else
 	set nocursorline
 end
