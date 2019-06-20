@@ -8,6 +8,7 @@ esac
 
 # History options
 shopt -s histappend
+shopt -s cmdhist
 export HISTIGNORE="exit:ls:ll:la:c:clear:cd"
 HISTTIMEFORMAT='%F %T '
 HISTCONTROL=ignoreboth
@@ -44,7 +45,7 @@ git_clean()
 
 set_prompt ()
 {
-	if [ $HOSTNAME == "raspberrypi" ]; then
+	if [ "$HOSTNAME" == "raspberrypi" ]; then
 		PS1="$Purple\u@\h$White:$Blue\w"
 	else
 		PS1="$Green\u@\h$White:$Blue\w"
