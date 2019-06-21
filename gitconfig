@@ -1,6 +1,7 @@
 [user]
 	name = Nolan Cooper
 	email = nolancooper97@gmail.com
+	signingkey = 6B94B9C7D78DD681
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
@@ -24,6 +25,7 @@
 [alias]
 	amend = commit -a --amend
 	cm = commit -m
+	scm = commit -S -m
 	br = branch
 	ba = branch -a
 	st = status
@@ -34,3 +36,5 @@
 	up = pull --rebase
 [push]
 	default = simple
+[commit]
+	gpgsign = true

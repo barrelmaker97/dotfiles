@@ -90,3 +90,7 @@ fi
 
 # Cycle through options on autocomplete
 bind TAB:menu-complete
+
+# Set GPG TTY for commit signing
+GPG_TTY=$(tty)
+export GPG_TTY
