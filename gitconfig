@@ -36,3 +36,5 @@
 	up = pull --rebase
 [push]
 	default = simple
+[include]
+	path = ~/.work-gitconfig

@@ -2,11 +2,12 @@ ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 all:
 	@printf "Makefile targets: \n\n"
-	@printf "\tinstall\t\t - install all\n"
-	@printf "\tbash\t\t - install bash\n"
-	@printf "\tgit\t\t - install git\n"
-	@printf "\tvim\t\t - install vim\n"
-	@printf "\ttmux\t\t - install tmux\n"
+	@printf "\tinstall\t\t - install all except for work\n"
+	@printf "\tbash\t\t - install bash configs\n"
+	@printf "\tgit\t\t - install git configs\n"
+	@printf "\twork\t\t - install work configs\n"
+	@printf "\tvim\t\t - install vim configs\n"
+	@printf "\ttmux\t\t - install tmux configs\n"
 	@printf "\thelp\t\t - print this message\n\n"
 
 install: bash git vim tmux
@@ -18,6 +19,8 @@ bash:
 git:
 	ln -sf $(ROOT_DIR)/gitconfig $(HOME)/.gitconfig
 	ln -sf $(ROOT_DIR)/gitignore $(HOME)/.gitignore
+work:
+	ln -sf $(ROOT_DIR)/work-gitconfig $(HOME)/.work-gitconfig
 vim:
 	ln -sf $(ROOT_DIR)/vimrc $(HOME)/.vimrc
 	rm -rf ~/.vim
