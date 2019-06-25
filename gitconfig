@@ -37,4 +37,4 @@
 [push]
 	default = simple
 [include]
-	path = ~/dotfiles/work-gitconfig
+	path = ~/.work-gitconfig
