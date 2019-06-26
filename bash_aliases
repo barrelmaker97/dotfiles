@@ -10,19 +10,22 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # more ls aliases
-alias ll='ls -alhFo'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -ahFo --time-style=+"%m-%d-%Y %H:%M:%S"'
+alias la='ls -AF'
+alias l='ls -F'
+
+# print $PATH nicely
+alias path='echo $PATH | tr ":" "\n" | sort'
+
+# moving around
+alias ..='cd ..'
+alias back='cd -'
 
 # tmux session alias
 alias mux='tmux new -s Home'
 
-# typing is hard
-alias c='clear'
-alias update='sudo apt-get -y update && sudo apt-get -y upgrade'
-
 # cleanup git directories
-alias glean='find -name "*.git" -type d -exec ~/dotfiles/bin/gitgc.sh "{}" ";"'
+alias glean='find -name "*.git" -type d -exec $HOME/dotfiles/bin/gitgc.sh "{}" ";"'
 
 # windows aliases
 if [ $TERM == "cygwin" ]; then
