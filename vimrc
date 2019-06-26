@@ -24,7 +24,7 @@ if has("termguicolors")
 	set termguicolors
 else
 	let g:gruvbox_termcolors=16
-end
+endif
 
 " Set leader
 let mapleader="\<Space>"
@@ -32,20 +32,21 @@ let mapleader="\<Space>"
 " GUI Options
 if has('gui')
 	set cursorline
-	set guifont=Consolas:h14
+	set guioptions=egmr
+	set lines=42 columns=85
 	if fontdetect#hasFontFamily('Consolas')
 		let &guifont = 'Consolas:h14'
 	else
 		let &guifont = 'Monospace 12'
 	endif
-	set guioptions=egmr
-	set lines=42 columns=85
-	if has('win32')
-		set shell=C:\WINDOWS\system32\cmd.exe
-	endif
 else
 	set nocursorline
-end
+endif
+
+" Change shell for Windows
+if has('win32')
+	set shell=C:\WINDOWS\system32\cmd.exe
+endif
 
 " Colors
 syntax enable
