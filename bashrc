@@ -18,6 +18,9 @@ HISTFILESIZE=2000
 # Check window size after each command
 shopt -s checkwinsize
 
+# Fix spelling errors in cd
+shopt -s cdspell
+
 Red='\[\e[01;31m\]'
 Orange='\[\e[38;5;208m\]'
 Yellow='\[\e[01;33m\]'
@@ -29,12 +32,12 @@ White='\[\e[01;37m\]'
 Reset='\[\e[00m\]'
 
 # Set prompt
-git_branch()
+git_branch ()
 {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-git_clean()
+git_clean ()
 {
 	if [[ -z $(git status -s) ]]; then
 		echo "$Cyan$(git_branch)"

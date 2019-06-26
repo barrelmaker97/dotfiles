@@ -2,11 +2,11 @@
 
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	alias ls='ls --color=auto'
+	alias grep='grep --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
 fi
 
 # more ls aliases
@@ -32,4 +32,4 @@ if [ $TERM == "cygwin" ]; then
 	alias gvim='/c/Program\ Files/Vim/vim81/gvim.exe'
 	alias gview='/c/Program\ Files/Vim/vim81/gvim.exe -R'
 	alias gvimdiff='/c/Program\ Files/Vim/vim81/gvim.exe -d'
-	fi
+fi
