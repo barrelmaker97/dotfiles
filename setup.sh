@@ -33,7 +33,6 @@ bash_install ()
 git_install ()
 {
 	ln -sf "${HOME}"/dotfiles/gitconfig "${HOME}"/.gitconfig
-	ln -sf "${HOME}"/dotfiles/gitignore "${HOME}"/.gitignore
 }
 
 vim_install ()

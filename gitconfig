@@ -4,7 +4,6 @@
 	signingkey = 6B94B9C7D78DD681
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore
 [color]
 	ui = auto
 [color "branch"]
