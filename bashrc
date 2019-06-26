@@ -71,8 +71,8 @@ case "$TERM" in
 esac
 
 # Alias definitions
-if [ -f ~/.bash_aliases ]; then
-	. ~/.bash_aliases
+if [ -f ~/dotfiles/aliases ]; then
+	. ~/dotfiles/aliases
 fi
 
 # Enable programmable completion features (you don't need to enable
