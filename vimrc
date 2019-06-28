@@ -134,6 +134,9 @@ let g:startify_bookmarks = [
 	\ {'f': $MYVIMRC},
 	\ {'c': '~/.bashrc'}
 	\ ]
+let g:startify_commands = [
+	\ {'v': 'version'},
+	\ ]
 function! s:filter_header(lines) abort
 	let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
 	let centered_lines = map(copy(a:lines),
