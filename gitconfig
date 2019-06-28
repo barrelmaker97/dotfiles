@@ -22,8 +22,6 @@
 	changed = yellow
 	untracked = red
 	branch = cyan
-[pretty]
-	detailed = format:%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 [alias]
 	amend = commit -a --amend
 	cm = commit -m
@@ -32,8 +30,6 @@
 	ba = branch -a
 	st = status
 	conf = config --global -e
-	hist = log --all --graph --pretty=detailed
-	sum = log --pretty=detailed
 	destroy = reset --hard HEAD
 	up = pull --rebase
 [push]
