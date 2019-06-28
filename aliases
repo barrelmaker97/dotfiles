@@ -1,4 +1,5 @@
-# .bash_aliases
+# aliases
+# vim: ft=sh :
 
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
@@ -26,10 +27,10 @@ alias mux='tmux new -s Home'
 
 # git aliases
 alias glean='find -name "*.git" -type d -exec $HOME/dotfiles/bin/gitgc.sh "{}" ";"'
-alias ghist='git log --all --graph --color=always --pretty=format:"GPGSIG%G?%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" | sed -e "s/GPGSIGN\(...\)./\11/; s/GPGSIGG\(...\)./\12/; s/GPGSIG.\(...\)./\13/;"| less -RX'
+alias gh='git log --all --graph --color=always --pretty=format:"GPGSIG%G?%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" | sed -e "s/GPGSIGN\(...\)./\11/; s/GPGSIGG\(...\)./\12/; s/GPGSIG.\(...\)./\13/;"| less -RX'
 
 # windows aliases
-if [ $TERM == "cygwin" ]; then
+if [ "$TERM" = "cygwin" ]; then
 	alias vim='/c/Program\ Files/Vim/vim81/vim.exe'
 	alias view='/c/Program\ Files/Vim/vim81/vim.exe -R'
 	alias vimdiff='/c/Program\ Files/Vim/vim81/vim.exe -d'

@@ -39,7 +39,7 @@ git_branch ()
 
 git_clean ()
 {
-	if [[ -z $(git status -s) ]]; then
+	if [ -z "$(git status -s)" ]; then
 		echo "$Cyan$(git_branch)"
 	else
 		echo "$Red$(git_branch)"
@@ -48,7 +48,7 @@ git_clean ()
 
 set_prompt ()
 {
-	if [ "$HOSTNAME" == "raspberrypi" ]; then
+	if [ "$HOSTNAME" = "raspberrypi" ]; then
 		PS1="$Purple\u@\h$White:$Blue\w"
 	else
 		PS1="$Green\u@\h$White:$Blue\w"
