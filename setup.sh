@@ -39,8 +39,8 @@ vim_install ()
 {
 	ln -sf "${HOME}"/dotfiles/vimrc "${HOME}"/.vimrc
 	rm -rf ~/.vim
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	vim -c PlugInstall -c quitall
+	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	yes "" | vim -c PlugInstall -c quitall 2>/dev/null
 }
 
 tmux_install ()
