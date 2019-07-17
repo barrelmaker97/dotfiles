@@ -21,15 +21,15 @@ shopt -s checkwinsize
 # Fix spelling errors in cd
 shopt -s cdspell
 
-Red='\[\e[01;31m\]'
-Orange='\[\e[38;5;208m\]'
-Yellow='\[\e[01;33m\]'
-Green='\[\e[01;32m\]'
-Cyan='\[\e[01;36m\]'
-Blue='\[\e[01;34m\]'
-Purple='\[\e[01;35m\]'
-White='\[\e[01;37m\]'
-Reset='\[\e[00m\]'
+Red='\e[01;31m'
+Orange='\e[38;5;208m'
+Yellow='\e[01;33m'
+Green='\e[01;32m'
+Cyan='\e[01;36m'
+Blue='\e[01;34m'
+Purple='\e[01;35m'
+White='\e[01;37m'
+Reset='\e[00m'
 
 # Set prompt
 git_branch ()
@@ -54,7 +54,11 @@ set_prompt ()
 		PS1="$Green\u@\h$White:$Blue\w"
 	fi
 	if [ -n "$(git_branch)" ]; then
-		PS1+="$White on $(git_clean)"
+		PS1="$PS1$White on $(git_clean)"
+	fi
+	if ! [ -z "$VIRTUAL_ENV" ]; then
+		TEST_ENV="[${VIRTUAL_ENV##*/}]"
+		PS1="$Yellow$TEST_ENV$Reset$PS1"
 	fi
 	PS1+="$White\$ $Reset"
 }
