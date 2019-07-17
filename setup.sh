@@ -33,41 +33,36 @@ all_install ()
 
 bash_install ()
 {
-	echo -ne "Installing bash configs..."
+	echo -e "Installing bash configs..."
 	ln -sf "${HOME}"/dotfiles/bashrc "${HOME}"/.bashrc
 	ln -sf "${HOME}"/dotfiles/profile "${HOME}"/.profile
-	echo -e "\t${GREEN}Done${RESET}"
 }
 
 git_install ()
 {
-	echo -ne "Installing git configs..."
+	echo -e "Installing git configs..."
 	ln -sf "${HOME}"/dotfiles/gitconfig "${HOME}"/.gitconfig
-	echo -e "\t${GREEN}Done${RESET}"
 }
 
 vim_install ()
 {
-	echo -ne "Installing vim configs..."
+	echo -e "Installing vim configs..."
 	ln -sf "${HOME}"/dotfiles/vimrc "${HOME}"/.vimrc
 	rm -rf ~/.vim
 	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	yes "" | vim -c PlugInstall -c quitall 2>/dev/null
-	echo -e "\t${GREEN}Done${RESET}"
 }
 
 tmux_install ()
 {
-	echo -ne "Installing tmux configs..."
+	echo -e "Installing tmux configs..."
 	ln -sf "${HOME}"/dotfiles/tmux.conf "${HOME}"/.tmux.conf
-	echo -e "\t${GREEN}Done${RESET}"
 }
 
 work_install ()
 {
-	echo -ne "Installing work configs..."
+	echo -e "Installing work configs..."
 	ln -sf "${HOME}"/dotfiles/work-gitconfig "${HOME}"/.work-gitconfig
-	echo -e "\t${GREEN}Done${RESET}"
 }
 
 # Print default usage when run without arguments
