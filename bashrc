@@ -21,15 +21,15 @@ shopt -s checkwinsize
 # Fix spelling errors in cd
 shopt -s cdspell
 
-Red='\e[01;31m'
-Orange='\e[38;5;208m'
-Yellow='\e[01;33m'
-Green='\e[01;32m'
-Cyan='\e[01;36m'
-Blue='\e[01;34m'
-Purple='\e[01;35m'
-White='\e[01;37m'
-Reset='\e[00m'
+Red='\[\e[01;31m\]'
+Orange='\[\e[38;5;208m\]'
+Yellow='\[\e[01;33m\]'
+Green='\[\e[01;32m\]'
+Cyan='\[\e[01;36m\]'
+Blue='\[\e[01;34m\]'
+Purple='\[\e[01;35m\]'
+White='\[\e[01;37m\]'
+Reset='\[\e[00m\]'
 
 # Set prompt
 git_branch ()
