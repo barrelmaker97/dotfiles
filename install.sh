@@ -6,6 +6,12 @@ if [ $? -eq 1 ]; then
 	exit 1
 fi
 
+which vim
+if [ $? -eq 1 ]; then
+	echo -e "Vim is not installed or cannot be found on this system"
+	exit 1
+fi
+
 cd ~
 if [ -d dotfiles ]; then
 	cd dotfiles && git checkout master && git pull
