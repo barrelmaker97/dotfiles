@@ -1,8 +1,6 @@
 #!/bin/bash
 
-set -o errexit
-set -o nounset
-set -o pipefail
+set -x
 
 # Color codes for output
 RED='\e[01;31m'
@@ -26,7 +24,8 @@ usage ()
 all_install ()
 {
 	echo -ne "Installing configs... "
-	bash_install & git_install & tmux_install & vim_install
+	vim_install
+	bash_install & git_install & tmux_install &
 	wait && echo -e "Done"
 }
 
@@ -46,7 +45,7 @@ vim_install ()
 	ln -sf "${HOME}"/dotfiles/vimrc "${HOME}"/.vimrc
 	rm -rf ~/.vim
 	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	vim -E -c PlugInstall -c quitall >/dev/null 2>&1
+	vim -E +PlugInstall +quitall >/dev/null 2>&1
 }
 
 tmux_install ()
