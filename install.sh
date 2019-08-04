@@ -36,7 +36,7 @@ clone_or_update_repo ()
 			&& git pull >/dev/null 2>&1
 		echo -e "Done"
 	else
-		echo -e "Cloning repo.. "
+		echo -ne "Cloning repo... "
 		git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
 		cd dotfiles
 		echo -e "Done"
