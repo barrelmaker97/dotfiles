@@ -1,4 +1,26 @@
 #!/bin/bash
+
+red="#fb4934"
+orange="#fe8019"
+yellow="#fabd2f"
+green="#b8bb26"
+background="#504945"
+
 linux=/sys/class/power_supply/BAT0/capacity
 wsl=/sys/class/power_supply/battery/capacity
-echo -e "$(cat $linux $wsl 2> /dev/null)% "
+percent=$(cat $linux $wsl 2> /dev/null)
+
+if [ "$percent" -gt 0 ]; then
+	color=${red}
+fi
+if [ "$percent" -gt 9 ]; then
+	color=${orange}
+fi
+if [ "$percent" -gt 19 ]; then
+	color=${yellow}
+fi
+if [ "$percent" -gt 29 ]; then
+	color=${green}
+fi
+
+echo -e "#[bg=${background}, fg=${color}] ${percent}% "
