@@ -17,6 +17,7 @@ Plug 'tpope/vim-fugitive'
 
 " Syntax Highlighting
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'chr4/nginx.vim'
 call plug#end()
 
 " Changes for older Vim versions
