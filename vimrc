@@ -18,6 +18,11 @@ Plug 'tpope/vim-fugitive'
 " Syntax Highlighting
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'chr4/nginx.vim'
+
+" Snippets
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
 call plug#end()
 
 " Changes for older Vim versions
