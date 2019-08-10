@@ -61,7 +61,7 @@ bash_install ()
 {
 	ln -sf "${HOME}"/dotfiles/bashrc "${HOME}"/.bashrc
 	ln -sf "${HOME}"/dotfiles/profile "${HOME}"/.profile
-	. bashrc
+	. "${HOME}"/dotfiles/bashrc
 }
 
 git_install ()
