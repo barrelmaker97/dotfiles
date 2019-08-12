@@ -48,19 +48,25 @@ git_clean ()
 
 set_prompt ()
 {
+	local color="${Green}"
 	if [ "$HOSTNAME" = "raspberrypi" ]; then
-		PS1="$Purple\u@\h$White:$Blue\w"
-	else
-		PS1="$Green\u@\h$White:$Blue\w"
+		color="${Purple}"
 	fi
+	if [ "$USER" = "root" ]; then
+		color="${Red}"
+	fi
+
+	local git_info=""
 	if [ -n "$(git_branch)" ]; then
-		PS1="$PS1$White on $(git_clean)"
+		git_info="$White on $(git_clean)"
 	fi
+
+	local test_env=""
 	if ! [ -z "$VIRTUAL_ENV" ]; then
-		TEST_ENV="[${VIRTUAL_ENV##*/}]"
-		PS1="$Yellow$TEST_ENV$Reset$PS1"
+		local virt_env="[${VIRTUAL_ENV##*/}]"
+		test_env="$Yellow$virt_env$Reset"
 	fi
-	PS1+="$White\$ $Reset"
+	PS1="$test_env$color\u@\h$White:$Blue\w$git_info$White\$ $Reset"
 }
 
 PROMPT_COMMAND='set_prompt'
