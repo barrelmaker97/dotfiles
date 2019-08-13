@@ -54,7 +54,7 @@ all_install ()
 {
 	echo -ne "Installing configs... "
 	bash_install & git_install & tmux_install & vim_install
-	wait && echo -e "Done"
+	wait && echo -e "${GREEN}Done${RESET}"
 }
 
 bash_install ()
