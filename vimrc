@@ -19,10 +19,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'chr4/nginx.vim'
 
-" Snippets
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+" Nerdtree
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
 " Changes for older Vim versions
@@ -175,6 +173,9 @@ nnoremap <Leader><Space> i_<Esc>r
 
 " Whitespace trimming
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
+
+" NERDTree
+nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 " Quick make
 nnoremap <F5> :make!<CR>
