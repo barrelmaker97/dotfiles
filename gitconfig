@@ -32,9 +32,6 @@
 	conf = config --global -e
 	destroy = reset --hard HEAD
 	up = pull --rebase
-	br-del-useless = "!f(){\
-        git branch | grep -v '^*' | xargs git branch -d;\
-    }; f"
 [push]
 	default = simple
 [include]
