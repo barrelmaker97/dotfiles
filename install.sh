@@ -7,6 +7,21 @@ GREEN='\e[01;32m'
 BLUE='\e[01;34m'
 RESET='\e[00m'
 
+# If the color table file exists,
+
+COL_NC='\e[0m' # No Color
+COL_LIGHT_GREEN='\e[1;32m'
+COL_LIGHT_RED='\e[1;31m'
+TICK="[${COL_LIGHT_GREEN}✓${COL_NC}]"
+CROSS="[${COL_LIGHT_RED}✗${COL_NC}]"
+INFO="[i]"
+# shellcheck disable=SC2034
+DONE="${COL_LIGHT_GREEN} done!${COL_NC}"
+echo -e $TICK
+echo -e $CROSS
+echo -e $INFO
+echo -e $DONE
+
 check_dependencies ()
 {
 	echo -ne "Checking for git... "
@@ -34,12 +49,12 @@ clone_or_update_repo ()
 		cd dotfiles \
 			&& git checkout master >/dev/null 2>&1 \
 			&& git pull >/dev/null 2>&1
-		echo -e "Done"
-	else
-		echo -ne "Cloning repo... "
-		git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
-		cd dotfiles
-		echo -e "Done"
+					echo -e "Done"
+				else
+					echo -ne "Cloning repo... "
+					git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
+					cd dotfiles
+					echo -e "Done"
 	fi
 }
 
