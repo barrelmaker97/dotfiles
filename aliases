@@ -2,7 +2,7 @@
 # vim: ft=sh :
 
 # quick start ssh-agent
-alias ssa='eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa'
+alias ssa='eval $(ssh-agent -s) && ssh-add'
 
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
