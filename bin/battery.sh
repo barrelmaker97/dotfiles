@@ -8,18 +8,18 @@ background="#504945"
 
 linux=/sys/class/power_supply/BAT0/capacity
 wsl=/sys/class/power_supply/battery/capacity
-percent=$(cat $linux $wsl 2> /dev/null)
+percent=$(cat ${linux} ${wsl} 2> /dev/null)
 
-if [ "$percent" -gt 0 ]; then
+if [ "${percent}" -gt 0 ]; then
 	color=${red}
 fi
-if [ "$percent" -gt 9 ]; then
+if [ "${percent}" -gt 9 ]; then
 	color=${orange}
 fi
-if [ "$percent" -gt 19 ]; then
+if [ "${percent}" -gt 19 ]; then
 	color=${yellow}
 fi
-if [ "$percent" -gt 29 ]; then
+if [ "${percent}" -gt 29 ]; then
 	color=${green}
 fi
 
