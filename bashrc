@@ -72,15 +72,6 @@ set_prompt ()
 
 PROMPT_COMMAND='set_prompt'
 
-# If this is an xterm set title to user@host:dir
-case "$TERM" in
-	xterm*|rxvt*)
-		PS1="\[\e]0;\u@\h: \w\a\]$PS1"
-		;;
-	*)
-		;;
-esac
-
 # Alias definitions
 if [ -f ~/dotfiles/aliases ]; then
 	. ~/dotfiles/aliases
