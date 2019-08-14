@@ -112,6 +112,9 @@ set noerrorbells visualbell t_vb=
 set wildmenu
 set completeopt=menu,menuone
 
+" Vertical diffing
+set diffopt+=vertical
+
 " PLUGIN SETTINGS
 
 " Lightline
