@@ -1,60 +1,52 @@
 #!/bin/bash
 
 # Color codes for output
-RED='\e[01;31m'
-YELLOW='\e[01;33m'
-GREEN='\e[01;32m'
-BLUE='\e[01;34m'
-RESET='\e[00m'
+RED='\e[1;31m'
+YELLOW='\e[1;33m'
+GREEN='\e[1;32m'
+BLUE='\e[1;34m'
+RESET='\e[0m'
 
-# If the color table file exists,
-
-COL_NC='\e[0m' # No Color
-COL_LIGHT_GREEN='\e[1;32m'
-COL_LIGHT_RED='\e[1;31m'
-TICK="[${COL_LIGHT_GREEN}✓${COL_NC}]"
-CROSS="[${COL_LIGHT_RED}✗${COL_NC}]"
+TICK="[${GREEN}✓${RESET}]"
+CROSS="[${RED}✗${RESET}]"
 INFO="[i]"
-# shellcheck disable=SC2034
-DONE="${COL_LIGHT_GREEN} done!${COL_NC}"
-echo -e $TICK
-echo -e $CROSS
-echo -e $INFO
-echo -e $DONE
+DONE="${GREEN} done!${RESET}"
 
 check_dependencies ()
 {
-	echo -ne "Checking for git... "
+	echo -ne " ${INFO} Checking for git"
 	which git >/dev/null
 	if [ $? -eq 1 ]; then
+		echo -e "\r ${CROSS}"
 		echo -e "Git is not installed or cannot be found on this system"
 		exit 1
 	fi
-	echo -e "Done"
+	echo -e "\r ${TICK}"
 
-	echo -ne "Checking for vim... "
+	echo -ne " ${INFO} Checking for vim"
 	which vim >/dev/null
 	if [ $? -eq 1 ]; then
+		echo -e "\r ${CROSS}"
 		echo -e "Vim is not installed or cannot be found on this system"
 		exit 1
 	fi
-	echo -e "Done"
+	echo -e "\r ${TICK}"
 }
 
 clone_or_update_repo ()
 {
 	cd ~
 	if [ -d dotfiles ]; then
-		echo -ne "Updating local repo... "
+		echo -ne " ${INFO} Updating local repo"
 		cd dotfiles \
 			&& git checkout master >/dev/null 2>&1 \
 			&& git pull >/dev/null 2>&1
-					echo -e "Done"
-				else
-					echo -ne "Cloning repo... "
-					git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
-					cd dotfiles
-					echo -e "Done"
+		echo -e "\r ${TICK}"
+	else
+		echo -ne " ${INFO} Cloning repo"
+		git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
+		cd dotfiles
+		echo -e "\r ${TICK}"
 	fi
 }
 
@@ -67,39 +59,50 @@ update_install ()
 
 all_install ()
 {
-	echo -ne "Installing configs... "
-	bash_install & git_install & tmux_install & vim_install
-	wait && echo -e "${GREEN}Done${RESET}"
+	bash_install
+	git_install
+	tmux_install
+	vim_install
 }
 
 bash_install ()
 {
+	echo -ne " ${INFO} Installing bash configs"
 	ln -sf "${HOME}"/dotfiles/bashrc "${HOME}"/.bashrc
 	ln -sf "${HOME}"/dotfiles/profile "${HOME}"/.profile
 	. "${HOME}"/dotfiles/bashrc
+	echo -e "\r ${TICK}"
 }
 
 git_install ()
 {
+	echo -ne " ${INFO} Installing git configs"
 	ln -sf "${HOME}"/dotfiles/gitconfig "${HOME}"/.gitconfig
+	echo -e "\r ${TICK}"
 }
 
 vim_install ()
 {
+	echo -ne " ${INFO} Installing vim configs"
 	ln -sf "${HOME}"/dotfiles/vimrc "${HOME}"/.vimrc
 	rm -rf ~/.vim
 	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	yes "" | vim +PlugInstall +quitall >/dev/null 2>&1
+	echo -e "\r ${TICK}"
 }
 
 tmux_install ()
 {
+	echo -ne " ${INFO} Installing tmux configs"
 	ln -sf "${HOME}"/dotfiles/tmux.conf "${HOME}"/.tmux.conf
+	echo -e "\r ${TICK}"
 }
 
 work_install ()
 {
+	echo -ne " ${INFO} Installing work configs"
 	ln -sf "${HOME}"/dotfiles/work-gitconfig "${HOME}"/.work-gitconfig
+	echo -e "\r ${TICK}"
 }
 
 help ()
@@ -114,7 +117,7 @@ help ()
 	echo -e "\thelp\t\t - print this message\n"
 }
 
-# Print default help when run without arguments
+# Install all when run without arguments
 if [ "$#" -eq 0 ]; then
 	update_install
 	exit 0
