@@ -21,15 +21,15 @@ shopt -s checkwinsize
 # Fix spelling errors in cd
 shopt -s cdspell
 
-Red='\[\e[01;31m\]'
-Orange='\[\e[38;5;208m\]'
-Yellow='\[\e[01;33m\]'
-Green='\[\e[01;32m\]'
-Cyan='\[\e[01;36m\]'
-Blue='\[\e[01;34m\]'
-Purple='\[\e[01;35m\]'
-White='\[\e[01;37m\]'
-Reset='\[\e[00m\]'
+RED='\[\e[1;31m\]'
+ORANGE='\[\e[38;5;208m\]'
+YELLOW='\[\e[1;33m\]'
+GREEN='\[\e[1;32m\]'
+CYAN='\[\e[1;36m\]'
+BLUE='\[\e[1;34m\]'
+PURPLE='\[\e[1;35m\]'
+WHITE='\[\e[1;37m\]'
+RESET='\[\e[0m\]'
 
 # Set prompt
 git_branch ()
@@ -40,34 +40,34 @@ git_branch ()
 git_clean ()
 {
 	if [ -z "$(git status -s)" ]; then
-		echo "$Cyan$(git_branch)"
+		echo "${CYAN}$(git_branch)"
 	else
-		echo "$Red$(git_branch)"
+		echo "${RED}$(git_branch)"
 	fi
 }
 
 set_prompt ()
 {
 	local symbol="\$"
-	local color="${Green}"
-	if [ "$HOSTNAME" = "raspberrypi" ]; then
-		color="${Purple}"
+	local color="${GREEN}"
+	if [ "${HOSTNAME}" = "raspberrypi" ]; then
+		color="${PURPLE}"
 	fi
-	if [ "$USER" = "root" ]; then
-		color="${Red}"
+	if [ "${USER}" = "root" ]; then
+		color="${RED}"
 		symbol="#"
 	fi
 
 	local git_info=""
 	if [ -n "$(git_branch)" ]; then
-		git_info="$White on $(git_clean)"
+		git_info="${WHITE} on $(git_clean)"
 	fi
 
 	local test_env=""
-	if ! [ -z "$VIRTUAL_ENV" ]; then
-		test_env="$Yellow[${VIRTUAL_ENV##*/}]$Reset"
+	if ! [ -z "${VIRTUAL_ENV}" ]; then
+		test_env="${YELLOW}[${VIRTUAL_ENV##*/}]${RESET}"
 	fi
-	PS1="$test_env$color\u@\h$White:$Blue\w$git_info$White$symbol $Reset"
+	PS1="${test_env}${color}\u@\h${WHITE}:${BLUE}\w${git_info}${WHITE}${symbol}${RESET} "
 }
 
 PROMPT_COMMAND='set_prompt'
