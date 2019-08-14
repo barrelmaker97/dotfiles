@@ -2,44 +2,44 @@
 # vim: ft=sh :
 
 # quick start ssh-agent
-alias ssa='eval $(ssh-agent -s) && ssh-add'
+alias ssa="eval $(ssh-agent -s) && ssh-add"
 
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-	alias ls='ls --color=auto'
-	alias grep='grep --color=auto'
-	alias fgrep='fgrep --color=auto'
-	alias egrep='egrep --color=auto'
+	alias ls="ls --color=auto"
+	alias grep="grep --color=auto"
+	alias fgrep="fgrep --color=auto"
+	alias egrep="egrep --color=auto"
 fi
 
 # more ls aliases
-alias ll='ls -ahFo --time-style=+"%m-%d-%Y %H:%M:%S"'
-alias la='ls -AF'
-alias l='ls -F'
+alias ll="ls -ahFo --time-style=+'%m-%d-%Y %H:%M:%S'"
+alias la="ls -AF"
+alias l="ls -F"
 
 # print $PATH nicely
-alias path='echo $PATH | tr ":" "\n" | sort'
+alias path="echo $PATH | tr ':' '\n' | sort"
 
 # moving around
-alias ..='cd ..'
-alias back='cd -'
+alias ..="cd .."
+alias back="cd -"
 
 # tmux session alias
-alias mux='tmux new -s Home'
+alias mux="tmux new -s Home"
 
 # git aliases
-alias glean='find -name "*.git" -type d -exec $HOME/dotfiles/bin/gitgc.sh "{}" ";"'
-alias gh='git log --all --graph --color=always --pretty=format:"GPGSIG%G?%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" | sed -e "s/GPGSIGN\(...\)./\11/; s/GPGSIGG\(...\)./\12/; s/GPGSIG.\(...\)./\13/;"| less -RX'
-alias gl='git log --color=always --pretty=format:"GPGSIG%G?%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" | sed -e "s/GPGSIGN\(...\)./\11/; s/GPGSIGG\(...\)./\12/; s/GPGSIG.\(...\)./\13/;"| less -RX'
+alias glean="find -name '*.git' -type d -exec $HOME/dotfiles/bin/gitgc.sh '{}' ';'"
+alias gh="git log --all --graph --color=always --pretty=format:'GPGSIG%G?%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' | sed -e 's/GPGSIGN\(...\)./\11/; s/GPGSIGG\(...\)./\12/; s/GPGSIG.\(...\)./\13/;' | less -RX"
+alias gl="git log --color=always --pretty=format:'GPGSIG%G?%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' | sed -e 's/GPGSIGN\(...\)./\11/; s/GPGSIGG\(...\)./\12/; s/GPGSIG.\(...\)./\13/;' | less -RX"
 alias guseless="git branch | grep -v '^*' | xargs git branch -d"
 
 # windows aliases
 if [ "$TERM" = "cygwin" ]; then
-	alias vim='/c/Program\ Files/Vim/vim81/vim.exe'
-	alias view='/c/Program\ Files/Vim/vim81/vim.exe -R'
-	alias vimdiff='/c/Program\ Files/Vim/vim81/vim.exe -d'
-	alias gvim='/c/Program\ Files/Vim/vim81/gvim.exe'
-	alias gview='/c/Program\ Files/Vim/vim81/gvim.exe -R'
-	alias gvimdiff='/c/Program\ Files/Vim/vim81/gvim.exe -d'
+	alias vim="/c/Program\ Files/Vim/vim81/vim.exe"
+	alias view="/c/Program\ Files/Vim/vim81/vim.exe -R"
+	alias vimdiff="/c/Program\ Files/Vim/vim81/vim.exe -d"
+	alias gvim="/c/Program\ Files/Vim/vim81/gvim.exe"
+	alias gview="/c/Program\ Files/Vim/vim81/gvim.exe -R"
+	alias gvimdiff="/c/Program\ Files/Vim/vim81/gvim.exe -d"
 fi
