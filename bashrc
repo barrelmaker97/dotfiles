@@ -6,6 +6,9 @@ case $- in
 	*) return;;
 esac
 
+# Set umask if it isn't already
+umask 022
+
 # History options
 shopt -s histappend
 shopt -s cmdhist
