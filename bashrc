@@ -24,14 +24,21 @@ shopt -s checkwinsize
 # Fix spelling errors in cd
 shopt -s cdspell
 
-RED='\[\e[1;31m\]'
+RED='\[\e[0;31m\]'
 ORANGE='\[\e[38;5;208m\]'
-YELLOW='\[\e[1;33m\]'
-GREEN='\[\e[1;32m\]'
-CYAN='\[\e[1;36m\]'
-BLUE='\[\e[1;34m\]'
-PURPLE='\[\e[1;35m\]'
-WHITE='\[\e[1;37m\]'
+YELLOW='\[\e[0;33m\]'
+GREEN='\[\e[0;32m\]'
+CYAN='\[\e[0;36m\]'
+BLUE='\[\e[0;34m\]'
+PURPLE='\[\e[0;35m\]'
+WHITE='\[\e[0;37m\]'
+BR_RED='\[\e[1;91m\]'
+BR_YELLOW='\[\e[0;93m\]'
+BR_GREEN='\[\e[0;92m\]'
+BR_CYAN='\[\e[0;96m\]'
+BR_BLUE='\[\e[0;94m\]'
+BR_PURPLE='\[\e[0;95m\]'
+BR_WHITE='\[\e[0;97m\]'
 RESET='\[\e[0m\]'
 
 # Set prompt
@@ -43,34 +50,37 @@ git_branch ()
 git_clean ()
 {
 	if [ -z "$(git status -s)" ]; then
-		echo "${CYAN}$(git_branch)"
+		echo "${BR_CYAN}$(git_branch)"
 	else
-		echo "${RED}$(git_branch)"
+		echo "${BR_RED}$(git_branch)"
 	fi
 }
 
 set_prompt ()
 {
 	local symbol="\$"
-	local color="${GREEN}"
-	if [ "${HOSTNAME}" = "raspberrypi" ]; then
-		color="${PURPLE}"
+	local color="${BR_GREEN}"
+	if [ "${HOSTNAME}" = "castor" ]; then
+		color="${BR_YELLOW}"
+	fi
+	if [ "${HOSTNAME}" = "pollux" ]; then
+		color="${ORANGE}"
 	fi
 	if [ "${USER}" = "root" ]; then
-		color="${RED}"
+		color="${BR_RED}"
 		symbol="#"
 	fi
 
 	local git_info=""
 	if [ -n "$(git_branch)" ]; then
-		git_info="${WHITE} on $(git_clean)"
+		git_info="${BR_WHITE} on $(git_clean)"
 	fi
 
 	local test_env=""
 	if ! [ -z "${VIRTUAL_ENV}" ]; then
-		test_env="${YELLOW}[${VIRTUAL_ENV##*/}]${RESET}"
+		test_env="${BR_YELLOW}[${VIRTUAL_ENV##*/}]${RESET}"
 	fi
-	PS1="${test_env}${color}\u@\h${WHITE}:${BLUE}\w${git_info}${WHITE}${symbol}${RESET} "
+	PS1="${test_env}${color}\u@\h${BR_WHITE}:${BR_BLUE}\w${git_info}${BR_WHITE}${symbol}${RESET} "
 }
 
 PROMPT_COMMAND='set_prompt'
@@ -102,3 +112,6 @@ bind TAB:menu-complete
 # Set GPG TTY for commit signing
 GPG_TTY=$(tty)
 export GPG_TTY
+
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
