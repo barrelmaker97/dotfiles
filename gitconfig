@@ -34,5 +34,11 @@
 	up = pull --rebase
 [push]
 	default = simple
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	tool = vimdiff
 [include]
 	path = ~/.work-gitconfig
