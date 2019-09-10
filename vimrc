@@ -204,6 +204,7 @@ autocmd FileType hlasm set expandtab tabstop=3 shiftwidth=3
 autocmd GUIEnter * set visualbell t_vb=
 autocmd FileType help wincmd L
 autocmd FileType javascript set expandtab tabstop=4 shiftwidth=4
+autocmd FileType yaml set expandtab tabstop=2 shiftwidth=2
 
 " Spell checking
 autocmd FileType markdown setlocal spell
