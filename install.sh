@@ -62,6 +62,8 @@ all_install ()
 	bash_install
 	git_install
 	tmux_install
+	i3_install
+	urxvt_install
 	vim_install
 }
 
@@ -105,6 +107,20 @@ work_install ()
 	echo -e "\r ${TICK}"
 }
 
+i3_install ()
+{
+	echo -ne " ${INFO} Installing i3 configs"
+	ln -sf "${HOME}"/dotfiles/i3config "${HOME}"/.config/i3/config
+	echo -e "\r ${TICK}"
+}
+
+urxvt_install ()
+{
+	echo -ne " ${INFO} Installing urxvt configs"
+	ln -sf "${HOME}"/dotfiles/xresources "${HOME}"/.Xresources
+	echo -e "\r ${TICK}"
+}
+
 help ()
 {
 	echo -e "Usage: \n"
@@ -126,7 +142,7 @@ fi
 # Action parsing
 ACTION="$1"
 case "${ACTION}" in
-	all|bash|git|work|vim|tmux)
+	all|bash|git|work|vim|tmux|i3|urxvt)
 		"${ACTION}"_install
 		;;
 	help)
