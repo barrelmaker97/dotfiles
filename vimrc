@@ -25,8 +25,6 @@ call plug#end()
 
 " Changes for older Vim versions
 if has("termguicolors")
-	set termguicolors
-else
 	let g:gruvbox_termcolors=16
 endif
 
