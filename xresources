@@ -35,3 +35,6 @@ URxvt.font: xft:Source Code Pro:style=Regular:size=10
 URxvt.inheritPixmap: true
 URxvt.depth: 24
 URxvt.shading: 30
+
+URxvt.perl-ext:
+URxvt.perl-ext-common:
