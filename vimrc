@@ -54,6 +54,7 @@ endif
 syntax enable
 colorscheme gruvbox
 set background=dark
+hi Normal ctermbg=NONE
 
 " Encoding
 set encoding=utf-8
@@ -117,7 +118,7 @@ set noro
 " PLUGIN SETTINGS
 
 " Lightline
-let g:lightline = { 'colorscheme': 'gruvbox' }
+let g:lightline = { 'colorscheme': 'seoul256' }
 
 " GitGutter
 let g:gitgutter_sign_added = '+'
