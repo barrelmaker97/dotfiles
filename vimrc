@@ -25,6 +25,7 @@ call plug#end()
 
 " Changes for older Vim versions
 if has("termguicolors")
+	let g:gruvbox_italic=1
 	let g:gruvbox_termcolors=16
 endif
 
@@ -54,7 +55,7 @@ endif
 syntax enable
 colorscheme gruvbox
 set background=dark
-hi Normal ctermbg=NONE
+"hi Normal ctermbg=NONE
 
 " Encoding
 set encoding=utf-8
@@ -118,7 +119,7 @@ set noro
 " PLUGIN SETTINGS
 
 " Lightline
-let g:lightline = { 'colorscheme': 'seoul256' }
+let g:lightline = { 'colorscheme': 'gruvbox' }
 
 " GitGutter
 let g:gitgutter_sign_added = '+'

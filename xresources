@@ -30,7 +30,7 @@ URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.cursorBlink: true
 URxvt.scrollBar: false
-URxvt.font: xft:Source Code Pro:style=Regular:size=10
+URxvt.font: xft:Source Code Pro:style=Bold:size=10
 
 URxvt.inheritPixmap: true
 URxvt.depth: 24
