@@ -111,6 +111,7 @@ i3_install ()
 {
 	echo -ne " ${INFO} Installing i3 configs"
 	ln -sf "${HOME}"/dotfiles/i3config "${HOME}"/.config/i3/config
+	ln -sf "${HOME}"/dotfiles/i3status "${HOME}"/.i3status.conf
 	echo -e "\r ${TICK}"
 }
 
