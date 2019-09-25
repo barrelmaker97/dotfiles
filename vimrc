@@ -23,12 +23,6 @@ Plug 'chr4/nginx.vim'
 Plug 'scrooloose/nerdtree'
 call plug#end()
 
-" Changes for older Vim versions
-if has("termguicolors")
-	let g:gruvbox_italic=1
-	let g:gruvbox_termcolors=16
-endif
-
 " Set leader
 let mapleader="\<Space>"
 
@@ -51,7 +45,9 @@ if has('win32')
 	set shell=C:\WINDOWS\system32\cmd.exe
 endif
 
-" Colors
+" Colors and syntax
+let g:gruvbox_italic=1
+let g:gruvbox_termcolors=16
 syntax enable
 colorscheme gruvbox
 set background=dark
