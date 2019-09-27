@@ -207,14 +207,14 @@ bar {
 	}
 }
 
-gaps outer 15
-gaps inner 15
+gaps outer 10
+gaps inner 10
 default_border pixel 2
 exec --no-startup-id ~/.fehbg &
 
 #                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
-client.focused          $black      $black      $darkwhite  $darkblack  $white
-client.unfocused        $black      $black      $white      $darkblack  $darkwhite
-client.focused_inactive $black      $black      $white      $darkblack  $darkwhite
+client.focused          $black      $black      $darkwhite  $cyan       $darkwhite
+client.unfocused        $black      $black      $white      $black      $black
+client.focused_inactive $black      $black      $white      $black      $black
 client.urgent           $darkred    $darkred    $black      $darkred    $darkred
 client.background       $black
