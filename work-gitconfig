@@ -1,4 +1,4 @@
 # vim: ft=gitconfig:
 [user]
-	email = Nolan.Cooper97@motorolasolutions.com
+	email = Nolan.Cooper@motorolasolutions.com
 	signingkey = 7E56EF0F5E42F72F
