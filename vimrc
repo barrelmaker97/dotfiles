@@ -1,5 +1,9 @@
 " .vimrc
 
+" Encoding
+set encoding=utf-8
+scriptencoding utf-8
+
 call plug#begin()
 " Font checking
 Plug 'drmikehenry/vim-fontdetect'
@@ -24,7 +28,7 @@ Plug 'scrooloose/nerdtree'
 call plug#end()
 
 " Set leader
-let mapleader="\<Space>"
+let g:mapleader="\<Space>"
 
 " GUI Options
 if has('gui')
@@ -59,9 +63,6 @@ syntax enable
 colorscheme gruvbox
 set background=dark
 "hi Normal ctermbg=NONE
-
-" Encoding
-set encoding=utf-8
 
 " Status line
 set noshowmode
