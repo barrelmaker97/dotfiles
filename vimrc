@@ -47,7 +47,7 @@ endif
 
 " Colors and syntax
 let g:gruvbox_italic=1
-if $TERM == 'st-256color'
+if $TERM ==# 'st-256color'
 	set t_8f=[38;2;%lu;%lu;%lum        " set foreground color
 	set t_8b=[48;2;%lu;%lu;%lum        " set background color
 	set termguicolors                    " Enable GUI colors for the terminal to get truecolor
@@ -203,16 +203,25 @@ command! Q q
 command! Reload :so $MYVIMRC
 
 " Autocommands
-autocmd FileType hlasm set expandtab tabstop=3 shiftwidth=3
-autocmd GUIEnter * set visualbell t_vb=
-autocmd FileType help wincmd L
-autocmd FileType javascript set expandtab tabstop=4 shiftwidth=4
-autocmd FileType yaml set expandtab tabstop=2 shiftwidth=2
+augroup filetypes
+	autocmd!
+	autocmd FileType hlasm set expandtab tabstop=3 shiftwidth=3
+	autocmd FileType help wincmd L
+	autocmd FileType javascript set expandtab tabstop=4 shiftwidth=4
+	autocmd FileType yaml set expandtab tabstop=2 shiftwidth=2
+augroup END
 
-" Spell checking
-autocmd FileType markdown setlocal spell
-autocmd FileType gitcommit setlocal spell
-autocmd FileType text setlocal spell
+augroup visual_bell
+	autocmd!
+	autocmd GUIEnter * set visualbell t_vb=
+augroup END
+
+augroup spellcheck
+	autocmd!
+	autocmd FileType markdown setlocal spell
+	autocmd FileType gitcommit setlocal spell
+	autocmd FileType text setlocal spell
+augroup END
 
 " Trim trailing whitespace
 function! TrimWhitespace()
