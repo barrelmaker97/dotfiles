@@ -5,45 +5,43 @@ RED='\e[1;31m'
 GREEN='\e[1;32m'
 RESET='\e[0m'
 
-TICK="[${GREEN}✓${RESET}]"
-CROSS="[${RED}✗${RESET}]"
-INFO="[i]"
+TICK="\r [${GREEN}✓${RESET}]"
+CROSS="\r [${RED}✗${RESET}]"
+INFO="\r [i]"
 
 check_dependencies ()
 {
-	echo -ne " ${INFO} Checking for git"
-	command -v git >/dev/null
+	echo -ne "${INFO} Checking for git"
+	command -v git > /dev/null
 	if [ $? -eq 1 ]; then
-		echo -e "\r ${CROSS}"
-		echo -e "Git is not installed or cannot be found on this system"
+		echo -e "${CROSS} Git is not installed or cannot be found on this system"
 		exit 1
 	fi
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 
-	echo -ne " ${INFO} Checking for vim"
-	command -v vim >/dev/null
+	echo -ne "${INFO} Checking for vim"
+	command -v vim > /dev/null
 	if [ $? -eq 1 ]; then
-		echo -e "\r ${CROSS}"
-		echo -e "Vim is not installed or cannot be found on this system"
+		echo -e "${CROSS} Vim is not installed or cannot be found on this system"
 		exit 1
 	fi
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 clone_or_update_repo ()
 {
 	cd ~ || exit 1
 	if [ -d dotfiles ]; then
-		echo -ne " ${INFO} Updating local repo"
+		echo -ne "${INFO} Updating local repo"
 		cd dotfiles \
 			&& git checkout master >/dev/null 2>&1 \
 			&& git pull >/dev/null 2>&1
-		echo -e "\r ${TICK}"
+		echo -e "${TICK}"
 	else
 		echo -ne " ${INFO} Cloning repo"
 		git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
 		cd dotfiles || exit 1
-		echo -e "\r ${TICK}"
+		echo -e "${TICK}"
 	fi
 }
 
