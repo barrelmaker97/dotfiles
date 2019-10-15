@@ -2,20 +2,17 @@
 
 # Color codes for output
 RED='\e[1;31m'
-YELLOW='\e[1;33m'
 GREEN='\e[1;32m'
-BLUE='\e[1;34m'
 RESET='\e[0m'
 
 TICK="[${GREEN}✓${RESET}]"
 CROSS="[${RED}✗${RESET}]"
 INFO="[i]"
-DONE="${GREEN} done!${RESET}"
 
 check_dependencies ()
 {
 	echo -ne " ${INFO} Checking for git"
-	which git >/dev/null
+	command -v git >/dev/null
 	if [ $? -eq 1 ]; then
 		echo -e "\r ${CROSS}"
 		echo -e "Git is not installed or cannot be found on this system"
@@ -24,7 +21,7 @@ check_dependencies ()
 	echo -e "\r ${TICK}"
 
 	echo -ne " ${INFO} Checking for vim"
-	which vim >/dev/null
+	command -v vim >/dev/null
 	if [ $? -eq 1 ]; then
 		echo -e "\r ${CROSS}"
 		echo -e "Vim is not installed or cannot be found on this system"
@@ -35,7 +32,7 @@ check_dependencies ()
 
 clone_or_update_repo ()
 {
-	cd ~
+	cd ~ || exit 1
 	if [ -d dotfiles ]; then
 		echo -ne " ${INFO} Updating local repo"
 		cd dotfiles \
@@ -45,7 +42,7 @@ clone_or_update_repo ()
 	else
 		echo -ne " ${INFO} Cloning repo"
 		git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
-		cd dotfiles
+		cd dotfiles || exit 1
 		echo -e "\r ${TICK}"
 	fi
 }
