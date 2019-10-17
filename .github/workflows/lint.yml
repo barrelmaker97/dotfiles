@@ -1,11 +1,14 @@
-name: CI
+name: Lint
 
 on: [push]
 
 jobs:
-  install_linter:
-    name: lint
+  lint_scripts:
+    name: Lint scripts
     runs-on: ubuntu-latest
     steps:
-    - name: Run a one-line script
+    - uses: actions/checkout@master
+    - name: Update shellcheck
       run: sudo apt install shellcheck
+    - name: Lint scripts
+      run: shellcheck bin/*
