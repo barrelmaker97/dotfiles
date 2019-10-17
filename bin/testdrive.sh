@@ -38,15 +38,20 @@ printf '\e[7mreverse\e[27m\n'
 printf '\e[8minvisible\e[28m <- invisible (but copy-pasteable)\n'
 printf '\e[9mstrikethrough\e[29m\n'
 printf '\e[53moverline\e[55m\n'
+printf '\e[31mred\e[39m\n'
+printf '\e[91mbright red\e[39m\n'
+printf '\e[38;5;42m256-color, de facto standard (commonly used)\e[39m\n'
+printf '\e[38;2;240;143;104mtruecolor, de facto standard (commonly used)\e[39m\n'
+printf '\e[46mcyan background\e[49m\n'
+printf '\e[106mbright cyan background\e[49m\n'
+printf '\e[48;5;42m256-color background, de facto standard (commonly used)\e[49m\n'
+printf '\e[48;2;240;143;104mtruecolor background, de facto standard (commonly used)\e[49m\n'
 echo
 
-echo "# magic string (see https://en.wikipedia.org/wiki/Unicode#Web)"
+echo "# Unicode string"
 echo "é Δ Й ק م ๗ あ 叶 葉 말"
 echo
 
 echo "# emojis"
 echo "😃😱😵"
 echo
-
-echo "# right-to-left ('w' symbol should be at right side)"
-echo "שרה"
