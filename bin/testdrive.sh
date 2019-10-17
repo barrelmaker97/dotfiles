@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 term_cols="$(tput cols)"
 term_lines="$(tput lines)"
