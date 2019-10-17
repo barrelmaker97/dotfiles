@@ -1,0 +1,11 @@
+name: CI
+
+on: [push]
+
+jobs:
+  install_linter:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run a one-line script
+      run: sudo apt install shellcheck
