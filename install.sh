@@ -68,7 +68,6 @@ bash_install ()
 	echo -ne " ${INFO} Installing bash configs"
 	ln -sf "${HOME}"/dotfiles/bashrc "${HOME}"/.bashrc
 	ln -sf "${HOME}"/dotfiles/profile "${HOME}"/.profile
-	. "${HOME}"/dotfiles/bashrc
 	echo -e "\r ${TICK}"
 }
 
