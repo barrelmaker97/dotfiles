@@ -59,6 +59,7 @@ all_install ()
 	tmux_install
 	i3_install
 	urxvt_install
+	scripts_install
 	vim_install
 }
 
@@ -115,6 +116,13 @@ urxvt_install ()
 {
 	echo -ne " ${INFO} Installing urxvt configs"
 	ln -sf "${HOME}"/dotfiles/xresources "${HOME}"/.Xresources
+	echo -e "\r ${TICK}"
+}
+
+scripts_install ()
+{
+	echo -ne " ${INFO} Installing scripts"
+	ln -sf "${HOME}"/dotfiles/bin "${HOME}"/
 	echo -e "\r ${TICK}"
 }
 
