@@ -11,4 +11,4 @@ jobs:
     - name: Update shellcheck
       run: sudo apt install shellcheck
     - name: Lint scripts
-      run: shellcheck bin/*
+      run: shellcheck bin/* install.sh
