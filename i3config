@@ -208,7 +208,7 @@ bar {
 }
 
 gaps outer 0
-gaps inner 20
+gaps inner 15
 default_border pixel 2
 exec --no-startup-id ~/.fehbg &
 
