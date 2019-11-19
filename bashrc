@@ -66,6 +66,9 @@ set_prompt ()
 	if [ "${HOSTNAME}" = "pollux" ]; then
 		color="${ORANGE}"
 	fi
+	if [ "${HOSTNAME}" = "zeus" ]; then
+		color="${BR_CYAN}"
+	fi
 	if [ "${USER}" = "root" ]; then
 		color="${BR_RED}"
 		symbol="#"
