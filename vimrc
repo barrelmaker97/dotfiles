@@ -56,6 +56,8 @@ if $TERM ==# 'st-256color'
 	set t_8b=[48;2;%lu;%lu;%lum        " set background color
 	set termguicolors                    " Enable GUI colors for the terminal to get truecolor
 	set t_Co=256                         " Enable 256 colors
+elseif $TERM ==# 'xterm-256color'
+	set termguicolors                    " Enable GUI colors for the terminal to get truecolor
 else
 	let g:gruvbox_termcolors=16
 endif

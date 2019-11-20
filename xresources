@@ -38,3 +38,5 @@ URxvt.shading: 30
 
 URxvt.perl-ext:
 URxvt.perl-ext-common:
+
+XTerm.termName: xterm-256color
