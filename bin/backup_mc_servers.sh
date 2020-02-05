@@ -10,4 +10,9 @@ backup ()
 	rm -rf /tmp/"${FILENAME}"
 }
 
-ssh -q ${BACKUP_HOST} [[ -f "${BACKUP_LOCATION}/${FILENAME}" ]] && echo "Backup for today already complete" || backup
+if ssh -q ${BACKUP_HOST} [[ -f "${BACKUP_LOCATION}/${FILENAME}" ]]
+then
+	echo "Backup for today already complete"
+else
+	backup
+fi
