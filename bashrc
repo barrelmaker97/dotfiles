@@ -80,7 +80,7 @@ set_prompt ()
 	fi
 
 	local test_env=""
-	if ! [ -z "${VIRTUAL_ENV}" ]; then
+	if [ -n "${VIRTUAL_ENV}" ]; then
 		test_env="${BR_YELLOW}[${VIRTUAL_ENV##*/}]${RESET}"
 	fi
 	PS1="${test_env}${color}\u@\h${BR_WHITE}:${BR_BLUE}\w${git_info}${BR_WHITE}${symbol}${RESET} "
