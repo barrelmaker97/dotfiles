@@ -6,7 +6,7 @@ BACKUP_LOCATION="/mnt/Backup"
 backup ()
 {
 	zip -r /tmp/"${FILENAME}" /home/barrelmaker/*craft
-	rsync -a /tmp/"${FILENAME}" "${BACKUP_HOST}":/mnt/Backup/
+	rsync -a /tmp/"${FILENAME}" "${BACKUP_HOST}":"${BACKUP_LOCATION}"
 	rm -rf /tmp/"${FILENAME}"
 }
 
