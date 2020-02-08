@@ -1,7 +1,7 @@
 #!/bin/bash
 BACKUP_HOST="pi@pollux"
 FILENAME="mc-servers-$(date +%m-%d-%Y).zip"
-BACKUP_LOCATION="/mnt/Backup"
+BACKUP_LOCATION="/mnt/Backup/mc-servers"
 
 backup ()
 {
