@@ -29,6 +29,7 @@
 	br = branch
 	ba = branch -a
 	st = status
+	co = checkout
 	conf = config --global -e
 	destroy = reset --hard HEAD
 	up = pull --rebase
