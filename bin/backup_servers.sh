@@ -18,7 +18,7 @@ minecraft_backup ()
 {
 	cd "${MINECRAFT_BACKUP_SOURCE}" || exit
 	zip -r /tmp/"${MINECRAFT_FILENAME}" ./*
-	rsync -a /tmp/"${MINECRAFT_FILENAME}" "${BACKUP_USER}@${BACKUP_HOST}":"${MINECRAFT_BACKUP_DESTINATION}"
+	rsync -a /tmp/"${MINECRAFT_FILENAME}" "${BACKUP_USER}@${BACKUP_HOST}:${MINECRAFT_BACKUP_DESTINATION}"
 	rm -rf /tmp/"${MINECRAFT_FILENAME}"
 }
 
@@ -26,7 +26,7 @@ factorio_backup ()
 {
 	cd "${FACTORIO_BACKUP_SOURCE}" || exit
 	zip -r /tmp/"${FACTORIO_FILENAME}" ./*
-	rsync -a /tmp/"${FACTORIO_FILENAME}" "${BACKUP_USER}@${BACKUP_HOST}":"${FACTORIO_BACKUP_DESTINATION}"
+	rsync -a /tmp/"${FACTORIO_FILENAME}" "${BACKUP_USER}@${BACKUP_HOST}:${FACTORIO_BACKUP_DESTINATION}"
 	rm -rf /tmp/"${FACTORIO_FILENAME}"
 }
 
