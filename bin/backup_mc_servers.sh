@@ -1,5 +1,5 @@
 #!/bin/bash
-BACKUP_HOST="pi@pollux"
+BACKUP_HOST="barrelmaker@pollux"
 FILENAME="mc-servers-$(date +%m-%d-%Y).zip"
 BACKUP_DESTINATION="/mnt/Backup/mc-servers"
 BACKUP_SOURCE="/home/barrelmaker/mc-servers"
