@@ -29,7 +29,7 @@ alias back="cd -"
 alias mux="tmux new -s Home"
 
 # git aliases
-alias glean="find -name '*.git' -type d -exec $HOME/dotfiles/bin/gitgc.sh '{}' ';'"
+alias glean="find -name '*.git' -type d -exec $HOME/dotfiles/bin/gitgc '{}' ';'"
 alias gh="git log --all --graph --color=always --pretty=format:'%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'"
 alias ghs="git log --all --graph --color=always --pretty=format:'GPGSIG%G?%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' | sed -e 's/GPGSIGN\(...\)./\11/; s/GPGSIGG\(...\)./\12/; s/GPGSIG.\(...\)./\13/;' | less -RX"
 alias gl="git log --color=always --pretty=format:'%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'"
