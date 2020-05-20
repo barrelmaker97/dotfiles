@@ -19,12 +19,12 @@ if ssh -q ${BACKUP_HOST} [[ -f "${MINECRAFT_BACKUP_DESTINATION}/${MINECRAFT_FILE
 then
 	echo "Minecraft Servers backup for today already complete"
 else
-	tar cf - -C "${HOME_DIR}" "${MINECRAFT_BACKUP_SOURCE}" | lz4 -1 - | ssh "${BACKUP_HOST}" dd of="${MINECRAFT_BACKUP_DESTINATION}/${MINECRAFT_FILENAME}"
+	tar cf - -C "${HOME_DIR}" "${MINECRAFT_BACKUP_SOURCE}" | lz4 -1 - | ssh "${BACKUP_USER}@${BACKUP_HOST}" dd of="${MINECRAFT_BACKUP_DESTINATION}/${MINECRAFT_FILENAME}"
 fi
 
 if ssh -q ${BACKUP_HOST} [[ -f "${FACTORIO_BACKUP_DESTINATION}/${FACTORIO_FILENAME}" ]]
 then
 	echo "Factorio Servers backup for today already complete"
 else
-	tar cf - -C "${HOME_DIR}" "${FACTORIO_BACKUP_SOURCE}" | lz4 -1 - | ssh "${BACKUP_HOST}" dd of="${FACTORIO_BACKUP_DESTINATION}/${FACTORIO_FILENAME}"
+	tar cf - -C "${HOME_DIR}" "${FACTORIO_BACKUP_SOURCE}" | lz4 -1 - | ssh "${BACKUP_USER}@${BACKUP_HOST}" dd of="${FACTORIO_BACKUP_DESTINATION}/${FACTORIO_FILENAME}"
 fi
