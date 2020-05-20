@@ -3,43 +3,28 @@
 # General variables
 BACKUP_USER="barrelmaker"
 BACKUP_HOST="pollux"
+HOME_DIR="/home/barrelmaker"
 
 # Minecraft variables
-MINECRAFT_FILENAME="mc-servers-$(date +%m-%d-%Y).zip"
+MINECRAFT_FILENAME="mc-servers-$(date +%m-%d-%Y).lz4"
 MINECRAFT_BACKUP_DESTINATION="/mnt/Backup/mc-servers"
-MINECRAFT_BACKUP_SOURCE="/home/barrelmaker/mc-servers"
+MINECRAFT_BACKUP_SOURCE="mc-servers"
 
 # Factorio variables
-FACTORIO_FILENAME="factorio-servers-$(date +%m-%d-%Y).zip"
+FACTORIO_FILENAME="factorio-servers-$(date +%m-%d-%Y).lz4"
 FACTORIO_BACKUP_DESTINATION="/mnt/Backup/factorio-servers"
-FACTORIO_BACKUP_SOURCE="/home/barrelmaker/factorio-servers"
-
-minecraft_backup ()
-{
-	cd "${MINECRAFT_BACKUP_SOURCE}" || exit
-	zip -r /tmp/"${MINECRAFT_FILENAME}" ./*
-	rsync -a /tmp/"${MINECRAFT_FILENAME}" "${BACKUP_USER}@${BACKUP_HOST}:${MINECRAFT_BACKUP_DESTINATION}"
-	rm -rf /tmp/"${MINECRAFT_FILENAME}"
-}
-
-factorio_backup ()
-{
-	cd "${FACTORIO_BACKUP_SOURCE}" || exit
-	zip -r /tmp/"${FACTORIO_FILENAME}" ./*
-	rsync -a /tmp/"${FACTORIO_FILENAME}" "${BACKUP_USER}@${BACKUP_HOST}:${FACTORIO_BACKUP_DESTINATION}"
-	rm -rf /tmp/"${FACTORIO_FILENAME}"
-}
+FACTORIO_BACKUP_SOURCE="factorio-servers"
 
 if ssh -q ${BACKUP_HOST} [[ -f "${MINECRAFT_BACKUP_DESTINATION}/${MINECRAFT_FILENAME}" ]]
 then
 	echo "Minecraft Servers backup for today already complete"
 else
-	minecraft_backup
+	tar cf - -C "${HOME_DIR}" "${MINECRAFT_BACKUP_SOURCE}" | lz4 -1 - | ssh "${BACKUP_HOST}" dd of="${MINECRAFT_BACKUP_DESTINATION}/${MINECRAFT_FILENAME}"
 fi
 
 if ssh -q ${BACKUP_HOST} [[ -f "${FACTORIO_BACKUP_DESTINATION}/${FACTORIO_FILENAME}" ]]
 then
 	echo "Factorio Servers backup for today already complete"
 else
-	factorio_backup
+	tar cf - -C "${HOME_DIR}" "${FACTORIO_BACKUP_SOURCE}" | lz4 -1 - | ssh "${BACKUP_HOST}" dd of="${FACTORIO_BACKUP_DESTINATION}/${FACTORIO_FILENAME}"
 fi
