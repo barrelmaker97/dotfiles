@@ -43,3 +43,5 @@
 	tool = vimdiff
 [include]
 	path = ~/.work-gitconfig
+[pull]
+	rebase = false
