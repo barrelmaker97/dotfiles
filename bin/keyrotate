@@ -1,0 +1,43 @@
+#!/bin/bash
+# shellcheck disable=SC2029
+TEMP_DIR="${HOME}/keyrotate-temp"
+KEY_COMMENT="${USER}@${HOSTNAME}-$(date +%m-%d-%Y)"
+
+if [ $# -eq 0 ]; then
+	echo "Please provide at least one hostname"
+	exit 1
+fi
+
+echo "Checking that all hosts are available..."
+for TARGET_HOST in "$@"
+do
+	timeout 10 ssh "$TARGET_HOST" :
+	EXIT_CODE=$?
+	if [ $EXIT_CODE -eq 124 ]; then
+		echo "Could not connect to ${TARGET_HOST} after 10 seconds"
+		exit 1
+	fi
+	if [ $EXIT_CODE -ne 0 ]; then
+		exit $?
+	fi
+done
+
+echo "Generating new key..."
+if [ -d "${TEMP_DIR}" ]; then rm -Rf "${TEMP_DIR}"; fi
+mkdir "${TEMP_DIR}"
+ssh-keygen -o -q -a 100 -t ed25519 -f "${TEMP_DIR}"/id_ed25519 -C "${KEY_COMMENT}" -N ""
+ESCAPED_OLD_PUB_KEY=$(sed -e 's/[]\/$*.^[]/\\&/g' < "${HOME}"/.ssh/id_ed25519.pub);
+CLEANUP_CMD="sed -i '/${ESCAPED_OLD_PUB_KEY}/d' ~/.ssh/authorized_keys"
+
+echo "Installing key in hosts..."
+for TARGET_HOST in "$@"
+do
+	ssh-copy-id -i "${TEMP_DIR}"/id_ed25519.pub "${TARGET_HOST}"
+	ssh "${TARGET_HOST}" "${CLEANUP_CMD}"
+done
+
+echo "Cleaning up..."
+rm -rf ~/.ssh/id_ed25519*
+mv "${TEMP_DIR}"/* ~/.ssh/
+rmdir "${TEMP_DIR}"
+echo "Done!"
