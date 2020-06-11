@@ -13,11 +13,25 @@ INFO="\r [i]"
 TEMP_DIR="${HOME}/keyrotate-temp"
 KEY_COMMENT="${USER}@${HOSTNAME}-$(date +%m-%d-%Y)"
 TIMEOUT="10"
+DEPENDENCIES=(timeout ssh-keygen ssh-copy-id)
 
 if [ $# -eq 0 ]; then
 	echo "${CROSS} Please provide at least one hostname"
 	exit 1
 fi
+
+
+echo -ne "${INFO} Checking for dependencies..."
+for DEPENDENCY in "${DEPENDENCIES[@]}"
+do
+	command -v "${DEPENDENCY}" > /dev/null
+	EXIT_CODE=$?
+	if [ $EXIT_CODE -ne 0 ]; then
+		echo -e "${CROSS} ${DEPENDENCY} is not installed or cannot be found on this system"
+		exit $EXIT_CODE
+	fi
+done
+echo -e "${TICK}"
 
 echo -ne "${INFO} Checking that all hosts are available..."
 for TARGET_HOST in "$@"
