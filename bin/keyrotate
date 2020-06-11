@@ -1,43 +1,72 @@
 #!/bin/bash
 # shellcheck disable=SC2029
+
+# Color codes and handy snippets
+RED='\e[1;31m'
+GREEN='\e[1;32m'
+RESET='\e[0m'
+TICK="\r [${GREEN}✓${RESET}]"
+CROSS="\r [${RED}✗${RESET}]"
+INFO="\r [i]"
+
+# Configuration
 TEMP_DIR="${HOME}/keyrotate-temp"
 KEY_COMMENT="${USER}@${HOSTNAME}-$(date +%m-%d-%Y)"
+TIMEOUT="10"
 
 if [ $# -eq 0 ]; then
-	echo "Please provide at least one hostname"
+	echo "${CROSS} Please provide at least one hostname"
 	exit 1
 fi
 
-echo "Checking that all hosts are available..."
+echo -ne "${INFO} Checking that all hosts are available..."
 for TARGET_HOST in "$@"
 do
-	timeout 10 ssh "$TARGET_HOST" :
+	timeout "${TIMEOUT}" ssh "$TARGET_HOST" : >/dev/null 2>&1
 	EXIT_CODE=$?
 	if [ $EXIT_CODE -eq 124 ]; then
-		echo "Could not connect to ${TARGET_HOST} after 10 seconds"
-		exit 1
+		echo -e "${CROSS} Could not connect to host ${TARGET_HOST} after ${TIMEOUT} seconds"
+		exit $EXIT_CODE
+	fi
+	if [ $EXIT_CODE -eq 255 ]; then
+		echo -e "${CROSS} Could not resolve host ${TARGET_HOST}                 "
+		exit $EXIT_CODE
 	fi
 	if [ $EXIT_CODE -ne 0 ]; then
-		exit $?
+		echo -e "${CROSS} An error occured while accessing host ${TARGET_HOST}  "
+		exit $EXIT_CODE
 	fi
 done
+echo -e "${TICK}"
 
-echo "Generating new key..."
+echo -ne "${INFO} Generating new key..."
 if [ -d "${TEMP_DIR}" ]; then rm -Rf "${TEMP_DIR}"; fi
 mkdir "${TEMP_DIR}"
 ssh-keygen -o -q -a 100 -t ed25519 -f "${TEMP_DIR}"/id_ed25519 -C "${KEY_COMMENT}" -N ""
 ESCAPED_OLD_PUB_KEY=$(sed -e 's/[]\/$*.^[]/\\&/g' < "${HOME}"/.ssh/id_ed25519.pub);
 CLEANUP_CMD="sed -i '/${ESCAPED_OLD_PUB_KEY}/d' ~/.ssh/authorized_keys"
+echo -e "${TICK}"
 
-echo "Installing key in hosts..."
+echo -ne "${INFO} Installing key in hosts..."
 for TARGET_HOST in "$@"
 do
-	ssh-copy-id -i "${TEMP_DIR}"/id_ed25519.pub "${TARGET_HOST}"
-	ssh "${TARGET_HOST}" "${CLEANUP_CMD}"
+	timeout "${TIMEOUT}" ssh-copy-id -i "${TEMP_DIR}"/id_ed25519.pub "${TARGET_HOST}" >/dev/null 2>&1
+	EXIT_CODE=$?
+	if [ $EXIT_CODE -ne 0 ]; then
+		echo -e "${CROSS} An error occured while copying key to host ${TARGET_HOST}"
+		exit $EXIT_CODE
+	fi
+	ssh "${TARGET_HOST}" "${CLEANUP_CMD}" >/dev/null 2>&1
+	EXIT_CODE=$?
+	if [ $EXIT_CODE -ne 0 ]; then
+		echo -e "${CROSS} An error occured while removing old key on host ${TARGET_HOST}"
+		exit $EXIT_CODE
+	fi
 done
+echo -e "${TICK}"
 
-echo "Cleaning up..."
+echo -ne "${INFO} Cleaning up..."
 rm -rf ~/.ssh/id_ed25519*
 mv "${TEMP_DIR}"/* ~/.ssh/
 rmdir "${TEMP_DIR}"
-echo "Done!"
+echo -e "${TICK}"
