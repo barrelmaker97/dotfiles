@@ -97,7 +97,7 @@ do
 done
 echo -e "${TICK}"
 
-echo -ne "${INFO} Cleaning up..."
+echo -ne "${INFO} Removing old key locally..."
 rm -rf ~/.ssh/id_ed25519*
 mv "${TEMP_DIR}"/* ~/.ssh/
 rmdir "${TEMP_DIR}"
