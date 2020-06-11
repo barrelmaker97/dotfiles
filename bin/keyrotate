@@ -61,15 +61,21 @@ ESCAPED_OLD_PUB_KEY=$(sed -e 's/[]\/$*.^[]/\\&/g' < "${HOME}"/.ssh/id_ed25519.pu
 CLEANUP_CMD="sed -i '/${ESCAPED_OLD_PUB_KEY}/d' ~/.ssh/authorized_keys"
 echo -e "${TICK}"
 
-echo -ne "${INFO} Installing key in hosts..."
+echo -ne "${INFO} Adding new key to hosts..."
 for TARGET_HOST in "$@"
 do
 	timeout "${TIMEOUT}" ssh-copy-id -i "${TEMP_DIR}"/id_ed25519.pub "${TARGET_HOST}" >/dev/null 2>&1
 	EXIT_CODE=$?
 	if [ $EXIT_CODE -ne 0 ]; then
-		echo -e "${CROSS} An error occured while copying key to host ${TARGET_HOST}"
+		echo -e "${CROSS} An error occured while adding key to host ${TARGET_HOST}"
 		exit $EXIT_CODE
 	fi
+done
+echo -e "${TICK}"
+
+echo -ne "${INFO} Removing old key from hosts..."
+for TARGET_HOST in "$@"
+do
 	ssh "${TARGET_HOST}" "${CLEANUP_CMD}" >/dev/null 2>&1
 	EXIT_CODE=$?
 	if [ $EXIT_CODE -ne 0 ]; then
