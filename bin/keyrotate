@@ -73,6 +73,18 @@ do
 done
 echo -e "${TICK}"
 
+echo -ne "${INFO} Checking that new key works on each host..."
+for TARGET_HOST in "$@"
+do
+	ssh -i "${TEMP_DIR}"/id_ed25519 "$TARGET_HOST" : >/dev/null 2>&1
+	EXIT_CODE=$?
+	if [ $EXIT_CODE -ne 0 ]; then
+		echo -e "${CROSS} An error occured while accessing host ${TARGET_HOST}  "
+		exit $EXIT_CODE
+	fi
+done
+echo -e "${TICK}"
+
 echo -ne "${INFO} Removing old key from hosts..."
 for TARGET_HOST in "$@"
 do
