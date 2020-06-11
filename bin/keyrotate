@@ -11,7 +11,7 @@ INFO="\r [i]"
 
 # Configuration
 TEMP_DIR="${HOME}/keyrotate-temp"
-KEY_COMMENT="${USER}@${HOSTNAME}-$(date +%m-%d-%Y)"
+KEY_COMMENT="$(whoami)@$(hostname)-$(date +%m-%d-%Y)"
 TIMEOUT="10"
 DEPENDENCIES=(timeout ssh-keygen ssh-copy-id)
 
