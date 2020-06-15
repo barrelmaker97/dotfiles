@@ -10,9 +10,9 @@ backup () {
 	then
 		echo "${source} backup for today already complete"
 	else
-		tar cf - -C "${HOME}" "${source}" | lz4 -1 - | ssh "${user}@${host}" dd of="${destination}/${filename}"
+		tar cf - -C "$(dirname ${source})" "$(basename ${source})" | lz4 -1 - | ssh "${user}@${host}" dd of="${destination}/${filename}"
 	fi
 }
 
-backup barrelmaker pollux "mc-servers" "/mnt/Backup/mc-servers" "mc-servers-$(date +%m-%d-%Y).lz4"
-backup barrelmaker pollux "factorio-servers" "/mnt/Backup/factorio-servers" "factorio-servers-$(date +%m-%d-%Y).lz4"
+backup barrelmaker pollux "${HOME}/mc-servers" "/mnt/Backup/mc-servers" "mc-servers-$(date +%m-%d-%Y).lz4"
+backup barrelmaker pollux "${HOME}/factorio-servers" "/mnt/Backup/factorio-servers" "factorio-servers-$(date +%m-%d-%Y).lz4"
