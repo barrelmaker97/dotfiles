@@ -16,3 +16,4 @@ backup () {
 
 backup barrelmaker pollux "${HOME}/mc-servers" "/mnt/Backup/mc-servers" "mc-servers-$(date +%m-%d-%Y).lz4"
 backup barrelmaker pollux "${HOME}/factorio-servers" "/mnt/Backup/factorio-servers" "factorio-servers-$(date +%m-%d-%Y).lz4"
+backup barrelmaker pollux "${HOME}/terraria-servers" "/mnt/Backup/terraria-servers" "terraria-servers-$(date +%m-%d-%Y).lz4"
