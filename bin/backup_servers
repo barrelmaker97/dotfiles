@@ -8,7 +8,7 @@ backup () {
 	local filename=$5
 	if ssh -q "${host}" [[ -f "${destination}/${filename}" ]]
 	then
-		echo "${source} backup for today already complete"
+		echo "${source} has already been backed up today. Skipping."
 	else
 		tar cf - -C "$(dirname ${source})" "$(basename ${source})" | lz4 -1 - | ssh "${user}@${host}" dd of="${destination}/${filename}"
 	fi
