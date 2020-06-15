@@ -6,7 +6,7 @@ backup () {
 	local source=$3
 	local destination=$4
 	local filename=$5
-	if ssh -q ${host} [[ -f "${destination}/${filename}" ]]
+	if ssh -q "${host}" [[ -f "${destination}/${filename}" ]]
 	then
 		echo "${source} backup for today already complete"
 	else
