@@ -1,0 +1,3 @@
+#!/bin/bash
+nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[4]=1750'
+nvidia-settings -a '[gpu:0]/GPUGraphicsClockOffset[4]=160'
