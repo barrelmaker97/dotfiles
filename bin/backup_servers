@@ -6,13 +6,24 @@ backup () {
 	local source=$3
 	local destination=$4
 	local filename=$5
-	if ssh -q "${host}" [[ -f "${destination}/${filename}" ]]
+	if ssh -q "${host}" [[ -f "${destination}/${filename}" ]] && [[ -z ${force+x} ]]
 	then
 		echo "${source} has already been backed up today. Skipping."
 	else
 		tar cf - -C "$(dirname "${source}")" "$(basename "${source}")" | lz4 -1 - | ssh "${user}@${host}" dd of="${destination}/${filename}" bs=1M oflag=direct iflag=fullblock
 	fi
 }
+
+while getopts ":f" opt; do
+  case ${opt} in
+    f ) # process option h
+		force="true"
+      ;;
+    \? ) echo "Usage: backup_servers [-f]"
+		exit 0
+      ;;
+  esac
+done
 
 backup barrelmaker pollux "${HOME}/mc-servers" "/mnt/Backup/mc-servers" "mc-servers-$(date +%m-%d-%Y).lz4"
 backup barrelmaker pollux "${HOME}/factorio-servers" "/mnt/Backup/factorio-servers" "factorio-servers-$(date +%m-%d-%Y).lz4"
