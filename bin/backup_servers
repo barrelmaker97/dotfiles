@@ -10,7 +10,7 @@ backup () {
 	then
 		echo "${source} has already been backed up today. Skipping."
 	else
-		tar cf - -C "$(dirname "${source}")" "$(basename "${source}")" | lz4 -1 - | ssh "${user}@${host}" dd of="${destination}/${filename}" bs=8M
+		tar cf - -C "$(dirname "${source}")" "$(basename "${source}")" | lz4 -1 - | ssh "${user}@${host}" dd of="${destination}/${filename}" bs=1M oflag=direct iflag=fullblock
 	fi
 }
 
