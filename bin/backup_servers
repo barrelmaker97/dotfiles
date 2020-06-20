@@ -6,12 +6,15 @@ backup () {
 	local source=$3
 	local destination=$4
 	local filename=$5
+	local max_age=$6
 	if ssh -q "${host}" [[ -f "${destination}/${filename}" ]] && [[ -z ${force+x} ]]
 	then
 		echo "${source} has already been backed up today. Skipping."
 	else
 		tar cf - -C "$(dirname "${source}")" "$(basename "${source}")" | lz4 -1 - | ssh "${user}@${host}" dd of="${destination}/${filename}" bs=1M oflag=direct iflag=fullblock
 	fi
+	echo "Cleaning up backups older than ${max_age} days in ${destination}."
+	ssh -q "${user}@${host}" find ${destination}/* -mtime +${max_age} -exec rm {} +
 }
 
 while getopts ":f" opt; do
@@ -25,6 +28,6 @@ while getopts ":f" opt; do
   esac
 done
 
-backup barrelmaker pollux "${HOME}/mc-servers" "/mnt/Backup/mc-servers" "mc-servers-$(date +%m-%d-%Y).lz4"
-backup barrelmaker pollux "${HOME}/factorio-servers" "/mnt/Backup/factorio-servers" "factorio-servers-$(date +%m-%d-%Y).lz4"
-backup barrelmaker pollux "${HOME}/terraria-servers" "/mnt/Backup/terraria-servers" "terraria-servers-$(date +%m-%d-%Y).lz4"
+backup barrelmaker pollux "${HOME}/mc-servers" "/mnt/Backup/mc-servers" "mc-servers-$(date +%m-%d-%Y).lz4" 30
+backup barrelmaker pollux "${HOME}/factorio-servers" "/mnt/Backup/factorio-servers" "factorio-servers-$(date +%m-%d-%Y).lz4" 30
+backup barrelmaker pollux "${HOME}/terraria-servers" "/mnt/Backup/terraria-servers" "terraria-servers-$(date +%m-%d-%Y).lz4" 30
