@@ -122,6 +122,9 @@ set completeopt=menu,menuone
 set diffopt+=vertical
 set noro
 
+" Make sure modeline is on
+set modeline
+
 " PLUGIN SETTINGS
 
 " Lightline
