@@ -45,6 +45,7 @@ RESET='\[\e[0m\]'
 ORANGE='\[\e[38;5;208m\]'
 GOLD='\[\e[38;5;220m\]'
 TEAL='\[\e[38;5;51m\]'
+SLATE='\[\e[38;5;115m\]'
 
 # Set prompt
 git_branch ()
@@ -73,6 +74,9 @@ set_prompt ()
 	fi
 	if [ "${HOSTNAME}" = "zeus" ]; then
 		color="${TEAL}"
+	fi
+	if [ "${HOSTNAME}" = "hephaestus" ]; then
+		color="${SLATE}"
 	fi
 	if [ "${USER}" = "root" ]; then
 		color="${BR_RED}"
