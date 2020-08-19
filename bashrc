@@ -124,6 +124,3 @@ bind TAB:menu-complete
 # Set GPG TTY for commit signing
 GPG_TTY=$(tty)
 export GPG_TTY
-
-# added by travis gem
-[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
