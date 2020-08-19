@@ -24,8 +24,8 @@ shopt -s checkwinsize
 # Fix spelling errors in cd
 shopt -s cdspell
 
+# Standard Colors
 RED='\[\e[0;31m\]'
-ORANGE='\[\e[38;5;208m\]'
 YELLOW='\[\e[0;33m\]'
 GREEN='\[\e[0;32m\]'
 CYAN='\[\e[0;36m\]'
@@ -40,6 +40,10 @@ BR_BLUE='\[\e[0;94m\]'
 BR_PURPLE='\[\e[0;95m\]'
 BR_WHITE='\[\e[0;97m\]'
 RESET='\[\e[0m\]'
+
+# Expanded colors
+ORANGE='\[\e[38;5;208m\]'
+GOLD='\[\e[38;5;220m\]'
 
 # Set prompt
 git_branch ()
@@ -61,7 +65,7 @@ set_prompt ()
 	local symbol="\$"
 	local color="${BR_GREEN}"
 	if [ "${HOSTNAME}" = "castor" ]; then
-		color="${BR_YELLOW}"
+		color="${GOLD}"
 	fi
 	if [ "${HOSTNAME}" = "pollux" ]; then
 		color="${ORANGE}"
