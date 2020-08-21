@@ -47,45 +47,39 @@ GOLD='\[\e[38;5;220m\]'
 TEAL='\[\e[38;5;51m\]'
 SLATE='\[\e[38;5;115m\]'
 
-# Set prompt
-git_branch ()
-{
-	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
-
-git_clean ()
-{
-	if [ -z "$(git status -s)" ]; then
-		echo "${BR_CYAN}$(git_branch)"
-	else
-		echo "${BR_RED}$(git_branch)"
-	fi
-}
-
 set_prompt ()
 {
+	case "${HOSTNAME}" in
+		"castor")
+			local color="${GOLD}";;
+		"pollux")
+			local color="${ORANGE}";;
+		"zeus")
+			local color="${TEAL}";;
+		"hephaestus")
+			local color="${SLATE}";;
+		"*")
+			local color="${BR_GREEN}";;
+	esac
+
 	local symbol="\$"
-	local color="${BR_GREEN}"
-	if [ "${HOSTNAME}" = "castor" ]; then
-		color="${GOLD}"
-	fi
-	if [ "${HOSTNAME}" = "pollux" ]; then
-		color="${ORANGE}"
-	fi
-	if [ "${HOSTNAME}" = "zeus" ]; then
-		color="${TEAL}"
-	fi
-	if [ "${HOSTNAME}" = "hephaestus" ]; then
-		color="${SLATE}"
-	fi
 	if [ "${USER}" = "root" ]; then
 		color="${BR_RED}"
 		symbol="#"
 	fi
 
 	local git_info=""
-	if [ -n "$(git_branch)" ]; then
-		git_info="${BR_WHITE} on $(git_clean)"
+	local current_branch
+	current_branch="$(git branch 2> /dev/null)"
+	if [ -n "$current_branch" ]; then
+		local clean_branch
+		clean_branch="$(echo "$current_branch" | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
+		if [ -z "$(git status -s)" ]; then
+			local git_color="${BR_CYAN}"
+		else
+			local git_color="${BR_RED}"
+		fi
+		git_info="${BR_WHITE} on ${git_color}${clean_branch}"
 	fi
 
 	local test_env=""
