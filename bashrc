@@ -68,21 +68,19 @@ set_prompt ()
 		symbol="#"
 	fi
 
-	local git_info=""
+	local git_info
 	local current_branch
-	current_branch="$(git branch 2> /dev/null)"
+	current_branch="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
 	if [ -n "$current_branch" ]; then
-		local clean_branch
-		clean_branch="$(echo "$current_branch" | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
 		if [ -z "$(git status -s)" ]; then
 			local git_color="${BR_CYAN}"
 		else
 			local git_color="${BR_RED}"
 		fi
-		git_info="${BR_WHITE} on ${git_color}${clean_branch}"
+		git_info="${BR_WHITE} on ${git_color}${current_branch}"
 	fi
 
-	local test_env=""
+	local test_env
 	if [ -n "${VIRTUAL_ENV}" ]; then
 		test_env="${BR_YELLOW}[${VIRTUAL_ENV##*/}]${RESET}"
 	fi
