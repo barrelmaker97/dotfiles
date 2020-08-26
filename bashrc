@@ -58,7 +58,7 @@ set_prompt ()
 			local color="${TEAL}";;
 		"hephaestus")
 			local color="${SLATE}";;
-		"*")
+		*)
 			local color="${BR_GREEN}";;
 	esac
 
