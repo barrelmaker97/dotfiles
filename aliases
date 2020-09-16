@@ -18,6 +18,9 @@ alias ll="ls -ahFo --time-style=+'%m-%d-%Y %H:%M:%S'"
 alias la="ls -AF"
 alias l="ls -F"
 
+# For SSHing into my work VM
+alias sshl="ssh localhost"
+
 # print $PATH nicely
 alias path="echo $PATH | tr ':' '\n' | sort"
 
