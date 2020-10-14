@@ -5,9 +5,9 @@ RED='\e[1;31m'
 GREEN='\e[1;32m'
 RESET='\e[0m'
 
-TICK="\r [${GREEN}✓${RESET}]"
-CROSS="\r [${RED}✗${RESET}]"
-INFO="\r [i]"
+TICK="\\r [${GREEN}✓${RESET}]"
+CROSS="\\r [${RED}✗${RESET}]"
+INFO="\\r [i]"
 
 check_dependencies ()
 {
@@ -68,14 +68,14 @@ bash_install ()
 	echo -ne " ${INFO} Installing bash configs"
 	ln -sf "${HOME}"/dotfiles/bashrc "${HOME}"/.bashrc
 	ln -sf "${HOME}"/dotfiles/profile "${HOME}"/.profile
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 git_install ()
 {
 	echo -ne " ${INFO} Installing git configs"
 	ln -sf "${HOME}"/dotfiles/gitconfig "${HOME}"/.gitconfig
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 vim_install ()
@@ -85,21 +85,21 @@ vim_install ()
 	rm -rf ~/.vim
 	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	yes "" | vim +PlugInstall +quitall >/dev/null 2>&1
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 tmux_install ()
 {
 	echo -ne " ${INFO} Installing tmux configs"
 	ln -sf "${HOME}"/dotfiles/tmux.conf "${HOME}"/.tmux.conf
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 work_install ()
 {
 	echo -ne " ${INFO} Installing work configs"
 	ln -sf "${HOME}"/dotfiles/work-gitconfig "${HOME}"/.work-gitconfig
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 i3_install ()
@@ -108,21 +108,21 @@ i3_install ()
 	mkdir -p "${HOME}"/.config/i3
 	ln -sf "${HOME}"/dotfiles/i3config "${HOME}"/.config/i3/config
 	ln -sf "${HOME}"/dotfiles/i3status "${HOME}"/.i3status.conf
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 urxvt_install ()
 {
 	echo -ne " ${INFO} Installing urxvt configs"
 	ln -sf "${HOME}"/dotfiles/xresources "${HOME}"/.Xresources
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 scripts_install ()
 {
 	echo -ne " ${INFO} Installing scripts"
 	ln -sf "${HOME}"/dotfiles/bin "${HOME}"/
-	echo -e "\r ${TICK}"
+	echo -e "${TICK}"
 }
 
 help ()
