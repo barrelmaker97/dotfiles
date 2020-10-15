@@ -120,7 +120,7 @@ set completeopt=menu,menuone
 
 " Diffing
 set diffopt+=vertical
-set noro
+set noreadonly
 
 " Make sure modeline is on
 set modeline
@@ -178,6 +178,10 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>gl :Glog<CR>:copen<CR>
 
+" GitGutter
+nnoremap <leader>gt :GitGutterToggle<CR>
+nnoremap <leader>gh :GitGutterNextHunk<CR>
+
 " Easy escape
 inoremap jk <Esc>
 
@@ -204,6 +208,9 @@ command! Wq wq
 command! WQ wq
 command! W w
 command! Q q
+
+" In case you forgot to sudo
+cnoremap w!! %!sudo tee > /dev/null %
 
 " Easy config reload
 command! Reload :so $MYVIMRC
