@@ -18,6 +18,11 @@ alias ll="ls -ahFo --time-style=+'%m-%d-%Y %H:%M:%S'"
 alias la="ls -AF"
 alias l="ls -F"
 
+# Microk8s
+#alias mkctl="microk8s kubectl"
+alias mk=microk8s.kubectl
+source <(mk completion bash | sed "s/kubectl/mk/g")
+
 # For SSHing into my work VM
 alias sshl="ssh localhost"
 
