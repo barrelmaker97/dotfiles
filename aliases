@@ -19,9 +19,11 @@ alias la="ls -AF"
 alias l="ls -F"
 
 # Microk8s
-#alias mkctl="microk8s kubectl"
-alias mk=microk8s.kubectl
-source <(mk completion bash | sed "s/kubectl/mk/g")
+command -v microk8s > /dev/null
+if [ $? -eq 0 ]; then
+	alias mk=microk8s.kubectl
+	source <(mk completion bash | sed "s/kubectl/mk/g")
+fi
 
 # For SSHing into my work VM
 alias sshl="ssh localhost"
