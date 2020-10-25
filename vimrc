@@ -25,6 +25,9 @@ Plug 'chr4/nginx.vim'
 
 " Nerdtree
 Plug 'scrooloose/nerdtree'
+
+" Linting
+Plug 'dense-analysis/ale'
 call plug#end()
 
 " Set leader

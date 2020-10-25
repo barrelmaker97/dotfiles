@@ -1,5 +1,5 @@
 # aliases
-# vim: ft=sh :
+# vim: ft=bash :
 
 # quick start ssh-agent
 alias ssa="eval $(ssh-agent -s) && ssh-add"
