@@ -2,7 +2,10 @@
 # vim: ft=bash :
 
 # quick start ssh-agent
-alias ssa="eval $(ssh-agent -s) && ssh-add"
+command -v ssh-agent > /dev/null
+if [ $? -eq 0 ]; then
+	alias ssa="eval $(ssh-agent -s) && ssh-add"
+fi
 
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
