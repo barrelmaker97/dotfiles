@@ -59,6 +59,8 @@ set_prompt ()
 			local color="${TEAL}";;
 		"hephaestus")
 			local color="${SLATE}";;
+		"soteria")
+			local color="${BR_PURPLE}";;
 		*)
 			local color="${BR_GREEN}";;
 	esac
