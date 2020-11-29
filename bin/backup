@@ -24,6 +24,6 @@ if [ "$USE_SYSLOG" = true ]; then
 	logger "$END_LOG"
 else
 	echo -e "$(date --rfc-3339=seconds) - $START_LOG"
-	/usr/local/bin/duplicacy -log backup -stats
+	/usr/local/bin/duplicacy backup -stats
 	echo -e "$(date --rfc-3339=seconds) - $END_LOG"
 fi
