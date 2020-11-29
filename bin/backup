@@ -1,11 +1,29 @@
 #!/bin/bash
+
+# Configuration variables
 BACKUP_LOCATION="/home/barrelmaker"
 START_LOG="Running duplicacy backup from $PWD"
 END_LOG="Duplicacy backup from $PWD complete!"
 
-cd "$BACKUP_LOCATION" || exit
-echo -e "$(date) - $START_LOG"
-logger "$START_LOG"
-/usr/local/bin/duplicacy -log backup -stats | logger
-echo -e "$(date) - $END_LOG!"
-logger "$END_LOG"
+# Check for args
+while getopts ":s" opt; do
+	case ${opt} in
+		s ) USE_SYSLOG="true"
+			;;
+		\? ) echo "Usage: backup [-s]"
+			exit 0
+			;;
+	esac
+done
+
+# Run backup
+cd "$BACKUP_LOCATION" || exit 1
+if [ "$USE_SYSLOG" = true ]; then
+	logger "$START_LOG"
+	/usr/local/bin/duplicacy -log backup -stats | logger
+	logger "$END_LOG"
+else
+	echo -e "$(date --rfc-3339=seconds) - $START_LOG"
+	/usr/local/bin/duplicacy -log backup -stats
+	echo -e "$(date --rfc-3339=seconds) - $END_LOG"
+fi
