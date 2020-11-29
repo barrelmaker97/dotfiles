@@ -1,0 +1,11 @@
+#!/bin/bash
+BACKUP_LOCATION="/home/barrelmaker"
+START_LOG="Running duplicacy backup from $PWD"
+END_LOG="Duplicacy backup from $PWD complete!"
+
+cd "$BACKUP_LOCATION" || exit
+echo -e "$(date) - $START_LOG"
+logger "$START_LOG"
+/usr/local/bin/duplicacy -log backup -stats | logger
+echo -e "$(date) - $END_LOG!"
+logger "$END_LOG"
