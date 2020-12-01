@@ -1,9 +1,10 @@
 #!/bin/bash
 
+set -e
+
 # Configuration variables
 BACKUP_LOCATION="/home/barrelmaker"
-START_LOG="Running duplicacy backup from $PWD"
-END_LOG="Duplicacy backup from $PWD complete!"
+DUPLICACY_BINARY="/usr/local/bin/duplicacy"
 
 # Check for args
 while getopts ":s" opt; do
@@ -16,14 +17,26 @@ while getopts ":s" opt; do
 	esac
 done
 
+run_backup ()
+{
+	echo -e "Checking integrity of duplicacy backup from $PWD"
+	${DUPLICACY_BINARY} -log check
+	echo -e "Integrity check of duplicacy backup from $PWD passed!"
+	echo -e "Running duplicacy backup from $PWD"
+	${DUPLICACY_BINARY} -log backup -stats
+	echo -e "Duplicacy backup from $PWD complete!"
+	echo -e "Pruning Duplicacy backup from $PWD"
+	${DUPLICACY_BINARY} -log prune -dry-run -keep 0:60 -keep 7:30 -keep 1:7
+	echo -e "Duplicacy backup from $PWD pruned!"
+	echo -e "Checking integrity of duplicacy backup from $PWD"
+	${DUPLICACY_BINARY} -log check
+	echo -e "Integrity check of duplicacy backup from $PWD passed!"
+}
+
 # Run backup
 cd "$BACKUP_LOCATION" || exit 1
 if [ "$USE_SYSLOG" = true ]; then
-	logger "$START_LOG"
-	/usr/local/bin/duplicacy -log backup -stats | logger
-	logger "$END_LOG"
+	run_backup | logger
 else
-	echo -e "$(date --rfc-3339=seconds) - $START_LOG"
-	/usr/local/bin/duplicacy backup -stats
-	echo -e "$(date --rfc-3339=seconds) - $END_LOG"
+	run_backup
 fi
