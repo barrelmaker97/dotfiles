@@ -13,11 +13,10 @@ umask 022
 # History options
 shopt -s histappend
 shopt -s cmdhist
-export HISTIGNORE="exit:ls:ll:la:c:clear:cd"
 HISTTIMEFORMAT='%F %T '
-HISTCONTROL=ignoreboth
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTCONTROL=ignorespace:ignoredups
+HISTSIZE=100000
+HISTFILESIZE=$HISTSIZE
 
 # Check window size after each command
 shopt -s checkwinsize
