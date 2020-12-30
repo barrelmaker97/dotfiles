@@ -13,7 +13,7 @@ umask 022
 # History options
 shopt -s histappend
 shopt -s cmdhist
-HISTTIMEFORMAT='%F %T '
+HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  "
 HISTCONTROL=ignorespace:ignoredups
 HISTSIZE=100000
 HISTFILESIZE=$HISTSIZE
