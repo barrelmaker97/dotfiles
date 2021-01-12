@@ -45,3 +45,5 @@
 	path = ~/.work-gitconfig
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main
