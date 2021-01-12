@@ -39,7 +39,7 @@ clone_or_update_repo ()
 		echo -e "${TICK}"
 	else
 		echo -ne " ${INFO} Cloning repo"
-		git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
+		git clone git@github.com:barrelmaker97/dotfiles.git >/dev/null 2>&1 || git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
 		cd dotfiles || exit 1
 		echo -e "${TICK}"
 	fi
