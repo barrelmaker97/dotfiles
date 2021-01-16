@@ -47,6 +47,7 @@ update_install ()
 	check_dependencies
 	clone_or_update_repo
 	all_install
+	git_cleanup
 }
 
 all_install ()
@@ -119,6 +120,13 @@ scripts_install ()
 {
 	echo -ne " ${INFO} Installing scripts..."
 	ln -sf "${HOME}"/dotfiles/bin "${HOME}"/
+	echo -e "${TICK}"
+}
+
+git_cleanup ()
+{
+	echo -ne " ${INFO} Cleaning git directories..."
+	find "$HOME" -name '*.git' -type d -exec "$HOME"/dotfiles/bin/gitgc -s '{}' ';'
 	echo -e "${TICK}"
 }
 

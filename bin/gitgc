@@ -1,5 +1,19 @@
 #!/bin/bash
 
-echo "Running 'git gc' for $1"
-cd "$1" || exit
-git gc --quiet
+# Check for args
+while getopts ":s" opt; do
+	case ${opt} in
+		s ) SILENT="true"
+			;;
+		\? ) echo "Usage: gitgc [-s]"
+			exit 0
+			;;
+	esac
+done
+
+if [ ! "$SILENT" = true ]; then
+	echo "Running 'git gc' for $1"
+	cd "$1" && git gc --quiet
+else
+	cd "$2" && git gc --quiet
+fi
