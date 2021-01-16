@@ -8,23 +8,20 @@ RESET='\e[0m'
 TICK="\\r [${GREEN}✓${RESET}]"
 CROSS="\\r [${RED}✗${RESET}]"
 INFO="\\r [i]"
+DEPENDENCIES=(git vim curl yes)
 
 check_dependencies ()
 {
-	echo -ne "${INFO} Checking for git"
-	command -v git > /dev/null
-	if [ $? -eq 1 ]; then
-		echo -e "${CROSS} Git is not installed or cannot be found on this system"
-		exit 1
-	fi
-	echo -e "${TICK}"
-
-	echo -ne "${INFO} Checking for vim"
-	command -v vim > /dev/null
-	if [ $? -eq 1 ]; then
-		echo -e "${CROSS} Vim is not installed or cannot be found on this system"
-		exit 1
-	fi
+	echo -ne "${INFO} Checking for dependencies..."
+	for DEPENDENCY in "${DEPENDENCIES[@]}"
+	do
+		command -v "${DEPENDENCY}" > /dev/null
+		EXIT_CODE=$?
+		if [ $EXIT_CODE -ne 0 ]; then
+			echo -e "${CROSS} ${DEPENDENCY} is not installed or cannot be found on this system"
+			exit $EXIT_CODE
+		fi
+	done
 	echo -e "${TICK}"
 }
 
@@ -32,13 +29,13 @@ clone_or_update_repo ()
 {
 	cd ~ || exit 1
 	if [ -d dotfiles ]; then
-		echo -ne "${INFO} Updating local repo"
+		echo -ne "${INFO} Updating local repo..."
 		cd dotfiles \
 			&& git checkout master >/dev/null 2>&1 \
 			&& git pull >/dev/null 2>&1
 		echo -e "${TICK}"
 	else
-		echo -ne " ${INFO} Cloning repo"
+		echo -ne " ${INFO} Cloning repo..."
 		git clone git@github.com:barrelmaker97/dotfiles.git >/dev/null 2>&1 || git clone https://github.com/barrelmaker97/dotfiles >/dev/null 2>&1
 		cd dotfiles || exit 1
 		echo -e "${TICK}"
@@ -65,7 +62,7 @@ all_install ()
 
 bash_install ()
 {
-	echo -ne " ${INFO} Installing bash configs"
+	echo -ne " ${INFO} Installing bash configs..."
 	ln -sf "${HOME}"/dotfiles/bashrc "${HOME}"/.bashrc
 	ln -sf "${HOME}"/dotfiles/profile "${HOME}"/.profile
 	echo -e "${TICK}"
@@ -73,14 +70,14 @@ bash_install ()
 
 git_install ()
 {
-	echo -ne " ${INFO} Installing git configs"
+	echo -ne " ${INFO} Installing git configs..."
 	ln -sf "${HOME}"/dotfiles/gitconfig "${HOME}"/.gitconfig
 	echo -e "${TICK}"
 }
 
 vim_install ()
 {
-	echo -ne " ${INFO} Installing vim configs"
+	echo -ne " ${INFO} Installing vim configs..."
 	ln -sf "${HOME}"/dotfiles/vimrc "${HOME}"/.vimrc
 	rm -rf ~/.vim
 	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -90,21 +87,21 @@ vim_install ()
 
 tmux_install ()
 {
-	echo -ne " ${INFO} Installing tmux configs"
+	echo -ne " ${INFO} Installing tmux configs..."
 	ln -sf "${HOME}"/dotfiles/tmux.conf "${HOME}"/.tmux.conf
 	echo -e "${TICK}"
 }
 
 work_install ()
 {
-	echo -ne " ${INFO} Installing work configs"
+	echo -ne " ${INFO} Installing work configs..."
 	ln -sf "${HOME}"/dotfiles/work-gitconfig "${HOME}"/.work-gitconfig
 	echo -e "${TICK}"
 }
 
 i3_install ()
 {
-	echo -ne " ${INFO} Installing i3 configs"
+	echo -ne " ${INFO} Installing i3 configs..."
 	mkdir -p "${HOME}"/.config/i3
 	ln -sf "${HOME}"/dotfiles/i3config "${HOME}"/.config/i3/config
 	ln -sf "${HOME}"/dotfiles/i3status "${HOME}"/.i3status.conf
@@ -113,14 +110,14 @@ i3_install ()
 
 urxvt_install ()
 {
-	echo -ne " ${INFO} Installing urxvt configs"
+	echo -ne " ${INFO} Installing urxvt configs..."
 	ln -sf "${HOME}"/dotfiles/xresources "${HOME}"/.Xresources
 	echo -e "${TICK}"
 }
 
 scripts_install ()
 {
-	echo -ne " ${INFO} Installing scripts"
+	echo -ne " ${INFO} Installing scripts..."
 	ln -sf "${HOME}"/dotfiles/bin "${HOME}"/
 	echo -e "${TICK}"
 }
