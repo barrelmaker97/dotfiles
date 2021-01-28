@@ -126,7 +126,7 @@ scripts_install ()
 git_cleanup ()
 {
 	echo -ne " ${INFO} Cleaning git directories..."
-	find "$HOME" -name '*.git' -type d -exec "$HOME"/dotfiles/bin/gitgc -s '{}' ';'
+	find "$HOME" -name '*.git' -type d -exec "$HOME"/dotfiles/bin/gitgc -s '{}' ';' 2>/dev/null
 	echo -e "${TICK}"
 }
 
