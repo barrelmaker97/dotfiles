@@ -1,3 +1,0 @@
-#!/bin/bash
-TEMP="$(</sys/class/thermal/thermal_zone0/temp)"
-bc -l <<< "scale=3;$TEMP/1000"
