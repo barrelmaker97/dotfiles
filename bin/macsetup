@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -e
-
-sudo ip link add mac0 link eth0 type macvlan mode bridge
-sudo ip addr add 192.168.1.98/32 dev mac0
-sudo ip link set mac0 up
-sudo ip route add 192.168.1.99/32 dev mac0
