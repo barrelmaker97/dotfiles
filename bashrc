@@ -118,3 +118,6 @@ bind TAB:menu-complete
 
 # Set GPG TTY for commit signing
 export GPG_TTY=$(tty)
+
+# Set fc editor
+export FCEDIT=vim
