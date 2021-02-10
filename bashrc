@@ -127,3 +127,9 @@ command -v kubectl > /dev/null
 if [ $? -eq 0 ]; then
 	source <(kubectl completion bash)
 fi
+
+# kubectl completion
+command -v helm > /dev/null
+if [ $? -eq 0 ]; then
+	source <(helm completion bash)
+fi
