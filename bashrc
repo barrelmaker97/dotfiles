@@ -121,3 +121,9 @@ export GPG_TTY=$(tty)
 
 # Set fc editor
 export FCEDIT=vim
+
+# kubectl completion
+command -v kubectl > /dev/null
+if [ $? -eq 0 ]; then
+	source <(kubectl completion bash)
+fi
