@@ -188,6 +188,7 @@ nnoremap <Leader>gl :Glog<CR>:copen<CR>
 " GitGutter
 nnoremap <leader>gt :GitGutterToggle<CR>
 nnoremap <leader>gh :GitGutterNextHunk<CR>
+nnoremap <leader>gu :GitGutterUndoHunk<CR>
 
 " Easy escape
 inoremap jk <Esc>
