@@ -132,6 +132,9 @@ set noreadonly
 " Make sure modeline is on
 set modeline
 
+" Don't wait before going back to normal mode
+set ttimeoutlen=0
+
 " PLUGIN SETTINGS
 
 " Lightline
