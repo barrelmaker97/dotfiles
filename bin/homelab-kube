@@ -68,3 +68,7 @@ helm upgrade --install \
 	redis bitnami/redis \
 	--namespace default \
 	--set usePassword=false
+
+
+# Install Jellyfin
+# sudo apt install nfs-common
