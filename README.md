@@ -9,9 +9,9 @@ Fair warning: The installation will silently overwrite your existing dotfiles.
 
 ## Requirements
 * Git
-* Vim
+* Vim >= 8.0
 * 24-bit color support in terminal (including tmux)
-* Tmux 2.2 or higher
+* Tmux >= 2.2
 
 # License
 
