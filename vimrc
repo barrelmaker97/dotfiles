@@ -245,6 +245,7 @@ augroup spellcheck
 	autocmd FileType markdown setlocal spell
 	autocmd FileType gitcommit setlocal spell
 	autocmd FileType text setlocal spell
+	autocmd FileType tex setlocal spell
 augroup END
 
 " Trim trailing whitespace

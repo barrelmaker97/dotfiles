@@ -92,11 +92,6 @@ set_prompt ()
 
 PROMPT_COMMAND='set_prompt'
 
-# Alias definitions
-if [ -f ~/dotfiles/aliases ]; then
-	. ~/dotfiles/aliases
-fi
-
 # Enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -111,6 +106,11 @@ fi
 # Set PATH to include private bin if it exists
 if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
+fi
+
+# Add Tex Live to PATH
+if [ -d "/usr/local/texlive/2020/bin/x86_64-linux" ] ; then
+	PATH="/usr/local/texlive/2020/bin/x86_64-linux:$PATH"
 fi
 
 # Cycle through options on autocomplete
@@ -132,4 +132,9 @@ fi
 command -v helm > /dev/null
 if [ $? -eq 0 ]; then
 	source <(helm completion bash)
+fi
+
+# Alias definitions; Keep this at the bottom
+if [ -f ~/dotfiles/aliases ]; then
+	. ~/dotfiles/aliases
 fi
