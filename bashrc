@@ -123,16 +123,10 @@ export GPG_TTY=$(tty)
 export FCEDIT=vim
 
 # kubectl completion
-command -v kubectl > /dev/null
-if [ $? -eq 0 ]; then
-	source <(kubectl completion bash)
-fi
+command -v kubectl > /dev/null && source <(kubectl completion bash)
 
 # helm completion
-command -v helm > /dev/null
-if [ $? -eq 0 ]; then
-	source <(helm completion bash)
-fi
+command -v helm > /dev/null && source <(helm completion bash)
 
 # Alias definitions; Keep this at the bottom
 if [ -f ~/dotfiles/aliases ]; then
