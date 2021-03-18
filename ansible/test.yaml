@@ -1,0 +1,35 @@
+---
+- hosts: server
+  tasks:
+    - name: Install microk8s
+      snap:
+        name: microk8s
+        classic: true
+
+    - name: Add user to microk8s group
+      user:
+        name: "{{ ansible_user }}"
+        groups: microk8s
+        append: true
+
+    - name: Wait for microk8s to be ready
+      command: microk8s status --wait-ready
+
+    - name: Allow packet forwarding
+      become: true
+      iptables:
+        chain: FORWARD
+        policy: ACCEPT
+
+    - name: Install iptables-persistent
+      apt:
+        name: iptables-persistent
+        state: present
+
+    - name: Enable microk8s addons
+      command: microk8s enable dns storage ingress helm3
+
+    - name: Install kubectl
+      snap:
+        name: kubectl
+        classic: true
