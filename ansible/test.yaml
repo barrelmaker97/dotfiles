@@ -33,3 +33,30 @@
       snap:
         name: kubectl
         classic: true
+
+    - name: Create kubeconfig directory
+      file:
+        path: "{{ ansible_env.HOME }}/.kube"
+        state: directory
+        mode: "0755"
+
+    - name: Set owner of kubeconfig directory to {{ ansible_user }}
+      file:
+        path: "{{ ansible_env.HOME }}/.kube"
+        state: directory
+        owner: "{{ ansible_user }}"
+        recurse: true
+
+    - name: Generate kubeconfig file
+      command: microk8s config
+      register: kubeconfig
+
+    - name: Save kubeconfig file
+      copy:
+        content: "{{ kubeconfig.stdout }}"
+        dest: "{{ ansible_env.HOME }}/.kube/config"
+
+    - name: Set kubeconfig file permissions
+      file:
+        path: "{{ ansible_env.HOME }}/.kube/config"
+        mode: "0600"
