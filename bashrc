@@ -113,6 +113,11 @@ if [ -d "/usr/local/texlive/2020/bin/x86_64-linux" ] ; then
 	PATH="/usr/local/texlive/2020/bin/x86_64-linux:$PATH"
 fi
 
+# Add local Python packages to PATH
+if [ -d "$HOME/.local/bin" ] ; then
+	PATH="$HOME/.local/bin:$PATH"
+fi
+
 # Cycle through options on autocomplete
 bind TAB:menu-complete
 
