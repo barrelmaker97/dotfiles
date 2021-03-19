@@ -27,7 +27,14 @@
         state: present
 
     - name: Enable microk8s addons
-      command: microk8s enable dns storage ingress helm3
+      command: microk8s enable {{ item }}
+      register: addon_result
+      changed_when: addon_result.stdout != "Addon {{ item }} is already enabled."
+      loop:
+        - dns
+        - storage
+        - ingress
+        - helm3
 
     - name: Install kubectl
       snap:
@@ -50,6 +57,7 @@
     - name: Generate kubeconfig file
       command: microk8s config
       register: kubeconfig
+      changed_when: false
 
     - name: Save kubeconfig file
       copy:
@@ -60,3 +68,8 @@
       file:
         path: "{{ ansible_env.HOME }}/.kube/config"
         mode: "0600"
+
+    - name: Install helm
+      snap:
+        name: helm
+        classic: true
