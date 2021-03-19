@@ -6,7 +6,7 @@ RESET='\e[0m'
 TICK="\\r[${GREEN}✓${RESET}]"
 CROSS="\\r[${RED}✗${RESET}]"
 INFO="\\r[i]"
-DEPENDENCIES=(ansible-playbook)
+DEPENDENCIES=(ansible)
 
 check_dependencies ()
 {
