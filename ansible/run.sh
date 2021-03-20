@@ -29,5 +29,5 @@ read -rp "Username (Default barrelmaker): " USERNAME
 USERNAME=${USERNAME:-barrelmaker}
 echo -e "Starting Deployment Playbook..."
 echo server ansible_host="${IP}" ansible_user="${USERNAME}" > inventory_hostname
-ansible-playbook test.yaml -i inventory_hostname -v
+ansible-playbook kubesetup.yaml -i inventory_hostname -v
 rm inventory_hostname
