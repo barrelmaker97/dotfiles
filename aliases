@@ -2,10 +2,7 @@
 # vim: ft=bash :
 
 # quick start ssh-agent
-command -v ssh-agent > /dev/null
-if [ $? -eq 0 ]; then
-	alias ssa="eval $(ssh-agent -s) && ssh-add"
-fi
+command -v ssh-agent > /dev/null && alias ssa="eval $(ssh-agent -s) && ssh-add"
 
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
@@ -25,7 +22,7 @@ alias l="ls -F"
 alias sshl="ssh localhost"
 
 # print $PATH nicely
-alias path="echo $PATH | tr ':' '\n' | sort"
+alias path='echo "$PATH" | tr ":" "\n" | sort'
 
 # moving around
 alias ..="cd .."
