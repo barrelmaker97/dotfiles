@@ -5,9 +5,9 @@
 RED='\e[1;31m'
 GREEN='\e[1;32m'
 RESET='\e[0m'
-TICK="\r [${GREEN}✓${RESET}]"
-CROSS="\r [${RED}✗${RESET}]"
-INFO="\r [i]"
+TICK="\r[${GREEN}✓${RESET}]"
+CROSS="\r[${RED}✗${RESET}]"
+INFO="\r[i]"
 
 # Configuration
 TEMP_DIR="${HOME}/keyrotate-temp"
