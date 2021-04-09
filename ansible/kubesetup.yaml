@@ -46,7 +46,6 @@
         - dns
         - storage
         - ingress
-        - helm3
         - prometheus
 
     - name: Install kubectl
