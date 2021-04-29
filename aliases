@@ -1,9 +1,6 @@
 # aliases
 # vim: ft=bash :
 
-# quick start ssh-agent
-command -v ssh-agent > /dev/null && alias ssa="eval $(ssh-agent -s) && ssh-add"
-
 # ls and grep color support
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
