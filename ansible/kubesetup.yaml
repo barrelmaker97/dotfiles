@@ -51,7 +51,7 @@
     - name: Configure Nginx Ingress Controller
       community.kubernetes.k8s:
         state: present
-        definition: "{{ lookup('file', './ingress/configmap-nginx.yaml') | from_yaml }}"
+        definition: "{{ lookup('file', './definitions/configmap-nginx.yaml') | from_yaml }}"
 
     - name: Install kubectl
       snap:
@@ -106,3 +106,8 @@
         wait: true
         release_values:
           installCRDs: true
+
+    - name: Create Production ClusterIssuer
+      community.kubernetes.k8s:
+        state: present
+        definition: "{{ lookup('file', './definitions/clusterissuer-prod.yaml') | from_yaml }}"
