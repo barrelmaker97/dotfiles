@@ -48,6 +48,24 @@
         - ingress
         - prometheus
 
+    - name: Configure Nginx Ingress Controller
+      community.kubernetes.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: nginx-load-balancer-microk8s-conf
+            namespace: ingress
+          data:
+            enable-ocsp: "true"
+            hsts-max-age: "63072000"
+            hsts-preload: "true"
+            http-snippet: |
+              sendfile on;
+            server-tokens: "false"
+            ssl-session-tickets: "false"
+
     - name: Install kubectl
       snap:
         name: kubectl
