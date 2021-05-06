@@ -15,6 +15,7 @@
       snap:
         name: microk8s
         classic: true
+        channel: latest/stable
 
     - name: Add user to microk8s group
       user:
