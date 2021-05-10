@@ -25,6 +25,9 @@ alias path='echo "$PATH" | tr ":" "\n" | sort'
 alias ..="cd .."
 alias back="cd -"
 
+# Concourse
+alias tfly="fly -t tutorial"
+
 # tmux session alias
 alias mux="tmux new -s Home"
 
