@@ -133,6 +133,9 @@ command -v kubectl > /dev/null && source <(kubectl completion bash)
 # helm completion
 command -v helm > /dev/null && source <(helm completion bash)
 
+# fly completion
+command -v fly > /dev/null && source <(fly completion --shell bash)
+
 # Alias definitions; Keep this at the bottom
 if [ -f ~/dotfiles/aliases ]; then
 	. ~/dotfiles/aliases
