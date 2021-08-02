@@ -10,6 +10,9 @@ if [ -x /usr/bin/dircolors ]; then
 	alias egrep="egrep --color=auto"
 fi
 
+# Fix UPS Driver issue
+alias upsfix="ssh pollux sudo systemctl restart nut-driver.service"
+
 # more ls aliases
 alias ll="ls -ahFo --time-style=+'%m-%d-%Y %H:%M:%S'"
 alias la="ls -AF"
