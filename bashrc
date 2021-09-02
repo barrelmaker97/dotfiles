@@ -130,6 +130,9 @@ export FCEDIT=vim
 # kubectl completion
 command -v kubectl > /dev/null && source <(kubectl completion bash)
 
+# oc completion
+command -v oc > /dev/null && source <(oc completion bash)
+
 # helm completion
 command -v helm > /dev/null && source <(helm completion bash)
 
