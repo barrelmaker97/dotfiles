@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 # Configuration variables
 BACKUP_LOCATION="/home/barrelmaker"

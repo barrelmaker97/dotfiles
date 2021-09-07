@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -euo pipefail
 term_cols="$(tput cols)"
 term_lines="$(tput lines)"
 cols=$((term_cols / 3))

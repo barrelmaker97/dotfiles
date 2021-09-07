@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Check for args
 while getopts ":s" opt; do
