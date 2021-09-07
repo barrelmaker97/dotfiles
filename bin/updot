@@ -55,8 +55,6 @@ all_install ()
 	bash_install
 	git_install
 	tmux_install
-	i3_install
-	urxvt_install
 	scripts_install
 	vim_install
 }
@@ -100,22 +98,6 @@ work_install ()
 	echo -e "${TICK}"
 }
 
-i3_install ()
-{
-	echo -ne " ${INFO} Installing i3 configs..."
-	mkdir -p "${HOME}"/.config/i3
-	ln -sf "${HOME}"/dotfiles/i3config "${HOME}"/.config/i3/config
-	ln -sf "${HOME}"/dotfiles/i3status "${HOME}"/.i3status.conf
-	echo -e "${TICK}"
-}
-
-urxvt_install ()
-{
-	echo -ne " ${INFO} Installing urxvt configs..."
-	ln -sf "${HOME}"/dotfiles/xresources "${HOME}"/.Xresources
-	echo -e "${TICK}"
-}
-
 scripts_install ()
 {
 	echo -ne " ${INFO} Installing scripts..."
@@ -151,7 +133,7 @@ fi
 # Action parsing
 ACTION="$1"
 case "${ACTION}" in
-	all|bash|git|work|vim|tmux|i3|urxvt)
+	all|bash|git|work|vim|tmux)
 		"${ACTION}"_install
 		;;
 	help)
