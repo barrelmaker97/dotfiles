@@ -2,6 +2,7 @@
 set -euo pipefail
 
 # Check for args
+SILENT="false"
 while getopts ":s" opt; do
 	case ${opt} in
 		s ) SILENT="true"
