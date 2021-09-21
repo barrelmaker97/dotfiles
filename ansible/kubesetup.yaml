@@ -87,6 +87,12 @@
         path: "{{ ansible_env.HOME }}/.kube/config"
         mode: "0600"
 
+    - name: Save kubeconfig Locally
+      fetch:
+        src: "{{ ansible_env.HOME }}/.kube/config"
+        dest: "{{ ansible_env.HOME }}/.kube/"
+        flat: true
+
     - name: Install helm
       snap:
         name: helm
