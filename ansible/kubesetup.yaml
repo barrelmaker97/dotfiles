@@ -46,6 +46,7 @@
       loop:
         - dns
         - storage
+        - rbac
         - ingress
         - prometheus
 
