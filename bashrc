@@ -139,7 +139,7 @@ command -v helm > /dev/null && source <(helm completion bash)
 # fly completion
 command -v fly > /dev/null && source <(fly completion --shell bash)
 
-# helm completion
+# kind completion
 command -v kind > /dev/null && source <(kind completion bash)
 
 # Alias definitions; Keep this at the bottom
