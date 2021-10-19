@@ -17,6 +17,7 @@ Include /etc/ssh/sshd_config.d/*.conf
 #ListenAddress 0.0.0.0
 #ListenAddress ::
 
+# Supported HostKey algorithms by order of preference.
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
@@ -28,10 +29,12 @@ HostKey /etc/ssh/ssh_host_ecdsa_key
 #SyslogFacility AUTH
 #LogLevel INFO
 
+Protocol 2
+AllowUsers barrelmaker
+
 # Authentication:
 
 LoginGraceTime 1m
-PermitRootLogin no
 #StrictModes yes
 MaxAuthTries 3
 #MaxSessions 10
@@ -97,8 +100,8 @@ PrintMotd no
 #TCPKeepAlive yes
 #PermitUserEnvironment no
 #Compression delayed
-#ClientAliveInterval 0
-#ClientAliveCountMax 3
+ClientAliveInterval 60
+ClientAliveCountMax 10
 #UseDNS no
 #PidFile /var/run/sshd.pid
 #MaxStartups 10:30:100
@@ -113,7 +116,7 @@ PrintMotd no
 AcceptEnv LANG LC_*
 
 # override default of no subsystems
-Subsystem sftp	/usr/lib/openssh/sftp-server
+Subsystem	sftp	/usr/lib/openssh/sftp-server
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
@@ -136,5 +139,13 @@ AuthenticationMethods publickey
 # LogLevel VERBOSE logs user's key fingerprint on login. Needed to have a clear audit track of which key was using to log in.
 LogLevel VERBOSE
 
-Protocol 2
-AllowUsers barrelmaker
+# Log sftp level file access (read/write/etc.) that would not be easily logged otherwise.
+#Subsystem sftp  /usr/lib/openssh/sftp-server -f AUTHPRIV -l INFO
+
+# Root login is not allowed for auditing reasons. This is because it's difficult to track which process belongs to which root user:
+#
+# On Linux, user sessions are tracking using a kernel-side session id, however, this session id is not recorded by OpenSSH.
+# Additionally, only tools such as systemd and auditd record the process session id.
+# On other OSes, the user session id is not necessarily recorded at all kernel-side.
+# Using regular users in combination with /bin/su or /usr/bin/sudo ensure a clear audit track.
+PermitRootLogin No
