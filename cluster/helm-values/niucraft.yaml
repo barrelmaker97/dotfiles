@@ -1,0 +1,12 @@
+---
+storageClassName: niucraft
+serverPort: 30013  # Must be in the range 30000-32767
+dynmap: true
+metrics: true
+properties:
+  memory: "2G"
+  motd: "NIUCraft Server"
+  ops: "Barrelmaker97"
+  serverName: "NIUCraft"
+  type: "BUKKIT"
+  viewDistance: "32"

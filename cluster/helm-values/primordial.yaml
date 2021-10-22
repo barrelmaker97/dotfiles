@@ -1,0 +1,10 @@
+---
+storageClassName: primordial
+serverPort: 30001  # Must be in the range 30000-32767
+properties:
+  memory: "2G"
+  motd: "Primordial Server"
+  ops: "Barrelmaker97"
+  serverName: "Primordial"
+  version: "1.16.5"
+  viewDistance: "32"

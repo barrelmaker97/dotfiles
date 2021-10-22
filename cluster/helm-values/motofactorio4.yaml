@@ -1,0 +1,4 @@
+---
+metrics: true
+serverPort: 30002  # Must be in the range 30000-32767
+storageClassName: motofactorio4

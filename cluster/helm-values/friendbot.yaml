@@ -1,0 +1,8 @@
+---
+exportLocation: "/home/barrelmaker/export.zip"
+redisHost: redis-master
+redisPort: 6379
+
+# This disables the Redis subchart
+redis:
+  enabled: false

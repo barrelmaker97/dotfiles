@@ -1,0 +1,4 @@
+---
+storageClassName:
+  config: jellyfin-config
+  media: jellyfin-media
