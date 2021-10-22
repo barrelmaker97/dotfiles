@@ -122,7 +122,7 @@
         release_values:
           installCRDs: true
 
-    - name: Create Production ClusterIssuer
+    - name: Create Production Issuer
       community.kubernetes.k8s:
         state: present
-        definition: "{{ lookup('file', './definitions/clusterissuer-prod.yaml') | from_yaml }}"
+        definition: "{{ lookup('file', './definitions/issuer-prod.yaml') | from_yaml }}"
