@@ -17,3 +17,30 @@ roleRef:
   kind: ClusterRole
   name: admin
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: barrelmaker
+  namespace: barrelmaker
+spec:
+  hard:
+    requests.cpu: "5"
+    requests.memory: 10Gi
+    limits.cpu: "10"
+    limits.memory: 20Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: barrelmaker
+  namespace: barrelmaker
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 30m
+        memory: 64Mi
+      default:
+        cpu: 60m
+        memory: 128Mi
