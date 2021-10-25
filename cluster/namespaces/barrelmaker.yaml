@@ -25,9 +25,9 @@ metadata:
   namespace: barrelmaker
 spec:
   hard:
-    requests.cpu: "5"
+    requests.cpu: 5
     requests.memory: 10Gi
-    limits.cpu: "10"
+    limits.cpu: 10
     limits.memory: 20Gi
 ---
 apiVersion: v1
