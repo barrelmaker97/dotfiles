@@ -4,6 +4,8 @@ openssl req -new -newkey rsa:2048 -nodes -keyout barrelmaker.key -out barrelmake
 # Convert CSR to base64 string
 cat barrelmaker.csr | base64 | tr -d "\n"
 
+# Create and approve CSR
+
 # Get cert from CSR resource
 kubectl get csr barrelmaker -o jsonpath='{.status.certificate}'| base64 -d > barrelmaker.crt
 
@@ -11,7 +13,7 @@ kubectl get csr barrelmaker -o jsonpath='{.status.certificate}'| base64 -d > bar
 kubectl config set-credentials barrelmaker --client-key=barrelmaker.key --client-certificate=barrelmaker.crt --embed-certs=true
 
 # Create cluster in kubectl
-TODO
+kubectl config set-cluster kubernetes --server=https://192.168.15.10:16443 --certificate-authority=/cluster/ca/cert/file.crt --embed-certs=true
 
 # Create context in kubectl
 kubectl config set-context barrelmaker --cluster=kubernetes --user=barrelmaker --namespace=barrelmaker
