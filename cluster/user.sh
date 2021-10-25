@@ -10,5 +10,8 @@ kubectl get csr barrelmaker -o jsonpath='{.status.certificate}'| base64 -d > bar
 # Create user in kubectl
 kubectl config set-credentials barrelmaker --client-key=barrelmaker.key --client-certificate=barrelmaker.crt --embed-certs=true
 
+# Create cluster in kubectl
+TODO
+
 # Create context in kubectl
 kubectl config set-context barrelmaker --cluster=kubernetes --user=barrelmaker --namespace=barrelmaker
