@@ -11,7 +11,7 @@ INFO="[i]"
 
 # Configuration
 TEMP_DIR="${HOME}/keyrotate-temp"
-KEY_COMMENT="$(whoami)@$(hostname)-$(date --rfc-3339=date)"
+KEY_COMMENT="$(whoami)@$(hostname)-$(date --iso-8601=minutes)"
 TIMEOUT="10"
 DEPENDENCIES=(timeout ssh-keygen ssh-copy-id)
 KEY_TYPE="ed25519"
@@ -77,7 +77,7 @@ echo -e "${TICK} New key added to all hosts"
 echo -e "\n${INFO} Checking that new key works on each host..."
 for TARGET_HOST in "$@"
 do
-	ssh -i "${TEMP_DIR}/${KEY_FILE_NAME}" "$TARGET_HOST" : >/dev/null 2>&1
+	ssh -i "${TEMP_DIR}/${KEY_FILE_NAME}" "$TARGET_HOST" :
 	EXIT_CODE=$?
 	if [ $EXIT_CODE -ne 0 ]; then
 		echo -e "${CROSS} An error occured while accessing host ${TARGET_HOST}"
