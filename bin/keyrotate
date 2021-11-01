@@ -5,23 +5,25 @@
 RED='\e[1;31m'
 GREEN='\e[1;32m'
 RESET='\e[0m'
-TICK="\r[${GREEN}✓${RESET}]"
-CROSS="\r[${RED}✗${RESET}]"
-INFO="\r[i]"
+TICK="[${GREEN}✓${RESET}]"
+CROSS="[${RED}✗${RESET}]"
+INFO="[i]"
 
 # Configuration
 TEMP_DIR="${HOME}/keyrotate-temp"
 KEY_COMMENT="$(whoami)@$(hostname)-$(date --rfc-3339=date)"
 TIMEOUT="10"
 DEPENDENCIES=(timeout ssh-keygen ssh-copy-id)
+KEY_TYPE="ed25519"
+KEY_FILE_NAME="id_ed25519"
 
 if [ $# -eq 0 ]; then
-	echo "${CROSS} Please provide at least one hostname"
+	echo -e "${CROSS} Please provide at least one hostname"
 	exit 1
 fi
 
 
-echo -ne "${INFO} Checking for dependencies..."
+echo -e "${INFO} Checking for dependencies..."
 for DEPENDENCY in "${DEPENDENCIES[@]}"
 do
 	command -v "${DEPENDENCY}" > /dev/null
@@ -31,9 +33,9 @@ do
 		exit $EXIT_CODE
 	fi
 done
-echo -e "${TICK}"
+echo -e "${TICK} All dependencies present"
 
-echo -ne "${INFO} Checking that all hosts are available..."
+echo -e "\n${INFO} Checking that all hosts are available..."
 for TARGET_HOST in "$@"
 do
 	timeout "${TIMEOUT}" ssh "$TARGET_HOST" : >/dev/null 2>&1
@@ -43,49 +45,49 @@ do
 		exit $EXIT_CODE
 	fi
 	if [ $EXIT_CODE -eq 255 ]; then
-		echo -e "${CROSS} Could not resolve host ${TARGET_HOST}                 "
+		echo -e "${CROSS} Could not resolve host ${TARGET_HOST}"
 		exit $EXIT_CODE
 	fi
 	if [ $EXIT_CODE -ne 0 ]; then
-		echo -e "${CROSS} An error occured while accessing host ${TARGET_HOST}  "
+		echo -e "${CROSS} An error occured while accessing host ${TARGET_HOST}"
 		exit $EXIT_CODE
 	fi
 done
-echo -e "${TICK}"
+echo -e "${TICK} All hosts available"
 
-echo -ne "${INFO} Generating new key..."
+echo -e "\n${INFO} Generating new key..."
 if [ -d "${TEMP_DIR}" ]; then rm -Rf "${TEMP_DIR}"; fi
 mkdir "${TEMP_DIR}"
-ssh-keygen -o -q -a 100 -t ed25519 -f "${TEMP_DIR}"/id_ed25519 -C "${KEY_COMMENT}" -N ""
-ESCAPED_OLD_PUB_KEY=$(sed -e 's/[]\/$*.^[]/\\&/g' < "${HOME}"/.ssh/id_ed25519.pub);
-CLEANUP_CMD="sed -i '/${ESCAPED_OLD_PUB_KEY}/d' ~/.ssh/authorized_keys"
-echo -e "${TICK}"
+ssh-keygen -q -a 100 -t "${KEY_TYPE}" -f "${TEMP_DIR}/${KEY_FILE_NAME}" -C "${KEY_COMMENT}" -N ""
+echo -e "${TICK} New key generated"
 
-echo -ne "${INFO} Adding new key to hosts..."
+echo -e "\n${INFO} Adding new key to hosts..."
 for TARGET_HOST in "$@"
 do
-	timeout "${TIMEOUT}" ssh-copy-id -i "${TEMP_DIR}"/id_ed25519.pub "${TARGET_HOST}" >/dev/null 2>&1
+	timeout "${TIMEOUT}" ssh-copy-id -i "${TEMP_DIR}/${KEY_FILE_NAME}.pub" "${TARGET_HOST}" >/dev/null 2>&1
 	EXIT_CODE=$?
 	if [ $EXIT_CODE -ne 0 ]; then
 		echo -e "${CROSS} An error occured while adding key to host ${TARGET_HOST}"
 		exit $EXIT_CODE
 	fi
 done
-echo -e "${TICK}"
+echo -e "${TICK} New key added to all hosts"
 
-echo -ne "${INFO} Checking that new key works on each host..."
+echo -e "\n${INFO} Checking that new key works on each host..."
 for TARGET_HOST in "$@"
 do
-	ssh -i "${TEMP_DIR}"/id_ed25519 "$TARGET_HOST" : >/dev/null 2>&1
+	ssh -i "${TEMP_DIR}/${KEY_FILE_NAME}" "$TARGET_HOST" : >/dev/null 2>&1
 	EXIT_CODE=$?
 	if [ $EXIT_CODE -ne 0 ]; then
-		echo -e "${CROSS} An error occured while accessing host ${TARGET_HOST}  "
+		echo -e "${CROSS} An error occured while accessing host ${TARGET_HOST}"
 		exit $EXIT_CODE
 	fi
 done
-echo -e "${TICK}"
+echo -e "${TICK} New key works on all hosts"
 
-echo -ne "${INFO} Removing old key from hosts..."
+echo -e "\n${INFO} Removing old key from hosts..."
+ESCAPED_OLD_PUB_KEY=$(sed -e 's/[]\/$*.^[]/\\&/g' < "${HOME}/.ssh/${KEY_FILE_NAME}.pub");
+CLEANUP_CMD="sed -i '/${ESCAPED_OLD_PUB_KEY}/d' ~/.ssh/authorized_keys"
 for TARGET_HOST in "$@"
 do
 	ssh "${TARGET_HOST}" "${CLEANUP_CMD}" >/dev/null 2>&1
@@ -95,10 +97,11 @@ do
 		exit $EXIT_CODE
 	fi
 done
-echo -e "${TICK}"
+echo -e "${TICK} Old key removed from all hosts"
 
-echo -ne "${INFO} Removing old key locally..."
-rm -rf ~/.ssh/id_ed25519*
+echo -e "\n${INFO} Removing old key locally..."
+rm -rf "${HOME}/.ssh/${KEY_FILE_NAME}"
+rm -rf "${HOME}/.ssh/${KEY_FILE_NAME}.pub"
 mv "${TEMP_DIR}"/* ~/.ssh/
 rmdir "${TEMP_DIR}"
-echo -e "${TICK}"
+echo -e "${TICK} Old key removed locally"
