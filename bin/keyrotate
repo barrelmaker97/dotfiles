@@ -14,15 +14,18 @@ TEMP_DIR="${HOME}/keyrotate-temp"
 KEY_COMMENT="$(whoami)@$(hostname)-$(date --iso-8601=minutes)"
 TIMEOUT="10"
 DEPENDENCIES=(timeout ssh-keygen ssh-copy-id)
-KEY_TYPE="ed25519"
-KEY_FILE_NAME="id_ed25519"
-OLD_KEY_FILE_NAME="id_ed25519"
 
 if [ $# -eq 0 ]; then
 	echo -e "${CROSS} Please provide at least one hostname"
 	exit 1
 fi
 
+read -rp "Key Type (default ed25519): " KEY_TYPE
+read -rp "Key File Name (Default id_ed25519): " KEY_FILE_NAME
+read -rp "Old Key File Name (Default id_ed25519): " OLD_KEY_FILE_NAME
+KEY_TYPE=${KEY_TYPE:-ed25519}
+KEY_FILE_NAME=${KEY_FILE_NAME:-id_ed25519}
+OLD_KEY_FILE_NAME=${OLD_KEY_FILE_NAME:-id_ed25519}
 
 echo -e "${INFO} Checking for dependencies..."
 for DEPENDENCY in "${DEPENDENCIES[@]}"
