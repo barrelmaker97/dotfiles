@@ -74,6 +74,20 @@ git_install ()
 	echo -e "${TICK}"
 }
 
+tmux_install ()
+{
+	echo -ne " ${INFO} Installing tmux configs..."
+	ln -sf "${HOME}"/dotfiles/tmux.conf "${HOME}"/.tmux.conf
+	echo -e "${TICK}"
+}
+
+scripts_install ()
+{
+	echo -ne " ${INFO} Installing scripts..."
+	ln -sf "${HOME}"/dotfiles/bin "${HOME}"/
+	echo -e "${TICK}"
+}
+
 vim_install ()
 {
 	echo -ne " ${INFO} Installing vim configs..."
@@ -84,13 +98,6 @@ vim_install ()
 	echo -e "${TICK}"
 }
 
-tmux_install ()
-{
-	echo -ne " ${INFO} Installing tmux configs..."
-	ln -sf "${HOME}"/dotfiles/tmux.conf "${HOME}"/.tmux.conf
-	echo -e "${TICK}"
-}
-
 work_install ()
 {
 	echo -ne " ${INFO} Installing work configs..."
@@ -98,10 +105,10 @@ work_install ()
 	echo -e "${TICK}"
 }
 
-scripts_install ()
+sshd_install ()
 {
-	echo -ne " ${INFO} Installing scripts..."
-	ln -sf "${HOME}"/dotfiles/bin "${HOME}"/
+	echo -ne " ${INFO} Installing sshd configs..."
+	sudo cp -u "${HOME}"/dotfiles/sshd_config /etc/ssh/sshd_config
 	echo -e "${TICK}"
 }
 
@@ -115,13 +122,14 @@ git_cleanup ()
 help ()
 {
 	echo -e "Usage: \n"
-	echo -e "\tall\t\t - install all except for work"
-	echo -e "\tbash\t\t - install bash configs"
-	echo -e "\tgit\t\t - install git configs"
-	echo -e "\tvim\t\t - install vim configs"
-	echo -e "\ttmux\t\t - install tmux configs"
-	echo -e "\twork\t\t - install work configs"
-	echo -e "\thelp\t\t - print this message\n"
+	echo -e "\tall\t - install all except for: work, sshd"
+	echo -e "\tbash\t - install bash configs"
+	echo -e "\tgit\t - install git configs"
+	echo -e "\tvim\t - install vim configs"
+	echo -e "\ttmux\t - install tmux configs"
+	echo -e "\tsshd\t - install sshd configs"
+	echo -e "\twork\t - install work configs"
+	echo -e "\thelp\t - print this message\n"
 }
 
 # Install all when run without arguments
@@ -133,7 +141,7 @@ fi
 # Action parsing
 ACTION="$1"
 case "${ACTION}" in
-	all|bash|git|work|vim|tmux)
+	all|bash|git|work|vim|tmux|sshd)
 		"${ACTION}"_install
 		;;
 	help)
