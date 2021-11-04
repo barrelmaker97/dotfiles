@@ -2,3 +2,7 @@
 storageClassName:
   config: jellyfin-config
   media: jellyfin-media
+
+resources:
+  requests:
+    memory: 1.5Gi

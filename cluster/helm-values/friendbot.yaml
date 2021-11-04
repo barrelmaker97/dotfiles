@@ -6,3 +6,7 @@ redisPort: 6379
 # This disables the Redis subchart
 redis:
   enabled: false
+
+resources:
+  requests:
+    memory: 100Mi

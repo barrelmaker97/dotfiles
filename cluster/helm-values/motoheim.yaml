@@ -3,3 +3,7 @@ serverName: MotoHeim
 serverPort: 30005  # Must be in the range 30000-32767
 storageClassName: motoheim
 worldName: Asgard
+
+resources:
+  requests:
+    memory: 3Gi

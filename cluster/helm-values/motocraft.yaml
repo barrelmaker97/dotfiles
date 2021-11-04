@@ -10,3 +10,7 @@ properties:
   serverName: "MotoCraft"
   type: "BUKKIT"
   viewDistance: "32"
+
+resources:
+  requests:
+    memory: 2.5Gi

@@ -8,3 +8,7 @@ properties:
   serverName: "Primordial"
   version: "1.16.5"
   viewDistance: "32"
+
+resources:
+  requests:
+    memory: 2.5Gi
