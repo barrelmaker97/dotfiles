@@ -7,3 +7,5 @@ worldName: Asgard
 resources:
   requests:
     memory: 3Gi
+  limits:
+    memory: 4Gi

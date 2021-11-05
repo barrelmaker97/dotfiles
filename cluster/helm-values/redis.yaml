@@ -5,7 +5,11 @@ master:
   resources:
     requests:
       memory: 80Mi
+    limits:
+      memory: 120Mi
 replica:
   resources:
     requests:
       memory: 80Mi
+    limits:
+      memory: 120Mi

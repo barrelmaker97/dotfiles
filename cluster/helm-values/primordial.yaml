@@ -12,3 +12,5 @@ properties:
 resources:
   requests:
     memory: 2.5Gi
+  limits:
+    memory: 3Gi

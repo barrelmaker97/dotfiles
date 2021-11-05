@@ -7,6 +7,10 @@ resources:
   factorio:
     requests:
       memory: 700Mi
+    limits:
+      memory: 1Gi
   metrics:
     requests:
       memory: 20Mi
+    limits:
+      memory: 40Mi
