@@ -4,12 +4,12 @@ auth:
 master:
   resources:
     requests:
-      memory: 80Mi
+      memory: 60Mi
     limits:
       memory: 120Mi
 replica:
   resources:
     requests:
-      memory: 80Mi
+      memory: 60Mi
     limits:
       memory: 120Mi
