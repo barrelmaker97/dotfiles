@@ -5,11 +5,15 @@ master:
   resources:
     requests:
       memory: 60Mi
+      cpu: 60m
     limits:
       memory: 120Mi
+      cpu: 120m
 replica:
   resources:
     requests:
       memory: 60Mi
+      cpu: 60m
     limits:
       memory: 120Mi
+      cpu: 120m
