@@ -6,10 +6,10 @@ storageClassName: motofactorio4
 resources:
   factorio:
     requests:
-      memory: 700Mi
+      memory: 1000Mi
       cpu: 300m
     limits:
-      memory: 1400Mi
+      memory: 2000Mi
       cpu: 1000m
   metrics:
     requests:
