@@ -9,7 +9,7 @@ resources:
       memory: 700Mi
       cpu: 300m
     limits:
-      memory: 1.4Gi
+      memory: 1400Mi
       cpu: 1000m
   metrics:
     requests:
