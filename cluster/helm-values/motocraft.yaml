@@ -9,6 +9,7 @@ properties:
   ops: "Barrelmaker97"
   serverName: "MotoCraft"
   type: "BUKKIT"
+  version: 1.17.1
   viewDistance: "32"
 
 resources:
