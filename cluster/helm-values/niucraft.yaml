@@ -8,7 +8,7 @@ properties:
   motd: "NIUCraft Server"
   ops: "Barrelmaker97"
   serverName: "NIUCraft"
-  type: "BUKKIT"
+  type: "PAPER"
   version: 1.17.1
   viewDistance: "32"
 

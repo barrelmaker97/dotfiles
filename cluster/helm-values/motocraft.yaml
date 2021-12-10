@@ -8,7 +8,7 @@ properties:
   motd: "MotoCraft Server"
   ops: "Barrelmaker97"
   serverName: "MotoCraft"
-  type: "BUKKIT"
+  type: "PAPER"
   version: 1.17.1
   viewDistance: "32"
 
