@@ -8,7 +8,6 @@ master:
       cpu: 60m
     limits:
       memory: 120Mi
-      cpu: 120m
 replica:
   resources:
     requests:
@@ -16,4 +15,3 @@ replica:
       cpu: 60m
     limits:
       memory: 120Mi
-      cpu: 120m

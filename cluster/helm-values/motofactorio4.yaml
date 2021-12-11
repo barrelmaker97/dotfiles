@@ -10,11 +10,9 @@ resources:
       cpu: 300m
     limits:
       memory: 2000Mi
-      cpu: 1000m
   metrics:
     requests:
       memory: 20Mi
       cpu: 10m
     limits:
       memory: 40Mi
-      cpu: 60m
