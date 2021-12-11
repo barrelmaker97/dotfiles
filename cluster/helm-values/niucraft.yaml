@@ -9,7 +9,6 @@ properties:
   ops: "Barrelmaker97"
   serverName: "NIUCraft"
   type: "PAPER"
-  version: 1.17.1
   viewDistance: "32"
 
 resources:
