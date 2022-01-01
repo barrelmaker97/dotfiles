@@ -126,3 +126,8 @@
       community.kubernetes.k8s:
         state: present
         definition: "{{ lookup('file', './definitions/issuer-prod.yaml') | from_yaml }}"
+
+    - name: Create Staging Issuer
+      community.kubernetes.k8s:
+        state: present
+        definition: "{{ lookup('file', './definitions/issuer-staging.yaml') | from_yaml }}"
