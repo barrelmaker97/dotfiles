@@ -5,6 +5,7 @@ metadata:
   name: nginx-load-balancer-microk8s-conf
   namespace: ingress
 data:
+  annotation-value-word-blocklist: "load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,}"
   enable-ocsp: "true"
   hsts-max-age: "63072000"
   hsts-preload: "true"
