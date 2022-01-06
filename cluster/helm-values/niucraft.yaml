@@ -4,6 +4,7 @@ serverPort: 30013  # Must be in the range 30000-32767
 dynmap: true
 metrics: true
 properties:
+  aikarFlags: true
   memory: "4G"
   motd: "NIUCraft Server"
   ops: "Barrelmaker97"

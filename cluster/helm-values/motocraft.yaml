@@ -4,6 +4,7 @@ serverPort: 30003  # Must be in the range 30000-32767
 dynmap: true
 metrics: true
 properties:
+  aikarFlags: true
   memory: "2G"
   motd: "MotoCraft Server"
   ops: "Barrelmaker97"
