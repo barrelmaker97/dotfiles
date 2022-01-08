@@ -9,7 +9,7 @@ properties:
   motd: "MotoCraft Server"
   ops: "Barrelmaker97"
   serverName: "MotoCraft"
-  spigetResources: "274,36618"
+  spigetResources: "274,36618,69584"
   type: "PAPER"
   viewDistance: "32"
 
