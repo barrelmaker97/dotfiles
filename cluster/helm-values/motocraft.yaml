@@ -5,13 +5,17 @@ dynmap: true
 metrics: true
 properties:
   aikarFlags: true
+  enforceWhitelist: true
   memory: "4G"
   motd: "MotoCraft Server"
   ops: "Barrelmaker97"
+  overrideOps: true
+  overrideWhitelist: true
   serverName: "MotoCraft"
   spigetResources: "81534,274,36618,69584"
   type: "PAPER"
   viewDistance: "32"
+  whitelist: "Barrelmaker97,Draken3899,Lil_Doza,QTippies,Raiikonnen,Redikalus,laplacianblocks"
 
 resources:
   requests:

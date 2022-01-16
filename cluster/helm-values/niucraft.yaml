@@ -5,13 +5,17 @@ dynmap: true
 metrics: true
 properties:
   aikarFlags: true
+  enforceWhitelist: true
   memory: "4G"
   motd: "NIUCraft Server"
   ops: "Barrelmaker97"
+  overrideOps: true
+  overrideWhitelist: true
   serverName: "NIUCraft"
   spigetResources: "81534,274,36618,69584"
   type: "PAPER"
   viewDistance: "32"
+  whitelist: "Barrelmaker97,Lil_Doza,LuckierDodge,Solo22499,Spronix,ThePrimeus"
 
 resources:
   requests:
