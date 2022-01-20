@@ -15,7 +15,7 @@ properties:
   spigetResources: "81534,274,36618,69584"
   type: "PAPER"
   viewDistance: "32"
-  whitelist: "Barrelmaker97,Lil_Doza,LuckierDodge,Solo22499,Spronix,ThePrimeus"
+  whitelist: "BakerGang2020,Barrelmaker97,Lil_Doza,LuckierDodge,Solo22499,Spronix,ThePrimeus"
 
 resources:
   requests:
