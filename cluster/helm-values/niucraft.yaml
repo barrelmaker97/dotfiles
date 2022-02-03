@@ -12,7 +12,7 @@ properties:
   overrideOps: true
   overrideWhitelist: true
   serverName: "NIUCraft"
-  spigetResources: "81534,274,36618,69584"
+  spigetResources: "81534,36618,69584"
   type: "PAPER"
   viewDistance: "32"
   whitelist: "BakerGang2020,Barrelmaker97,Lil_Doza,LuckierDodge,Solo22499,Spronix,ThePrimeus"
