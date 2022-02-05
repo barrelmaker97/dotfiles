@@ -1,0 +1,14 @@
+---
+properties:
+  defaultMap: gm_flatgrass
+  gamemode: terrortown
+  installCSS: true
+  installHL2: true
+  installHLDM: true
+  installTF2: true
+  maxPlayers: 20
+# rconPassword: asdf # broken
+  serverName: MotoMod
+  workshopCollectionID: "343063929" # only works if it's in quotes
+serverPort: 30008  # Must be in the range 30000-32767
+storageClassName: testmod # directory needs to be owned by user/group 10000
