@@ -7,8 +7,7 @@ properties:
   installHLDM: true
   installTF2: true
   maxPlayers: 20
-  rconPassword: "securePw"
   serverName: Moto-TTT
   workshopCollectionID: "343063929" # only works if it's in quotes
 serverPort: 30008  # Must be in the range 30000-32767
-storageClassName: testmod # directory needs to be owned by user/group 10000
+storageClassName: moto-ttt # directory needs to be owned by user/group 10000
