@@ -3,9 +3,9 @@ properties:
   defaultMap: gm_flatgrass
   gamemode: terrortown
   installCSS: true
-  installHL2: true
-  installHLDM: true
-  installTF2: true
+  installHL2: false
+  installHLDM: false
+  installTF2: false
   maxPlayers: 20
   serverName: Moto-TTT
   workshopCollectionID: "2747580017" # only works if it's in quotes
