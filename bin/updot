@@ -54,7 +54,6 @@ all_install ()
 {
 	bash_install
 	git_install
-	tmux_install
 	scripts_install
 	vim_install
 }
@@ -122,12 +121,13 @@ git_cleanup ()
 help ()
 {
 	echo -e "Usage: \n"
-	echo -e "\tall\t - install all except for: work, sshd"
+	echo -e "\tall\t - install all except for: sshd, tmux, work"
 	echo -e "\tbash\t - install bash configs"
 	echo -e "\tgit\t - install git configs"
-	echo -e "\tvim\t - install vim configs"
-	echo -e "\ttmux\t - install tmux configs"
+	echo -e "\tscripts\t - install scripts"
 	echo -e "\tsshd\t - install sshd configs"
+	echo -e "\ttmux\t - install tmux configs"
+	echo -e "\tvim\t - install vim configs"
 	echo -e "\twork\t - install work configs"
 	echo -e "\thelp\t - print this message\n"
 }
@@ -141,7 +141,7 @@ fi
 # Action parsing
 ACTION="$1"
 case "${ACTION}" in
-	all|bash|git|work|vim|tmux|sshd)
+	all|bash|git|scripts|sshd|tmux|vim|work)
 		"${ACTION}"_install
 		;;
 	help)
