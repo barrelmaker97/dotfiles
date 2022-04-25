@@ -8,6 +8,6 @@ properties:
   installTF2: false
   maxPlayers: 20
   serverName: Moto-TTT
-  workshopCollectionID: "2747580017" # only works if it's in quotes
+  workshopCollectionID: "2747580017"  # only works if it's in quotes
 serverPort: 30008  # Must be in the range 30000-32767
-storageClassName: moto-ttt # directory needs to be owned by user/group 10000
+storageClassName: moto-ttt  # directory needs to be owned by user/group 10000
