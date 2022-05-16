@@ -1,4 +1,5 @@
 ---
+architecture: standalone
 auth:
   enabled: false
 master:
