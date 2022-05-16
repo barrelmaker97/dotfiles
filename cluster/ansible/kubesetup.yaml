@@ -45,7 +45,7 @@
       changed_when: addon_result.stdout is not search("is already enabled.")
       loop:
         - dns
-        - storage
+        - hostpath-storage
         - rbac
         - ingress
         - prometheus
