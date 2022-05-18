@@ -42,7 +42,7 @@
     - name: Enable microk8s addons
       command: microk8s enable {{ item }}
       register: addon_result
-      changed_when: addon_result.stdout is not search("is already enabled.")
+      changed_when: addon_result.stdout is not search("is already enabled")
       loop:
         - dns
         - hostpath-storage
