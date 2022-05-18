@@ -49,6 +49,7 @@
         - rbac
         - ingress
         - prometheus
+        - metallb:192.168.15.40-192.168.15.49
 
     - name: Configure Nginx Ingress Controller
       k8s:
