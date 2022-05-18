@@ -24,10 +24,5 @@ check_dependencies ()
 }
 
 check_dependencies
-read -rp "IP: " IP
-read -rp "Username (Default barrelmaker): " USERNAME
-USERNAME=${USERNAME:-barrelmaker}
 echo -e "Starting Deployment Playbook..."
-echo server ansible_host="${IP}" ansible_user="${USERNAME}" > inventory_hostname
-ansible-playbook "$1" -i inventory_hostname
-rm inventory_hostname
+ansible-playbook "$1" -i inventory.yaml
