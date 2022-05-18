@@ -56,6 +56,11 @@
         state: present
         definition: "{{ lookup('file', './definitions/configmap-nginx.yaml') | from_yaml }}"
 
+    - name: Load Balance Ingress Controller
+      k8s:
+        state: present
+        definition: "{{ lookup('template', './definitions/service-ingress.yaml') | from_yaml }}"
+
     - name: Install kubectl
       snap:
         name: kubectl
