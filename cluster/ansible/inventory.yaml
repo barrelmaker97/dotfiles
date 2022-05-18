@@ -4,3 +4,4 @@ all:
     server:
       ansible_host: 192.168.15.10
       ansible_user: barrelmaker
+      metallb_ip_range: 192.168.15.40-192.168.15.49
