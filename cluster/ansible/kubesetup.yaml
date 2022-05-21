@@ -44,7 +44,7 @@
       register: addon_result
       changed_when: addon_result.stdout is not search("is already enabled")
       loop:
-        - dns
+        - "dns:{{ upstream_dns }}"
         - hostpath-storage
         - rbac
         - ingress

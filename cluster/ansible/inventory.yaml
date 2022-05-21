@@ -4,5 +4,6 @@ all:
     server:
       ansible_host: 192.168.15.10
       ansible_user: barrelmaker
-      metallb_ip_range: 192.168.15.40-192.168.15.49
       cluster_vip: 192.168.15.40
+      metallb_ip_range: 192.168.15.40-192.168.15.49
+      upstream_dns: 192.168.15.1
