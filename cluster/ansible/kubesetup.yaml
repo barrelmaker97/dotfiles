@@ -107,6 +107,7 @@
         flat: true
 
     - name: Install helm
+      become: true
       snap:
         name: helm
         classic: true
