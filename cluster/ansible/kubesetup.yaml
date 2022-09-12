@@ -48,7 +48,7 @@
         - hostpath-storage
         - rbac
         - ingress
-        - prometheus
+        - observability
         - "metallb:{{ metallb_ip_range }}"
 
     - name: Configure MetalLB
