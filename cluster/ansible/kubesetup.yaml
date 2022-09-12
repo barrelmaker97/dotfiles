@@ -12,6 +12,7 @@
         name: openshift
 
     - name: Install microk8s
+      become: true
       snap:
         name: microk8s
         classic: true
@@ -50,21 +51,6 @@
         - ingress
         - observability
         - "metallb:{{ metallb_ip_range }}"
-
-    - name: Configure MetalLB
-      k8s:
-        state: present
-        definition: "{{ lookup('template', './definitions/configmap-metallb.yaml') | from_yaml }}"
-
-    - name: Configure Nginx Ingress Controller
-      k8s:
-        state: present
-        definition: "{{ lookup('file', './definitions/configmap-nginx.yaml') | from_yaml }}"
-
-    - name: Load Balance Ingress Controller
-      k8s:
-        state: present
-        definition: "{{ lookup('template', './definitions/service-ingress.yaml') | from_yaml }}"
 
     - name: Install kubectl
       snap:
@@ -105,6 +91,21 @@
         src: "{{ ansible_env.HOME }}/.kube/config"
         dest: "{{ ansible_env.HOME }}/.kube/"
         flat: true
+
+    - name: Configure MetalLB
+      k8s:
+        state: present
+        definition: "{{ lookup('template', './definitions/configmap-metallb.yaml') | from_yaml }}"
+
+    - name: Configure Nginx Ingress Controller
+      k8s:
+        state: present
+        definition: "{{ lookup('file', './definitions/configmap-nginx.yaml') | from_yaml }}"
+
+    - name: Load Balance Ingress Controller
+      k8s:
+        state: present
+        definition: "{{ lookup('template', './definitions/service-ingress.yaml') | from_yaml }}"
 
     - name: Install helm
       become: true
