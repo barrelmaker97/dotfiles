@@ -97,6 +97,11 @@
         state: present
         definition: "{{ lookup('template', './definitions/configmap-metallb.yaml') | from_yaml }}"
 
+    - name: Advertise Load Balanced IP
+      k8s:
+        state: present
+        definition: "{{ lookup('template', './definitions/L2Advertisement-metallb.yaml') | from_yaml }}"
+
     - name: Configure Nginx Ingress Controller
       k8s:
         state: present
