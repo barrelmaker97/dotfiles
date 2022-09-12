@@ -45,12 +45,12 @@
       register: addon_result
       changed_when: addon_result.stdout is not search("is already enabled")
       loop:
-        - "dns:{{ upstream_dns }}"
-        - hostpath-storage
-        - rbac
-        - ingress
-        - observability
-        - "metallb:{{ metallb_ip_range }}"
+        - "core/dns:{{ upstream_dns }}"
+        - core/hostpath-storage
+        - core/rbac
+        - core/ingress
+        - core/observability
+        - "core/metallb:{{ metallb_ip_range }}"
 
     - name: Install kubectl
       snap:
