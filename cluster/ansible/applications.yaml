@@ -16,3 +16,16 @@
         helm_repos:
           bitnami: https://charts.bitnami.com/bitnami
           barrelmaker: https://charts.barrelmaker.dev
+
+    - name: Deploy Helm Charts
+      kubernetes.core.helm:
+        name: "{{ item.key }}"
+        chart_ref: "{{ item.value }}"
+        release_namespace: default
+        update_repo_cache: true
+        wait: true
+        release_values: "{{ lookup('file', './helm-values/{{ item.key }}.yaml') | from_yaml }}"
+      loop: "{{ helm_charts | dict2items }}"
+      vars:
+        helm_charts:
+          ingress: barrelmaker/ingress
