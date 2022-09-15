@@ -1,0 +1,18 @@
+---
+- hosts: all
+  tasks:
+    - name: Create PVs
+      k8s:
+        definition: "{{ lookup('file', '{{ item }}') | from_yaml }}"
+      with_fileglob:
+        - "./definitions/persistent-volumes/*.yaml"
+
+    - name: Add Helm Repos
+      kubernetes.core.helm_repository:
+        name: "{{ item.key }}"
+        repo_url: "{{ item.value }}"
+      loop: "{{ helm_repos | dict2items }}"
+      vars:
+        helm_repos:
+          bitnami: https://charts.bitnami.com/bitnami
+          barrelmaker: https://charts.barrelmaker.dev

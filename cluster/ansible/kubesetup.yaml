@@ -126,8 +126,6 @@
       vars:
         helm_repos:
           jetstack: https://charts.jetstack.io
-          bitnami: https://charts.bitnami.com/bitnami
-          barrelmaker: https://charts.barrelmaker.dev
 
     - name: Deploy Cert-Manager
       kubernetes.core.helm:
