@@ -53,6 +53,7 @@
         - "core/metallb:{{ metallb_ip_range }}"
 
     - name: Install kubectl
+      become: true
       snap:
         name: kubectl
         classic: true
