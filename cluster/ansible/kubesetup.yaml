@@ -65,6 +65,7 @@
         mode: "0755"
 
     - name: Set owner of kubeconfig directory to {{ ansible_user }}
+      become: true
       file:
         path: "{{ ansible_env.HOME }}/.kube"
         state: directory
