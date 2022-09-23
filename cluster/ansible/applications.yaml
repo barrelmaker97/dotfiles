@@ -8,6 +8,7 @@
         - "./definitions/persistent-volumes/*.yaml"
 
     - name: Add Helm Repos
+      no_log: true
       kubernetes.core.helm_repository:
         name: "{{ item.key }}"
         repo_url: "{{ item.value }}"
