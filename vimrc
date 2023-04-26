@@ -181,12 +181,12 @@ highlight link StartifyNumber Type
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " vim-fugitive
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gp :Gpush<CR>
-nnoremap <Leader>gl :Glog<CR>:copen<CR>
+nnoremap <Leader>gb :Git blame<CR>
+nnoremap <Leader>gs :Git<CR>
+nnoremap <Leader>gd :Git diff<CR>
+nnoremap <Leader>gc :Git commit<CR>
+nnoremap <Leader>gp :Git push<CR>
+nnoremap <Leader>gl :Git log<CR>
 
 " GitGutter
 nnoremap <leader>gt :GitGutterToggle<CR>
