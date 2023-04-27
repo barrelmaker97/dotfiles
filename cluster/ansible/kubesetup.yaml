@@ -40,6 +40,10 @@
         name: iptables-persistent
         state: present
 
+    - name: Update microk8s core addons repo
+      become: true
+      command: microk8s addons repo update core
+
     - name: Enable microk8s addons
       command: microk8s enable {{ item }}
       register: addon_result
