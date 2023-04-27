@@ -54,6 +54,7 @@
         - core/rbac
         - core/ingress
         - core/observability
+        - core/cert-manager
         - "core/metallb:{{ metallb_ip_range }}"
 
     - name: Install kubectl
@@ -133,17 +134,6 @@
       vars:
         helm_repos:
           jetstack: https://charts.jetstack.io
-
-    - name: Deploy Cert-Manager
-      kubernetes.core.helm:
-        name: cert-manager
-        chart_ref: jetstack/cert-manager
-        release_namespace: cert-manager
-        create_namespace: true
-        update_repo_cache: true
-        wait: true
-        release_values:
-          installCRDs: true
 
     - name: Create Production Issuer
       k8s:
