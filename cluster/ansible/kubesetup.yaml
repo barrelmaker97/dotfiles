@@ -125,16 +125,6 @@
         name: helm
         classic: true
 
-    - name: Add Helm Repos
-      no_log: true
-      kubernetes.core.helm_repository:
-        name: "{{ item.key }}"
-        repo_url: "{{ item.value }}"
-      loop: "{{ helm_repos | dict2items }}"
-      vars:
-        helm_repos:
-          jetstack: https://charts.jetstack.io
-
     - name: Create Production Issuer
       k8s:
         state: present
