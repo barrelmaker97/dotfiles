@@ -1,3 +1,8 @@
 ---
+image:
+  repository: ghcr.io/nsarrazin/serge
+  pullPolicy: IfNotPresent
+  tag: latest
+
 securityContext:
   allowPrivilegeEscalation: false
