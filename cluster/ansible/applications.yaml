@@ -34,7 +34,7 @@
           friendbot: barrelmaker/friendbot
           jellyfin: barrelmaker/jellyfin
           moto-ttt: barrelmaker/gmod
-          motofactorio4: barrelmaker/factorio
+          factorio: barrelmaker/factorio
           motoheim: barrelmaker/valheim
           niucraft: barrelmaker/minecraft
           website: barrelmaker/website
