@@ -33,7 +33,7 @@
           redis: bitnami/redis
           friendbot: barrelmaker/friendbot
           jellyfin: barrelmaker/jellyfin
-          moto-ttt: barrelmaker/gmod
+          gmod: barrelmaker/gmod
           factorio: barrelmaker/factorio
           motoheim: barrelmaker/valheim
           niucraft: barrelmaker/minecraft
