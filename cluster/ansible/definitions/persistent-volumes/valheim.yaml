@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: valheim
   local:
-    path: /home/barrelmaker/gamedata/valheim/valheim-data
+    path: /home/barrelmaker/backup/valheim/valheim-data
   nodeAffinity:
     required:
       nodeSelectorTerms:

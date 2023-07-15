@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: factorio
   local:
-    path: /home/barrelmaker/gamedata/factorio/factorio-data
+    path: /home/barrelmaker/backup/factorio/factorio-data
   nodeAffinity:
     required:
       nodeSelectorTerms:
