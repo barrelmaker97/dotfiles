@@ -5,6 +5,7 @@ set -euo pipefail
 # Configuration variables
 BACKUP_LOCATION="/home/barrelmaker"
 DUPLICACY_BINARY="/usr/local/bin/duplicacy"
+USE_SYSLOG="false"
 
 # Check for args
 while getopts ":s" opt; do
