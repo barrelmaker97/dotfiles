@@ -35,7 +35,7 @@
           jellyfin: barrelmaker/jellyfin
           gmod: barrelmaker/gmod
           factorio: barrelmaker/factorio
-          motoheim: barrelmaker/valheim
+          valheim: barrelmaker/valheim
           niucraft: barrelmaker/minecraft
           website: barrelmaker/website
           ingress: barrelmaker/ingress

@@ -1,7 +1,7 @@
 ---
-serverName: MotoHeim
+serverName: Valheim
 serverPort: 30005  # Must be in the range 30000-32767
-storageClassName: motoheim
+storageClassName: valheim
 worldName: Asgard
 
 resources:
