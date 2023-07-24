@@ -1,9 +1,15 @@
 ---
 all:
   hosts:
-    server:
+    ares:
       ansible_host: 192.168.15.10
       ansible_user: barrelmaker
       cluster_vip: 192.168.15.40
       metallb_ip_range: 192.168.15.40-192.168.15.49
+      upstream_dns: 192.168.15.1
+    hermes:
+      ansible_host: 192.168.15.50
+      ansible_user: barrelmaker
+      cluster_vip: 192.168.15.60
+      metallb_ip_range: 192.168.15.60-192.168.15.69
       upstream_dns: 192.168.15.1
