@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: hermes
   tasks:
     - name: Install python3-pip
       become: true
@@ -19,6 +19,7 @@
         channel: latest/stable
 
     - name: Add user to microk8s group
+      become: true
       user:
         name: "{{ ansible_user }}"
         groups: microk8s
