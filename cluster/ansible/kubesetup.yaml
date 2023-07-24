@@ -7,6 +7,12 @@
         name: python3-pip
         state: present
 
+    - name: Install nfs-common
+      become: true
+      apt:
+        name: nfs-common
+        state: present
+
     - name: Install openshift python module
       pip:
         name: openshift
