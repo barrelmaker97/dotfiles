@@ -30,8 +30,6 @@
       vars:
         helm_charts:
 #         serge: barrelmaker/serge
-          redis: bitnami/redis
-          friendbot: barrelmaker/friendbot
           jellyfin: barrelmaker/jellyfin
           gmod: barrelmaker/gmod
           factorio: barrelmaker/factorio
