@@ -51,7 +51,7 @@ LIME='\[\e[38;5;46m\]'
 set_prompt ()
 {
 	case "${HOSTNAME}" in
-		"ares")
+		"hermes")
 			local color="${GOLD}";;
 		"pollux")
 			local color="${ORANGE}";;
