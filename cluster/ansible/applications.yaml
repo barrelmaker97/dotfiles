@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: hermes
   tasks:
     - name: Create PVs
       k8s:
@@ -29,7 +29,7 @@
       loop: "{{ helm_charts | dict2items }}"
       vars:
         helm_charts:
-          serge: barrelmaker/serge
+#         serge: barrelmaker/serge
           redis: bitnami/redis
           friendbot: barrelmaker/friendbot
           jellyfin: barrelmaker/jellyfin
