@@ -9,8 +9,8 @@ properties:
   memory: "6G"
   motd: "NIUCraft Server"
   ops: "Barrelmaker97"
-  overrideOps: true
-  overrideWhitelist: true
+  existingWhitelist: "SYNCHRONIZE"
+  existingOps: "SYNCHRONIZE"
   serverName: "NIUCraft"
   spigetResources: "81534,36618"
   type: "PAPER"
