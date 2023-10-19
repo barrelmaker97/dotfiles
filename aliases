@@ -13,9 +13,6 @@ fi
 # Fix UPS Driver issue
 alias upsfix="ssh pollux sudo systemctl restart nut-driver.service"
 
-# Fix Kubelet memory leak
-alias kubestart='oc get nodes -o name | xargs -I % oc debug % -- chroot /host /bin/sh -c "systemctl restart kubelet"'
-
 # more ls aliases
 alias ll="ls -ahFo --time-style=+'%m-%d-%Y %H:%M:%S'"
 alias la="ls -AF"
@@ -27,9 +24,6 @@ alias path='echo "$PATH" | tr ":" "\n" | sort'
 # moving around
 alias ..="cd .."
 alias back="cd -"
-
-# Concourse
-alias tfly="fly -t tutorial"
 
 # tmux session alias
 alias mux="tmux new -s Home"
