@@ -47,7 +47,6 @@ update_install ()
 	check_dependencies
 	clone_or_update_repo
 	all_install
-	git_cleanup
 }
 
 all_install ()
@@ -108,13 +107,6 @@ sshd_install ()
 {
 	echo -ne " ${INFO} Installing sshd configs..."
 	sudo cp -u "${HOME}"/dotfiles/sshd_config /etc/ssh/sshd_config
-	echo -e "${TICK}"
-}
-
-git_cleanup ()
-{
-	echo -ne " ${INFO} Cleaning git directories..."
-	find "$HOME" -name '*.git' -type d -exec "$HOME"/dotfiles/bin/gitgc -s '{}' ';' 2>/dev/null
 	echo -e "${TICK}"
 }
 
