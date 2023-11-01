@@ -1,3 +1,7 @@
 # vim: ft=gitconfig:
 [user]
 	email = Nolan.Cooper@motorolasolutions.com
+[include]
+	path = ~/.git-login.creds
+[credential]
+	helper = wincred
