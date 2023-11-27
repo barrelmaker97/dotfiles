@@ -45,7 +45,6 @@ RESET='\[\e[0m\]'
 ORANGE='\[\e[38;5;208m\]'
 GOLD='\[\e[38;5;220m\]'
 TEAL='\[\e[38;5;51m\]'
-SLATE='\[\e[38;5;115m\]'
 LIME='\[\e[38;5;46m\]'
 
 set_prompt ()
@@ -57,8 +56,6 @@ set_prompt ()
 			local color="${ORANGE}";;
 		"zeus")
 			local color="${TEAL}";;
-		"hephaestus")
-			local color="${SLATE}";;
 		"soteria")
 			local color="${LIME}";;
 		*)
