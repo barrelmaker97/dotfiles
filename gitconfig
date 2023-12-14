@@ -4,6 +4,7 @@
 	email = nolancooper97@gmail.com
 [core]
 	editor = vim
+	autocrlf = false
 [color]
 	ui = auto
 [color "branch"]
