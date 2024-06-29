@@ -11,9 +11,11 @@ properties:
   ops: "Barrelmaker97"
   existingWhitelist: "SYNCHRONIZE"
   existingOps: "SYNCHRONIZE"
+  paperChannel: "experimental"
   serverName: "NIUCraft"
   spigetResources: "81534,36618"
   type: "PAPER"
+  version: "1.21"
   viewDistance: "32"
   whitelist: "BakerGang2022,Barrelmaker97,Lil_Doza,LuckierDodge,ninjahomie7,Solo22499,Spronix,ThePrimeus"
 
