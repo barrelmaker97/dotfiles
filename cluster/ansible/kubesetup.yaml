@@ -22,7 +22,7 @@
       snap:
         name: microk8s
         classic: true
-        channel: latest/stable
+        channel: "{{ microk8s_channel }}"
 
     - name: Add user to microk8s group
       become: true
