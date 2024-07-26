@@ -11,7 +11,7 @@ properties:
   ops: "Barrelmaker97"
   existingWhitelist: "SYNCHRONIZE"
   existingOps: "SYNCHRONIZE"
-  paperChannel: "experimental"
+  paperChannel: "default"
   serverName: "NIUCraft"
   spigetResources: "81534,36618"
   type: "PAPER"
