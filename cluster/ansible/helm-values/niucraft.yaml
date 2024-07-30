@@ -14,6 +14,7 @@ properties:
   paperChannel: "default"
   serverName: "NIUCraft"
   spigetResources: "81534,36618"
+  modrinthProjects: "dynmap:beta"
   type: "PAPER"
   version: "1.21"
   viewDistance: "32"
