@@ -135,3 +135,6 @@ command -v kind > /dev/null && source <(kind completion bash)
 if [ -f ~/dotfiles/aliases ]; then
 	. ~/dotfiles/aliases
 fi
+
+# Load Rust/Cargo config
+. "$HOME/.cargo/env"
