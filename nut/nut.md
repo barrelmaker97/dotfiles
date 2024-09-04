@@ -1,9 +1,7 @@
 # NUT Configuration
-This tutorial will allow you to use a Raspberry Pi as a headless UPS server using the Network UPS Tools suite. NUT ([http://networkupstools.org](http://networkupstools.org)) is an extensible and highly configurable client/server application for monitoring and managing power sources. It includes a set of hardware-specific drivers, a server daemon (upsd), and clients like upsmon and upsc.
+This docuement covers how to setup a headless UPS monitoring server using the Network UPS Tools suite. NUT ([http://networkupstools.org](http://networkupstools.org)) is an extensible and highly configurable client/server application for monitoring and managing power sources. It includes a set of hardware-specific drivers, a server daemon (upsd), and clients like upsmon and upsc.
 
-Why would you need a UPS server? I have a mixed environment with Linux, FreeBSD and Windows clients all hooked up to a single UPS. I want to shut down all services gracefully when the UPS battery is running empty. Setting up a NUT server allows you to do this quite easily. This is also a fun project that may put any RPi you may have laying around to good use in your rack.
-
-The tutorial will take you thru the steps of preparing the SD card, Configure Raspbian, installing and testing the NUT server and deploying the NUT web UI. I have also covered how to configure Proxmox (any Debian/Ubuntu server really), pfSense and Synology DSM as NUT clients to control the graceful shutdown when the UPS battery runs out of power. A bonus step will allow you to get stats from your UPS to InfluxDB/Grafana and monitor your UPS via SNMP.
+The tutorial will take you thru the steps of installing and testing the NUT server. I have also covered how to configure NUT clients to control the graceful shutdown when the UPS battery runs out of power.
 
 More information about how to configure NUT can be found here: https://networkupstools.org/docs/user-manual.chunked/ar01s06.html
 
@@ -119,14 +117,14 @@ sudo systemctl restart nut-monitor
 
 ## Verify Configuration
 
-reboot the RPi and verify that the nut-server and local nut-client services are up
+Verify that the nut-server and local nut-client services are up:
 
 ```
 service nut-server status
 service nut-client status
 ```
 
-test the configuration using the following command:
+Test the configuration using the following command:
 
 ```
 upsc ups
@@ -135,7 +133,6 @@ upsc ups
 This should produce something like this:
 
 ```
-root@raspberrypi:~ # upsc ups
 Init SSL without certificate database
 battery.charge: 100
 battery.charge.low: 10
@@ -224,9 +221,9 @@ In DSM, go to Control Panel/Hardware and Power and switch to the UPS tab. Config
 * Network UPS type: Synology UPS server
 * Network UPS server IP: 192.168.0.13
 
-DSM looks for the "ups" UPS entry in /etc/nut/ups.conf on the RPi by default and uses the monuser/secret username/password pair that we created in the /etc/nut/upsd.users file on the RPi
+DSM looks for the "ups" UPS entry in /etc/nut/ups.conf and uses the monuser/secret username/password pair that we created in the /etc/nut/upsd.users file.
 
-Click save and then the Device Information button to verify that the connection to the RPi works as expected.
+Click save and then the Device Information button to verify that the connection works as expected.
 
 ## Test the NUT server
 
