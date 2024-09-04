@@ -102,10 +102,17 @@ MONITOR ups@localhost 1 localuser hunter2 primary
 ```
 
 ## Start NUT
-And finally edit /etc/nut/nut.conf and set the value for MODE equal to 'netserver' without any spaces before and after the = sign:
+Edit /etc/nut/nut.conf and set the value for MODE equal to 'netserver' without any spaces before and after the = sign:
 
 ```
 MODE=netserver
+```
+
+Then restart the nut-server and nut-monitor services:
+
+```
+sudo systemctl restart nut-server
+sudo systemctl restart nut-monitor
 ```
 
 **Verify the configuration**
