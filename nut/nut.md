@@ -24,6 +24,8 @@ You should see the UPS listed in the output:
 Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
 ```
 
+> **Note:** If the UPS does not appear, ensure that it is correctly connected and powered on.
+
 ---
 
 ## 2. Install NUT
@@ -31,6 +33,7 @@ Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
 Install the NUT server and client packages:
 
 ```bash
+sudo apt update
 sudo apt install nut
 ```
 
@@ -47,7 +50,7 @@ Edit the `/etc/nut/ups.conf` file and add the following section at the bottom:
   desc = "Main UPS"
 ```
 
-*Note: Keep the name "ups" for usage with Synology DSM.*
+> **Note:** Keep the name "ups" for usage with Synology DSM.
 
 Test the UPS driver by running:
 
@@ -65,7 +68,7 @@ Duplicate driver instance detected (PID file /run/nut/usbhid-ups-ups.pid exists)
 Using subdriver: CyberPower HID 0.8
 ```
 
-*Note: If you don't see this output, a reboot might resolve the issue.*
+> **Note:** If you don't see this output, a reboot might resolve the issue.
 
 ---
 
@@ -77,6 +80,8 @@ To configure it, add a `LISTEN` directive to the `/etc/nut/upsd.conf` file to bi
 ```bash
 LISTEN 0.0.0.0 3493
 ```
+
+> **Note:** This configuration allows the `upsd` service to listen for connections on all network interfaces.
 
 ---
 
@@ -103,6 +108,8 @@ To manage access to `upsd`, edit the `/etc/nut/upsd.users` file and add the foll
   password = secret # Leave this here.
   upsmon secondary
 ```
+
+> **Reminder:** Replace the placeholder password `hunter2` with a strong, unique password.
 
 ---
 
@@ -141,6 +148,8 @@ Check the status of the NUT server and client services:
 systemctl status nut-server
 systemctl status nut-client
 ```
+
+> **Note:** Ensure that both services are running without errors.
 
 Test the configuration with:
 
@@ -260,7 +269,8 @@ It's essential to test the server behavior in a power outage scenario:
     ```bash
     upsmon -c fsd
     ```
-*Note: If the UPS is connected to mains, the server will stop and then restart (don't forget to set your BIOS power management to "Always on"). If the UPS is unplugged, the server will restart only after reconnection to mains.*
+
+    > **Note:** If the UPS is connected to mains, the server will stop and then restart (don't forget to set your BIOS power management to "Always on"). If the UPS is unplugged, the server will restart only after reconnection to mains.
 
 2. Monitor logs:
 
