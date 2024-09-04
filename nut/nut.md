@@ -188,89 +188,84 @@ ups.timer.shutdown: -1
 ups.vendorid: 051d
 ```
 
-Now you can continue adding NUT-clients on your network, and on the clients set nut.conf MODE=netclient and upsmon.conf to:
-
-```
-MONITOR ups@192.168.0.13 1 remoteuser hunter2 secondary
-```
-
-Congratulations. Your NUT server is now officially running!
-
 ---
 
 ## 9. Configure Remote Clients
 
+### 9.1 Linux
 
-To shut down Proxmox including all VMs and containers gracefully, we need to install nut on the Proxmox server. SSH as root to your PVE host and:
+To set up a Linux client:
 
-```
-apt update
-apt install nut-client
-```
+1. Install the NUT client:
 
-Edit /etc/nut/nut.conf and tell it to act as a client:
+    ```bash
+    sudo apt update
+    sudo apt install nut-client
+    ```
 
-```
-MODE=netclient
-```
+2. Edit `/etc/nut/nut.conf` to set the mode:
 
-Edit /etc/nut/upsmon.conf and add a MONITOR directive in the MONITOR section that tells it to listen to the NUT server:
+    ```ini
+    MODE=netclient
+    ```
 
-```
-MONITOR ups@192.168.0.13 1 upsmon_remote hunter2 secondary
-```
+3. Edit `/etc/nut/upsmon.conf` to monitor the UPS:
 
-Start monitoring:
+    ```ini
+    MONITOR ups@192.168.0.13 1 upsmon_remote hunter2 secondary
+    ```
 
-```
-service nut-client start
-```
+4. Start the NUT client:
 
-Verify the installation by checking the UPS status on the NUT server from Proxmox:
+    ```bash
+    service nut-client start
+    ```
 
-```
-upsc ups@192.168.0.13
-```
+5. Verify the UPS status:
 
-The default NUT shutdown command will let Proxmox shut down all VMs and Containers gracefully before Proxmox is shut down. This is of course depending on if the VMs and Containers allow that, so check your configs.
+    ```bash
+    upsc ups@192.168.0.13
+    ```
 
-## Synology Diskstation UPS configuration
+### 9.2 Synology Diskstation
 
 Synology DSM uses NUT to manage and share UPSes. The NUT UPS name and the username/password for the NUT client in DSM can't be set in the GUI, but the config we created earlier is set to match what DMS expects, so there is no need to modify anything over SSH unles you want to.
-
-In DSM, go to Control Panel/Hardware and Power and switch to the UPS tab. Configure the following:
-
-* Enable UPS support: true
-* Network UPS type: Synology UPS server
-* Network UPS server IP: 192.168.0.13
-
 DSM looks for the "ups" UPS entry in /etc/nut/ups.conf and uses the monuser/secret username/password pair that we created in the /etc/nut/upsd.users file.
 
-Click save and then the Device Information button to verify that the connection works as expected.
+1. In DSM, go to **Control Panel > Hardware and Power > UPS**.
+2. Configure the following:
+
+    - **Enable UPS support**: Yes
+    - **Network UPS type**: Synology UPS server
+    - **Network UPS server IP**: `192.168.0.13`
+
+3. Click **Save** and then **Device Information** to verify the connection.
 
 ---
 
 ## 10. Test the NUT Server
 
+It's essential to test the server behavior in a power outage scenario:
 
-It is a good idea to test behaviour of the NUT server and connected clients in case of a power outage before it happens. One way to do it is to keep your devices connected to mains during the testing and then move them to the UPS once everything is verified.
+1. To simulate a power outage, run:
 
-To test the server behavior in case of power outage, use the following command on the NUT server:
+    ```bash
+    upsmon -c fsd
+    ```
+*Note: If the UPS is connected to mains, the server will stop and then restart (don't forget to set your BIOS power management to "Always on"). If the UPS is unplugged, the server will restart only after reconnection to mains.*
 
-```
-upsmon -c fsd
-```
+2. Monitor logs:
 
-If the UPS is connected to mains, the server will stop and then restart (don't forget to set your BIOS power management to "Always on"). If the UPS is unplugged, the server will restart only after reconnection to mains.
+    ```bash
+    tail -f /var/log/syslog
+    ```
 
-NUT writes to the syslog by default on most Linux systems. You can monitor the log as the shutdown events happen using the command:
+3. View UPS status messages:
 
-```
-tail -f /var/log/syslog
-```
+    ```bash
+    upslog -s ups -l -
+    ```
 
-You can also view the upslog status messages using the command:
+---
 
-```
-upslog -s ups -l -
-```
+Congratulations! Your NUT server is now fully configured and operational.
