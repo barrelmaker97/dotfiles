@@ -1,11 +1,17 @@
-# NUT Configuration
+# Network UPS Tools (NUT) Configuration Guide
 This docuement covers how to setup a headless UPS monitoring server using the Network UPS Tools suite. NUT ([http://networkupstools.org](http://networkupstools.org)) is an extensible and highly configurable client/server application for monitoring and managing power sources. It includes a set of hardware-specific drivers, a server daemon (upsd), and clients like upsmon and upsc.
 
-The tutorial will take you thru the steps of installing and testing the NUT server. I have also covered how to configure NUT clients to control the graceful shutdown when the UPS battery runs out of power.
+This guide covers the steps to set up a headless UPS monitoring server using the Network UPS Tools (NUT) suite. NUT is an extensible and highly configurable client/server application for monitoring and managing power sources. It includes:
 
-More information about how to configure NUT can be found here: https://networkupstools.org/docs/user-manual.chunked/ar01s06.html
+- **Hardware-specific drivers**
+- **Server daemon (`upsd`)**
+- **Client tools like `upsmon` and `upsc`**
 
-## Check UPS Connection
+More information on NUT can be found on the [official website](http://networkupstools.org) and the [user manual](https://networkupstools.org/docs/user-manual.chunked/ar01s06.html).
+
+---
+
+## 1. Check UPS Connection
 
 Verify that the UPS is visible on the USB interface using the command:
 
@@ -19,7 +25,9 @@ You should see the UPS listed:
 Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
 ```
 
-## Install NUT
+---
+
+## 2. Install NUT
 
 Run the following to install the nut-server and nut-client packages:
 
@@ -27,7 +35,10 @@ Run the following to install the nut-server and nut-client packages:
 sudo apt install nut
 ```
 
-## Create UPS Entry
+---
+
+## 3. Create UPS Entry
+
 
 The first file to edit is /etc/nut/ups.conf Add the following section to the bottom:
 
@@ -56,7 +67,10 @@ Duplicate driver instance detected (PID file /run/nut/usbhid-ups-ups.pid exists)
 Using subdriver: CyberPower HID 0.8
 ```
 
-## Configure upsd
+---
+
+## 4. Configure `upsd`
+
 upsd is responsible for serving the data from the drivers to the clients.
 
 It connects to each driver and maintains a local cache of the current state.
@@ -71,7 +85,10 @@ Add a LISTEN directive to the end of the `/etc/nut/upsd.conf` file to bind the u
 LISTEN 0.0.0.0 3493
 ```
 
-## Configure Users
+---
+
+## 5. Configure Users
+
 We will also need to add some users to manage access to upsd by editing the upsd users config file /etc/nut/upsd.users and adding the following:
 
 ```
@@ -94,14 +111,20 @@ We will also need to add some users to manage access to upsd by editing the upsd
   upsmon secondary
 ```
 
-## Configure upsmon
+---
+
+## 6. Configure `upsmon`
+
 Then we edit /etc/nut/upsmon.conf and add the UPS to be monitored and user credentials for upsd in the MONITOR section:
 
 ```
 MONITOR ups@localhost 1 localuser hunter2 primary
 ```
 
-## Start NUT
+---
+
+## 7. Start NUT Services
+
 Edit /etc/nut/nut.conf and set the value for MODE equal to 'netserver' without any spaces before and after the = sign:
 
 ```
@@ -115,7 +138,10 @@ sudo systemctl restart nut-server
 sudo systemctl restart nut-monitor
 ```
 
-## Verify Configuration
+---
+
+## 8. Verify Configuration
+
 
 Verify that the nut-server and local nut-client services are up:
 
@@ -176,7 +202,10 @@ MONITOR ups@192.168.0.13 1 remoteuser hunter2 secondary
 
 Congratulations. Your NUT server is now officially running!
 
-## Configuring Remote Clients
+---
+
+## 9. Configure Remote Clients
+
 
 To shut down Proxmox including all VMs and containers gracefully, we need to install nut on the Proxmox server. SSH as root to your PVE host and:
 
@@ -225,7 +254,10 @@ DSM looks for the "ups" UPS entry in /etc/nut/ups.conf and uses the monuser/secr
 
 Click save and then the Device Information button to verify that the connection works as expected.
 
-## Test the NUT server
+---
+
+## 10. Test the NUT Server
+
 
 It is a good idea to test behaviour of the NUT server and connected clients in case of a power outage before it happens. One way to do it is to keep your devices connected to mains during the testing and then move them to the UPS once everything is verified.
 
