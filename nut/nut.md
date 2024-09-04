@@ -1,16 +1,11 @@
+# NUT Configuration
 This tutorial will allow you to use a Raspberry Pi as a headless UPS server using the Network UPS Tools suite. NUT ([http://networkupstools.org](http://networkupstools.org)) is an extensible and highly configurable client/server application for monitoring and managing power sources. It includes a set of hardware-specific drivers, a server daemon (upsd), and clients like upsmon and upsc.
 
 Why would you need a UPS server? I have a mixed environment with Linux, FreeBSD and Windows clients all hooked up to a single UPS. I want to shut down all services gracefully when the UPS battery is running empty. Setting up a NUT server allows you to do this quite easily. This is also a fun project that may put any RPi you may have laying around to good use in your rack.
 
 The tutorial will take you thru the steps of preparing the SD card, Configure Raspbian, installing and testing the NUT server and deploying the NUT web UI. I have also covered how to configure Proxmox (any Debian/Ubuntu server really), pfSense and Synology DSM as NUT clients to control the graceful shutdown when the UPS battery runs out of power. A bonus step will allow you to get stats from your UPS to InfluxDB/Grafana and monitor your UPS via SNMP.
 
-**Install NUT**
-
-ssh as root to the RPi and install the NUT-server and NUT-client:
-
-```
-apt install nut
-```
+## Check UPS Connection
 
 Verify that the UPS is visible on the USB interface using the command:
 
@@ -24,7 +19,15 @@ You should see the UPS listed:
 Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
 ```
 
-**Configure NUT**
+## Install NUT
+
+ssh as root to the RPi and install the NUT-server and NUT-client:
+
+```
+apt install nut
+```
+
+## Configure UPS Entry
 
 The first file to edit is /etc/nut/ups.conf Add the following section to the bottom:
 
