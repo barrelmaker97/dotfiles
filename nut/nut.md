@@ -21,10 +21,10 @@ Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
 
 ## Install NUT
 
-ssh as root to the RPi and install the NUT-server and NUT-client:
+Run the following to install the nut-server and nut-client packages:
 
 ```
-apt install nut
+sudo apt install nut
 ```
 
 ## Create UPS Entry
@@ -38,7 +38,7 @@ The first file to edit is /etc/nut/ups.conf Add the following section to the bot
  desc = "Main UPS"
 ```
 
-Within the bracket, you can set your UPS name (no space allowed) but keep the name "ups" for easier usage with Synology DSM.
+Within the bracket, set the UPS name (no space allowed) but keep the name "ups" for easier usage with Synology DSM.
 
 Test the UPS driver by running:
 
@@ -56,9 +56,10 @@ Duplicate driver instance detected (PID file /run/nut/usbhid-ups-ups.pid exists)
 Using subdriver: CyberPower HID 0.8
 ```
 
-## Configure UPSD
+## Configure upsd
 upsd is responsible for serving the data from the drivers to the clients.
-It connects to each driver and maintains a local cache of the current state. Queries from the clients are served from this cache, so delays are minimal.
+
+It connects to each driver and maintains a local cache of the current state.
 
 It also conveys administrative messages from the clients back to the drivers, such as starting tests, or setting values.
 
@@ -70,39 +71,34 @@ Add a LISTEN directive to the end of the `/etc/nut/upsd.conf` file to bind the u
 LISTEN 0.0.0.0 3493
 ```
 
-The next step is to configure upsmon and upsd of which the later communicates with the UPS driver configured while upsmon monitors and communicates shutdown procedures to upsd. NUT allows multiple instances of upsmon to run on different machines while communicating with the same physical UPS.
-
-For upsd to be accessible via the network we edit /etc/nut/upsd.conf
-
-Uncomment the LISTEN directive for localhost (127.0.0.1) and add another LISTEN directive for the static IP we assigned to the RPi earlier.
-
-```
-LISTEN 127.0.0.1 3493
-LISTEN 192.168.0.13 3493
-```
-
+## Configure Users
 We will also need to add some users to manage access to upsd by editing the upsd users config file /etc/nut/upsd.users and adding the following:
 
 ```
 [admin]
- password = hunter2
- actions = SET
- instcmds = ALL
-[upsmon_local]
- password = hunter2
- upsmon master
-[upsmon_remote]
- password = hunter2
- upsmon slave
-[monuser]#This is what Synology DSM expects
- password = secret #Leave this here.
- upsmon slave
+  password = hunter2
+  actions = set
+  actions = fsd
+  instcmds = ALL
+
+[localuser]
+  password = hunter2
+  upsmon primary
+
+[remoteuser]
+  password = hunter2
+  upsmon secondary
+
+[monuser] # This is what Synology DSM expects
+  password = secret # Leave this here.
+  upsmon secondary
 ```
 
+## Configure upsmon
 Then we edit /etc/nut/upsmon.conf and add the UPS to be monitored and user credentials for upsd in the MONITOR section:
 
 ```
-MONITOR ups@localhost 1 upsmon_local hunter2 master
+MONITOR ups@localhost 1 localuser hunter2 primary
 ```
 
 And finally edit /etc/nut/nut.conf and set the value for MODE equal to 'netserver' without any spaces before and after the = sign:
@@ -168,7 +164,7 @@ ups.vendorid: 051d
 Now you can continue adding NUT-clients on your network, and on the clients set nut.conf MODE=netclient and upsmon.conf to:
 
 ```
-MONITOR ups@192.168.0.13 1 upsmon_remote hunter2 slave
+MONITOR ups@192.168.0.13 1 remoteuser hunter2 secondary
 ```
 
 Congratulations. Your NUT server is now officially running!
@@ -233,7 +229,7 @@ MODE=netclient
 Edit /etc/nut/upsmon.conf and add a MONITOR directive in the MONITOR section that tells it to listen to the NUT server:
 
 ```
-MONITOR ups@192.168.0.13 1 upsmon_remote hunter2 slave
+MONITOR ups@192.168.0.13 1 upsmon_remote hunter2 secondary
 ```
 
 Start monitoring:
