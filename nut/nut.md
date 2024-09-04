@@ -40,16 +40,17 @@ Within the bracket, you can set your UPS name (no space allowed) but keep the na
 Test the UPS driver by running:
 
 ```
-upsdrvctl start
+sudo upsdrvctl start
 ```
 
 This will return something similar to the below depending on your UPS model and if not, a reboot usually does the trick to get the UPS to play along:
 
 ```
-Network UPS Tools - UPS driver controller 2.7.2
-Network UPS Tools - Generic HID driver 0.38 (2.7.2)
-USB communication driver 0.32
-Using subdriver: APC HID 0.95
+Network UPS Tools - UPS driver controller 2.8.1
+Network UPS Tools - Generic HID driver 0.52 (2.8.1)
+USB communication driver (libusb 1.0) 0.46
+Duplicate driver instance detected (PID file /run/nut/usbhid-ups-ups.pid exists)! Terminating other driver!
+Using subdriver: CyberPower HID 0.8
 ```
 
 **Upsmon and upsd**
