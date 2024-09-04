@@ -237,8 +237,8 @@ To set up a Linux client:
 
 ### 9.2 Synology Diskstation
 
-Synology DSM uses NUT to manage and share UPSes. The NUT UPS name and the username/password for the NUT client in DSM can't be set in the GUI, but the config we created earlier is set to match what DSM expects, so there is no need to modify anything over SSH unles you want to.
-DSM looks for the "ups" UPS entry in /etc/nut/ups.conf and uses the monuser/secret username/password pair that we created in the /etc/nut/upsd.users file.
+The UPS name and the username/password cannot be set in the DSM GUI, but the config created earlier matches what DSM expects.
+DSM uses the `ups` UPS entry from `/etc/nut/ups.conf` and uses the `monuser/secret` username/password from the `/etc/nut/upsd.users` file.
 
 1. In DSM, go to **Control Panel > Hardware and Power > UPS**.
 2. Configure the following:
