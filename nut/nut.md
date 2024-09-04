@@ -18,13 +18,10 @@ Verify that the UPS is visible on the USB interface using the command:
 lsusb
 ```
 
-This should return something like this:
+You should see the UPS listed:
 
 ```
-Bus 001 Device 004: ID 051d:0003 American Power Conversion UPS
-Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
-Bus 001 Device 002: ID 0424:9512 Standard Microsystems Corp. LAN9500 Ethernet 10/100 Adapter / SMSC9512/9514 Hub
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
 ```
 
 **Configure NUT**
@@ -35,7 +32,7 @@ The first file to edit is /etc/nut/ups.conf Add the following section to the bot
 [ups]
  driver = usbhid-ups
  port = auto
- desc = "APC Smart-Ups X 750i"
+ desc = "Main UPS"
 ```
 
 Within the bracket, you can set your UPS name (no space allowed) but keep the name "ups" for easier usage with Synology DSM.
