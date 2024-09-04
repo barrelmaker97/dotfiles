@@ -101,6 +101,7 @@ Then we edit /etc/nut/upsmon.conf and add the UPS to be monitored and user crede
 MONITOR ups@localhost 1 localuser hunter2 primary
 ```
 
+## Start NUT
 And finally edit /etc/nut/nut.conf and set the value for MODE equal to 'netserver' without any spaces before and after the = sign:
 
 ```
