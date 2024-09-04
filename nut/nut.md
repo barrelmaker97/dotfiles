@@ -1,5 +1,4 @@
 # Network UPS Tools (NUT) Configuration Guide
-This docuement covers how to setup a headless UPS monitoring server using the Network UPS Tools suite. NUT ([http://networkupstools.org](http://networkupstools.org)) is an extensible and highly configurable client/server application for monitoring and managing power sources. It includes a set of hardware-specific drivers, a server daemon (upsd), and clients like upsmon and upsc.
 
 This guide covers the steps to set up a headless UPS monitoring server using the Network UPS Tools (NUT) suite. NUT is an extensible and highly configurable client/server application for monitoring and managing power sources. It includes:
 
@@ -13,15 +12,15 @@ More information on NUT can be found on the [official website](http://networkups
 
 ## 1. Check UPS Connection
 
-Verify that the UPS is visible on the USB interface using the command:
+First, verify that the UPS is visible on the USB interface:
 
-```
+```bash
 lsusb
 ```
 
-You should see the UPS listed:
+You should see the UPS listed in the output:
 
-```
+```bash
 Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
 ```
 
@@ -29,9 +28,9 @@ Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
 
 ## 2. Install NUT
 
-Run the following to install the nut-server and nut-client packages:
+Install the NUT server and client packages:
 
-```
+```bash
 sudo apt install nut
 ```
 
@@ -39,27 +38,26 @@ sudo apt install nut
 
 ## 3. Create UPS Entry
 
+Edit the `/etc/nut/ups.conf` file and add the following section at the bottom:
 
-The first file to edit is /etc/nut/ups.conf Add the following section to the bottom:
-
-```
+```ini
 [ups]
- driver = usbhid-ups
- port = auto
- desc = "Main UPS"
+  driver = usbhid-ups
+  port = auto
+  desc = "Main UPS"
 ```
 
 Within the bracket, set the UPS name (no space allowed) but keep the name "ups" for easier usage with Synology DSM.
 
 Test the UPS driver by running:
 
-```
+```bash
 sudo upsdrvctl start
 ```
 
-This will return something similar to the below depending on your UPS model and if not, a reboot usually does the trick to get the UPS to play along:
+Expected output might include:
 
-```
+```bash
 Network UPS Tools - UPS driver controller 2.8.1
 Network UPS Tools - Generic HID driver 0.52 (2.8.1)
 USB communication driver (libusb 1.0) 0.46
@@ -67,31 +65,28 @@ Duplicate driver instance detected (PID file /run/nut/usbhid-ups-ups.pid exists)
 Using subdriver: CyberPower HID 0.8
 ```
 
+*Note: If you don't see this output, a reboot might resolve the issue.*
+
 ---
 
 ## 4. Configure `upsd`
 
-upsd is responsible for serving the data from the drivers to the clients.
+The `upsd` daemon is responsible for serving data from the drivers to the clients. To configure it:
 
-It connects to each driver and maintains a local cache of the current state.
+1. Edit the `/etc/nut/upsd.conf` file.
+2. Add a `LISTEN` directive at the end to bind `upsd` to port 3493:
 
-It also conveys administrative messages from the clients back to the drivers, such as starting tests, or setting values.
-
-Communication between upsd and clients is handled on a TCP port.
-
-Add a LISTEN directive to the end of the `/etc/nut/upsd.conf` file to bind the upsd server to listen on port 3493:
-
-```
-LISTEN 0.0.0.0 3493
-```
+    ```bash
+    LISTEN 0.0.0.0 3493
+    ```
 
 ---
 
 ## 5. Configure Users
 
-We will also need to add some users to manage access to upsd by editing the upsd users config file /etc/nut/upsd.users and adding the following:
+To manage access to `upsd`, edit the `/etc/nut/upsd.users` file and add the following:
 
-```
+```ini
 [admin]
   password = hunter2
   actions = set
@@ -115,9 +110,9 @@ We will also need to add some users to manage access to upsd by editing the upsd
 
 ## 6. Configure `upsmon`
 
-Then we edit /etc/nut/upsmon.conf and add the UPS to be monitored and user credentials for upsd in the MONITOR section:
+Next, configure the `upsmon` client by editing the `/etc/nut/upsmon.conf` file. Add the UPS to be monitored and the user credentials for `upsd`:
 
-```
+```ini
 MONITOR ups@localhost 1 localuser hunter2 primary
 ```
 
@@ -125,15 +120,15 @@ MONITOR ups@localhost 1 localuser hunter2 primary
 
 ## 7. Start NUT Services
 
-Edit /etc/nut/nut.conf and set the value for MODE equal to 'netserver' without any spaces before and after the = sign:
+Edit `/etc/nut/nut.conf` and set the mode:
 
-```
+```ini
 MODE=netserver
 ```
 
-Then restart the nut-server and nut-monitor services:
+Restart the NUT services:
 
-```
+```bash
 sudo systemctl restart nut-server
 sudo systemctl restart nut-monitor
 ```
@@ -142,23 +137,22 @@ sudo systemctl restart nut-monitor
 
 ## 8. Verify Configuration
 
+Check the status of the NUT server and client services:
 
-Verify that the nut-server and local nut-client services are up:
-
-```
+```bash
 service nut-server status
 service nut-client status
 ```
 
-Test the configuration using the following command:
+Test the configuration with:
 
-```
+```bash
 upsc ups
 ```
 
-This should produce something like this:
+Expected output might include details like:
 
-```
+```bash
 Init SSL without certificate database
 battery.charge: 100
 battery.charge.low: 10
