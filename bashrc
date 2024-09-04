@@ -137,4 +137,6 @@ if [ -f ~/dotfiles/aliases ]; then
 fi
 
 # Load Rust/Cargo config
-. "$HOME/.cargo/env"
+if [ -d "$HOME/.cargo" ] ; then
+	. "$HOME/.cargo/env"
+fi
