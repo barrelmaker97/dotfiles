@@ -5,6 +5,8 @@ Why would you need a UPS server? I have a mixed environment with Linux, FreeBSD 
 
 The tutorial will take you thru the steps of preparing the SD card, Configure Raspbian, installing and testing the NUT server and deploying the NUT web UI. I have also covered how to configure Proxmox (any Debian/Ubuntu server really), pfSense and Synology DSM as NUT clients to control the graceful shutdown when the UPS battery runs out of power. A bonus step will allow you to get stats from your UPS to InfluxDB/Grafana and monitor your UPS via SNMP.
 
+More information about how to configure NUT can be found here: https://networkupstools.org/docs/user-manual.chunked/ar01s06.html
+
 ## Check UPS Connection
 
 Verify that the UPS is visible on the USB interface using the command:
