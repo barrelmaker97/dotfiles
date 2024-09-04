@@ -117,7 +117,7 @@ sudo systemctl restart nut-server
 sudo systemctl restart nut-monitor
 ```
 
-## Verify the configuration
+## Verify Configuration
 
 reboot the RPi and verify that the nut-server and local nut-client services are up
 
@@ -179,49 +179,7 @@ MONITOR ups@192.168.0.13 1 remoteuser hunter2 secondary
 
 Congratulations. Your NUT server is now officially running!
 
-## Web monitoring
-
-You can optionally install a simple web GUI to monitor and control the UPS. This will require a web server on the RPi so we will begin by installing Apache but you can really use whatever cgi-capable web server you want. On the RPi:
-
-```
-apt install apache2
-```
-
-Install the nut-cgi package:
-
-```
-apt install nut-cgi
-```
-
-To monitor the UPS via the web CGI script, add the following line to /etc/nut/hosts.conf:
-
-```
-MONITOR ups@localhost "Local UPS"
-```
-
-Enable CGI support in apache:
-
-```
-a2enmod cgi
-```
-
-Restart Apache:
-
-```
-service apache2 restart
-```
-
-You can now access the web UI via: ([http://192.168.0.13/cgi-bin/nut/upsstats.cgi](http://192.168.0.13/cgi-bin/nut/upsstats.cgi))
-
-Upsset will not run until you convince it that your CGI directory has been secured. You should therefore secure this directory according to the instructions in upsset.conf (outside of the scope of this tutorial) and when you're done, uncomment the following line in /etc/nut/upsset.conf:
-
-```
-### I_HAVE_SECURED_MY_CGI_DIRECTORY
-```
-
-This will allow you to log in to [http://192.168.0.13/cgi-bin/nut/upsset.cgi](http://192.168.0.13/cgi-bin/nut/upsset.cgi) using the admin user/password we configured in /etc/nut/upsd.users. You will be able to view and set options on your UPS if this is supported by your ups.
-
-## Configuring Proxmox/Ubuntu/Debian node as client for remote NUT server
+## Configuring Remote Clients
 
 To shut down Proxmox including all VMs and containers gracefully, we need to install nut on the Proxmox server. SSH as root to your PVE host and:
 
@@ -293,3 +251,45 @@ You can also view the upslog status messages using the command:
 ```
 upslog -s ups -l -
 ```
+
+## Web Monitoring
+
+You can optionally install a simple web GUI to monitor and control the UPS. This will require a web server on the RPi so we will begin by installing Apache but you can really use whatever cgi-capable web server you want. On the RPi:
+
+```
+apt install apache2
+```
+
+Install the nut-cgi package:
+
+```
+apt install nut-cgi
+```
+
+To monitor the UPS via the web CGI script, add the following line to /etc/nut/hosts.conf:
+
+```
+MONITOR ups@localhost "Local UPS"
+```
+
+Enable CGI support in apache:
+
+```
+a2enmod cgi
+```
+
+Restart Apache:
+
+```
+service apache2 restart
+```
+
+You can now access the web UI via: ([http://192.168.0.13/cgi-bin/nut/upsstats.cgi](http://192.168.0.13/cgi-bin/nut/upsstats.cgi))
+
+Upsset will not run until you convince it that your CGI directory has been secured. You should therefore secure this directory according to the instructions in upsset.conf (outside of the scope of this tutorial) and when you're done, uncomment the following line in /etc/nut/upsset.conf:
+
+```
+### I_HAVE_SECURED_MY_CGI_DIRECTORY
+```
+
+This will allow you to log in to [http://192.168.0.13/cgi-bin/nut/upsset.cgi](http://192.168.0.13/cgi-bin/nut/upsset.cgi) using the admin user/password we configured in /etc/nut/upsd.users. You will be able to view and set options on your UPS if this is supported by your ups.
