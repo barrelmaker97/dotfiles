@@ -3,7 +3,7 @@
 This guide covers the steps to set up a headless UPS monitoring server using the Network UPS Tools (NUT) suite. NUT is an extensible and highly configurable client/server application for monitoring and managing power sources. It includes:
 
 - **Hardware-specific drivers**
-- **Server daemon (`upsd`)**
+- **A server daemon (`upsd`)**
 - **Client tools like `upsmon` and `upsc`**
 
 More information on NUT can be found on the [official website](http://networkupstools.org) and the [user manual](https://networkupstools.org/docs/user-manual.chunked/ar01s06.html).
@@ -47,7 +47,7 @@ Edit the `/etc/nut/ups.conf` file and add the following section at the bottom:
   desc = "Main UPS"
 ```
 
-Within the bracket, set the UPS name (no space allowed) but keep the name "ups" for easier usage with Synology DSM.
+*Note: Keep the name "ups" for usage with Synology DSM.*
 
 Test the UPS driver by running:
 
@@ -71,14 +71,12 @@ Using subdriver: CyberPower HID 0.8
 
 ## 4. Configure `upsd`
 
-The `upsd` daemon is responsible for serving data from the drivers to the clients. To configure it:
+The `upsd` daemon is responsible for serving data from the drivers to the clients.
+To configure it, add a `LISTEN` directive to the `/etc/nut/upsd.conf` file to bind `upsd` to port 3493:
 
-1. Edit the `/etc/nut/upsd.conf` file.
-2. Add a `LISTEN` directive at the end to bind `upsd` to port 3493:
-
-    ```bash
-    LISTEN 0.0.0.0 3493
-    ```
+```bash
+LISTEN 0.0.0.0 3493
+```
 
 ---
 
@@ -140,8 +138,8 @@ sudo systemctl restart nut-monitor
 Check the status of the NUT server and client services:
 
 ```bash
-service nut-server status
-service nut-client status
+systemctl status nut-server
+systemctl status nut-client
 ```
 
 Test the configuration with:
@@ -156,36 +154,46 @@ Expected output might include details like:
 Init SSL without certificate database
 battery.charge: 100
 battery.charge.low: 10
-battery.charge.warning: 50
-battery.runtime: 33046
-battery.runtime.low: 150
-battery.type: PbAc
-battery.voltage: 52.4
-battery.voltage.nominal: 48.0
-device.mfr: American Power Conversion
-device.model: Smart-UPS X 750
-device.serial: AS1035120444
+battery.charge.warning: 20
+battery.mfr.date: CPS
+battery.runtime: 5900
+battery.runtime.low: 300
+battery.type: PbAcid
+battery.voltage: 27.4
+battery.voltage.nominal: 24
+device.mfr: CPS
+device.model: CP1500PFCLCDa
+device.serial: CXXKT2000911
 device.type: ups
-driver.flag.pollonly: enabled
+driver.debug: 0
+driver.flag.allow_killpower: 0
 driver.name: usbhid-ups
 driver.parameter.pollfreq: 30
 driver.parameter.pollinterval: 2
 driver.parameter.port: auto
-driver.version: 2.7.2
-driver.version.data: APC HID 0.95
-driver.version.internal: 0.38
+driver.parameter.synchronous: auto
+driver.state: quiet
+driver.version: 2.8.1
+driver.version.data: CyberPower HID 0.8
+driver.version.internal: 0.52
+driver.version.usb: libusb-1.0.27 (API: 0x100010a)
+input.voltage: 120.0
+input.voltage.nominal: 120
+output.voltage: 120.0
 ups.beeper.status: enabled
 ups.delay.shutdown: 20
-ups.firmware: COM 03.6 / UPS 03.6
-ups.mfr: American Power Conversion
-ups.mfr.date: 2010/08/24
-ups.model: Smart-UPS X 750
-ups.productid: 0003
-ups.serial: AS1035120666
+ups.delay.start: 30
+ups.load: 5
+ups.mfr: CPS
+ups.model: CP1500PFCLCDa
+ups.productid: 0601
+ups.realpower.nominal: 1000
+ups.serial: CXXKT2000911
 ups.status: OL
-ups.timer.reboot: -1
-ups.timer.shutdown: -1
-ups.vendorid: 051d
+ups.test.result: No test initiated
+ups.timer.shutdown: -60
+ups.timer.start: -60
+ups.vendorid: 0764
 ```
 
 ---
@@ -218,7 +226,7 @@ To set up a Linux client:
 4. Start the NUT client:
 
     ```bash
-    service nut-client start
+    sudo systemctl start nut-client
     ```
 
 5. Verify the UPS status:
@@ -229,7 +237,7 @@ To set up a Linux client:
 
 ### 9.2 Synology Diskstation
 
-Synology DSM uses NUT to manage and share UPSes. The NUT UPS name and the username/password for the NUT client in DSM can't be set in the GUI, but the config we created earlier is set to match what DMS expects, so there is no need to modify anything over SSH unles you want to.
+Synology DSM uses NUT to manage and share UPSes. The NUT UPS name and the username/password for the NUT client in DSM can't be set in the GUI, but the config we created earlier is set to match what DSM expects, so there is no need to modify anything over SSH unles you want to.
 DSM looks for the "ups" UPS entry in /etc/nut/ups.conf and uses the monuser/secret username/password pair that we created in the /etc/nut/upsd.users file.
 
 1. In DSM, go to **Control Panel > Hardware and Power > UPS**.
