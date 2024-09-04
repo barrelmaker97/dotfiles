@@ -117,7 +117,7 @@ sudo systemctl restart nut-server
 sudo systemctl restart nut-monitor
 ```
 
-**Verify the configuration**
+## Verify the configuration
 
 reboot the RPi and verify that the nut-server and local nut-client services are up
 
@@ -179,7 +179,7 @@ MONITOR ups@192.168.0.13 1 remoteuser hunter2 secondary
 
 Congratulations. Your NUT server is now officially running!
 
-**Web monitoring**
+## Web monitoring
 
 You can optionally install a simple web GUI to monitor and control the UPS. This will require a web server on the RPi so we will begin by installing Apache but you can really use whatever cgi-capable web server you want. On the RPi:
 
@@ -221,7 +221,7 @@ Upsset will not run until you convince it that your CGI directory has been secur
 
 This will allow you to log in to [http://192.168.0.13/cgi-bin/nut/upsset.cgi](http://192.168.0.13/cgi-bin/nut/upsset.cgi) using the admin user/password we configured in /etc/nut/upsd.users. You will be able to view and set options on your UPS if this is supported by your ups.
 
-**Configuring Proxmox/Ubuntu/Debian node as client for remote NUT server**
+## Configuring Proxmox/Ubuntu/Debian node as client for remote NUT server
 
 To shut down Proxmox including all VMs and containers gracefully, we need to install nut on the Proxmox server. SSH as root to your PVE host and:
 
@@ -256,7 +256,7 @@ upsc ups@192.168.0.13
 
 The default NUT shutdown command will let Proxmox shut down all VMs and Containers gracefully before Proxmox is shut down. This is of course depending on if the VMs and Containers allow that, so check your configs.
 
-**Synology Diskstation UPS configuration**
+## Synology Diskstation UPS configuration
 
 Synology DSM uses NUT to manage and share UPSes. The NUT UPS name and the username/password for the NUT client in DSM can't be set in the GUI, but the config we created earlier is set to match what DMS expects, so there is no need to modify anything over SSH unles you want to.
 
@@ -270,7 +270,7 @@ DSM looks for the "ups" UPS entry in /etc/nut/ups.conf on the RPi by default and
 
 Click save and then the Device Information button to verify that the connection to the RPi works as expected.
 
-**Test the NUT server**
+## Test the NUT server
 
 It is a good idea to test behaviour of the NUT server and connected clients in case of a power outage before it happens. One way to do it is to keep your devices connected to mains during the testing and then move them to the UPS once everything is verified.
 
