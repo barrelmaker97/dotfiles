@@ -27,7 +27,7 @@ ssh as root to the RPi and install the NUT-server and NUT-client:
 apt install nut
 ```
 
-## Configure UPS Entry
+## Create UPS Entry
 
 The first file to edit is /etc/nut/ups.conf Add the following section to the bottom:
 
@@ -56,7 +56,19 @@ Duplicate driver instance detected (PID file /run/nut/usbhid-ups-ups.pid exists)
 Using subdriver: CyberPower HID 0.8
 ```
 
-**Upsmon and upsd**
+## Configure UPSD
+upsd is responsible for serving the data from the drivers to the clients.
+It connects to each driver and maintains a local cache of the current state. Queries from the clients are served from this cache, so delays are minimal.
+
+It also conveys administrative messages from the clients back to the drivers, such as starting tests, or setting values.
+
+Communication between upsd and clients is handled on a TCP port.
+
+Add a LISTEN directive to the end of the `/etc/nut/upsd.conf` file to bind the upsd server to listen on port 3493:
+
+```
+LISTEN 0.0.0.0 3493
+```
 
 The next step is to configure upsmon and upsd of which the later communicates with the UPS driver configured while upsmon monitors and communicates shutdown procedures to upsd. NUT allows multiple instances of upsmon to run on different machines while communicating with the same physical UPS.
 
