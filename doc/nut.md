@@ -220,28 +220,29 @@ To set up a Linux client:
     sudo apt install nut-client
     ```
 
-2. Edit `/etc/nut/nut.conf` to set the mode:
+1. Verify the UPS is reachable:
+
+    ```bash
+    upsc ups@192.168.0.13
+    ```
+
+1. Edit `/etc/nut/nut.conf` to set the mode:
 
     ```ini
     MODE=netclient
     ```
 
-3. Edit `/etc/nut/upsmon.conf` to monitor the UPS:
+1. Edit `/etc/nut/upsmon.conf` to monitor the UPS:
 
     ```ini
     MONITOR ups@192.168.0.13 1 remoteuser hunter2 secondary
     ```
 
-4. Start the NUT client:
+1. Start the NUT client and check the status:
 
     ```bash
     sudo systemctl start nut-client
-    ```
-
-5. Verify the UPS status:
-
-    ```bash
-    upsc ups@192.168.0.13
+    systemctl status nut-client
     ```
 
 ### 9.2 Synology Diskstation
