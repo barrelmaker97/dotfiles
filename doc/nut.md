@@ -229,7 +229,7 @@ To set up a Linux client:
 3. Edit `/etc/nut/upsmon.conf` to monitor the UPS:
 
     ```ini
-    MONITOR ups@192.168.0.13 1 upsmon_remote hunter2 secondary
+    MONITOR ups@192.168.0.13 1 remoteuser hunter2 secondary
     ```
 
 4. Start the NUT client:
