@@ -18,7 +18,15 @@ properties:
   type: "PAPER"
   version: "1.21.1"
   viewDistance: "32"
-  whitelist: "BakerGang2022,Barrelmaker97,Lil_Doza,LuckierDodge,ninjahomie7,Solo22499,Spronix,ThePrimeus"
+  whitelist: >-
+    BakerGang2022,
+    Barrelmaker97,
+    Lil_Doza,
+    LuckierDodge,
+    Solo22499,
+    Spronix,
+    ThePrimeus,
+    ninjahomie7
 
 resources:
   requests:
