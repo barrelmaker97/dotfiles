@@ -16,7 +16,7 @@ properties:
   spigetResources: "81534,36618"
   modrinthProjects: "dynmap:beta"
   type: "PAPER"
-  version: "1.21"
+  version: "1.21.1"
   viewDistance: "32"
   whitelist: "BakerGang2022,Barrelmaker97,Lil_Doza,LuckierDodge,ninjahomie7,Solo22499,Spronix,ThePrimeus"
 
