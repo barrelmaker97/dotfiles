@@ -4,6 +4,7 @@ all:
     hermes:
       ansible_host: 192.168.15.50
       ansible_user: barrelmaker
+      cluster_user: barrelmaker
       cluster_vip: 192.168.15.60
       metallb_ip_range: 192.168.15.60-192.168.15.69
       microk8s_channel: 1.31/stable
