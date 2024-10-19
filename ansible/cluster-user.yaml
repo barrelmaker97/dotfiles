@@ -1,5 +1,9 @@
 ---
 - hosts: hermes
+  vars:
+    key_file: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.key"
+    csr_file: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.csr"
+    crt_file: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.crt"
   tasks:
     - name: Create kubeconfig directory
       delegate_to: localhost
@@ -20,13 +24,13 @@
     - name: Generate User Private Key
       delegate_to: localhost
       openssl_privatekey:
-        path: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.key"
+        path: "{{ key_file }}"
 
     - name: Generate User CSR
       delegate_to: localhost
       openssl_csr:
-        path: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.csr"
-        privatekey_path: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.key"
+        path: "{{ csr_file }}"
+        privatekey_path: "{{ key_file }}"
         common_name: "{{ cluster_user }}"
 
     - name: Create User CSR Object
@@ -34,7 +38,7 @@
         state: present
         definition: "{{ lookup('template', './definitions/csr-user.yaml') | from_yaml }}"
       vars:
-        user_csr_base64: "{{ lookup('file', '{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.csr') | b64encode }}"
+        user_csr_base64: "{{ lookup('file', '{{ csr_file }}') | b64encode }}"
 
     - name: Approve User CSR
       command: "kubectl certificate approve {{ cluster_user }}"
@@ -50,14 +54,14 @@
       delegate_to: localhost
       copy:
         content: "{{ user_cert.resources[0].status.certificate | b64decode }}"
-        dest: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.crt"
+        dest: "{{ crt_file }}"
 
     - name: Create User in Kubeconfig
       delegate_to: localhost
       command: >-
         kubectl config set-credentials {{ cluster_user }}
-        --client-key={{ ansible_env.HOME }}/.kube/{{ cluster_user }}.key
-        --client-certificate={{ ansible_env.HOME }}/.kube/{{ cluster_user }}.crt
+        --client-key={{ key_file }}
+        --client-certificate={{ crt_file }}
 
     - name: Create User Namespace
       k8s:
