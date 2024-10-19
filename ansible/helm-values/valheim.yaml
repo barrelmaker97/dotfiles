@@ -7,6 +7,6 @@ worldName: Asgard
 resources:
   requests:
     memory: 3Gi
-    cpu: 500m
+    cpu: 700m
   limits:
     memory: 4Gi
