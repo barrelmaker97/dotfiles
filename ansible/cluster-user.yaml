@@ -52,6 +52,13 @@
         content: "{{ user_cert.resources[0].status.certificate | b64decode }}"
         dest: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.crt"
 
+    - name: Create User in Kubeconfig
+      delegate_to: localhost
+      command: >-
+        kubectl config set-credentials {{ cluster_user }}
+        --client-key={{ ansible_env.HOME }}/.kube/{{ cluster_user }}.key
+        --client-certificate={{ ansible_env.HOME }}/.kube/{{ cluster_user }}.crt
+
     - name: Create User Namespace
       k8s:
         state: present
