@@ -1,6 +1,25 @@
 ---
 - hosts: hermes
   tasks:
+    - name: Generate User Private Key
+      delegate_to: localhost
+      openssl_privatekey:
+        path: "/tmp/{{ cluster_user }}.key"
+
+    - name: Generate User CSR
+      delegate_to: localhost
+      openssl_csr:
+        path: "/tmp/{{ cluster_user }}.csr"
+        privatekey_path: "/tmp/{{ cluster_user }}.key"
+        common_name: "{{ cluster_user }}"
+
+    - name: Create User CSR Object
+      k8s:
+        state: present
+        definition: "{{ lookup('template', './definitions/csr-user.yaml') | from_yaml }}"
+      vars:
+        user_csr_base64: "{{ lookup('file', '/tmp/{{ cluster_user }}.csr') | b64encode }}"
+
     - name: Create User Namespace
       k8s:
         state: present
