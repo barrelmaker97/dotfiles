@@ -31,7 +31,7 @@ Create a namespace for the user, including a RoleBinding, ResourceQuota, and Lim
 
 ## Create user in kubectl (User)
 ```bash
-kubectl config set-credentials myuser --client-key=myuser.key --client-certificate=myuser.crt --embed-certs=true
+kubectl config set-credentials myuser --client-key=myuser.key --client-certificate=myuser.crt
 ```
 
 ## Create cluster in kubectl (User)
