@@ -1,16 +1,32 @@
 ---
 - hosts: hermes
   tasks:
+    - name: Create kubeconfig directory
+      delegate_to: localhost
+      file:
+        path: "{{ ansible_env.HOME }}/.kube"
+        state: directory
+        mode: "0755"
+
+    - name: Set owner of kubeconfig directory to {{ ansible_user }}
+      become: true
+      delegate_to: localhost
+      file:
+        path: "{{ ansible_env.HOME }}/.kube"
+        state: directory
+        owner: "{{ ansible_user }}"
+        recurse: true
+
     - name: Generate User Private Key
       delegate_to: localhost
       openssl_privatekey:
-        path: "/tmp/{{ cluster_user }}.key"
+        path: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.key"
 
     - name: Generate User CSR
       delegate_to: localhost
       openssl_csr:
-        path: "/tmp/{{ cluster_user }}.csr"
-        privatekey_path: "/tmp/{{ cluster_user }}.key"
+        path: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.csr"
+        privatekey_path: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.key"
         common_name: "{{ cluster_user }}"
 
     - name: Create User CSR Object
@@ -18,7 +34,7 @@
         state: present
         definition: "{{ lookup('template', './definitions/csr-user.yaml') | from_yaml }}"
       vars:
-        user_csr_base64: "{{ lookup('file', '/tmp/{{ cluster_user }}.csr') | b64encode }}"
+        user_csr_base64: "{{ lookup('file', '{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.csr') | b64encode }}"
 
     - name: Create User Namespace
       k8s:
