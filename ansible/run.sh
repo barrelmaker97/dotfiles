@@ -24,5 +24,5 @@ check_dependencies ()
 }
 
 check_dependencies
-echo -e "Starting Deployment Playbook..."
+echo -e "Running Playbook..."
 ansible-playbook "$1" -i inventory.yaml
