@@ -2,14 +2,14 @@
 ## Create private key and CSR (User)
 Run
 ```bash
-openssl req -new -newkey rsa:2048 -nodes -keyout myuser.key -out myuser.csr -subj "/CN=myuser"
+openssl req -new -newkey rsa -nodes -keyout myuser.key -out myuser.csr -subj "/CN=myuser"
 ```
 then provide the `myuser.csr` file to the cluster admin.
 
 ## Convert CSR to base64 string (Admin)
 Run
 ```bash
-cat myuser.csr | base64 | tr -d "\n"
+cat myuser.csr | base64 -w 0
 ```
 to convert the CSR to a string that can be placed in a CertificateSigningRequest object.
 
