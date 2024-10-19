@@ -36,6 +36,22 @@
       vars:
         user_csr_base64: "{{ lookup('file', '{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.csr') | b64encode }}"
 
+    - name: Approve User CSR
+      command: "kubectl certificate approve {{ cluster_user }}"
+
+    - name: Get Signed Certificate
+      k8s_info:
+        api_version: certificates.k8s.io/v1
+        kind: CertificateSigningRequest
+        name: "{{ cluster_user }}"
+      register: user_cert
+
+    - name: Save Certificate
+      delegate_to: localhost
+      copy:
+        content: "{{ user_cert.resources[0].status.certificate | b64decode }}"
+        dest: "{{ ansible_env.HOME }}/.kube/{{ cluster_user }}.crt"
+
     - name: Create User Namespace
       k8s:
         state: present
