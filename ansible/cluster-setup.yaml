@@ -131,3 +131,10 @@
       k8s:
         state: present
         definition: "{{ lookup('file', './definitions/issuer-staging.yaml') | from_yaml }}"
+
+    - name: Add DNS Entry to Cluster Certificate
+      lineinfile:
+        path: /var/snap/microk8s/current/certs/csr.conf.template
+        regexp: '^DNS\.6'
+        line: "DNS.6 = {{ hostname }}"
+        insertafter: 'DNS\.5 = kubernetes\.default\.svc\.cluster\.local'
