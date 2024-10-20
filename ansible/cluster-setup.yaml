@@ -138,3 +138,14 @@
         regexp: '^DNS\.6'
         line: "DNS.6 = {{ hostname }}"
         insertafter: 'DNS\.5 = kubernetes\.default\.svc\.cluster\.local'
+
+    - name: Wait for Certificate to Rotate
+      delegate_to: localhost
+      wait_for:
+        timeout: 120
+
+    - name: Create PVs
+      k8s:
+        definition: "{{ lookup('file', '{{ item }}') | from_yaml }}"
+      with_fileglob:
+        - "./definitions/persistent-volumes/*.yaml"

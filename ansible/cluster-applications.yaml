@@ -1,12 +1,6 @@
 ---
 - hosts: hermes
   tasks:
-    - name: Create PVs
-      k8s:
-        definition: "{{ lookup('file', '{{ item }}') | from_yaml }}"
-      with_fileglob:
-        - "./definitions/persistent-volumes/*.yaml"
-
     - name: Add Helm Repos
       no_log: true
       kubernetes.core.helm_repository:
