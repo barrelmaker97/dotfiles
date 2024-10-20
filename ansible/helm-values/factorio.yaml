@@ -12,7 +12,7 @@ resources:
       memory: 2000Mi
   metrics:
     requests:
-      memory: 20Mi
+      memory: 40Mi
       cpu: 10m
     limits:
-      memory: 40Mi
+      memory: 80Mi
