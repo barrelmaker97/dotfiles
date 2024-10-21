@@ -1,8 +1,0 @@
----
-gitRepo: https://github.com/barrelmaker97/website.git
-resources:
-  requests:
-    cpu: 20m
-    memory: 500Mi
-  limits:
-    memory: 1Gi
