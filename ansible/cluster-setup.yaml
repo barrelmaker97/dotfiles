@@ -140,9 +140,8 @@
         insertafter: 'DNS\.5 = kubernetes\.default\.svc\.cluster\.local'
 
     - name: Wait for Certificate to Rotate
-      delegate_to: localhost
-      wait_for:
-        timeout: 120
+      pause:
+        minutes: 2
 
     - name: Create PVs
       k8s:
