@@ -116,6 +116,11 @@
         state: present
         definition: "{{ lookup('template', './definitions/service-ingress.yaml') | from_yaml }}"
 
+    - name: Create Ingress for Observability
+      k8s:
+        state: present
+        definition: "{{ lookup('template', './definitions/ingress-observability.yaml') | from_yaml }}"
+
     - name: Install helm
       become: true
       snap:
