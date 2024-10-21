@@ -24,10 +24,10 @@
       vars:
         helm_charts:
           factorio: barrelmaker/factorio
-#         gmod: barrelmaker/gmod
+          # gmod: barrelmaker/gmod
           jellyfin: barrelmaker/jellyfin
           niucraft: barrelmaker/minecraft
-#         serge: barrelmaker/serge
+          # serge: barrelmaker/serge
           valheim: barrelmaker/valheim
           website: barrelmaker/website
           ingress: barrelmaker/ingress
