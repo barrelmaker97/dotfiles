@@ -136,7 +136,7 @@
       lineinfile:
         path: /var/snap/microk8s/current/certs/csr.conf.template
         regexp: '^DNS\.6'
-        line: "DNS.6 = {{ hostname }}"
+        line: "DNS.6 = {{ inventory_hostname }}.{{ local_domain }}"
         insertafter: 'DNS\.5 = kubernetes\.default\.svc\.cluster\.local'
 
     - name: Wait for Certificate to Rotate
@@ -146,6 +146,6 @@
 
     - name: Create PVs
       k8s:
-        definition: "{{ lookup('file', '{{ item }}') | from_yaml }}"
+        definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
       with_fileglob:
         - "./definitions/persistent-volumes/*.yaml"
