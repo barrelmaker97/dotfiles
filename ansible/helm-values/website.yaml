@@ -1,8 +1,5 @@
 ---
-storage:
-  enabled: true
-  class: website
-
+gitRepo: https://github.com/barrelmaker97/website.git
 resources:
   requests:
     cpu: 20m
