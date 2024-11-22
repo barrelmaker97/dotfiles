@@ -115,6 +115,11 @@ if [ -d "$HOME/.local/bin" ] ; then
 	PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Load Rust/Cargo config
+if [ -d "$HOME/.cargo" ] ; then
+	. "$HOME/.cargo/env"
+fi
+
 # Cycle through options on autocomplete
 bind TAB:menu-complete
 
@@ -126,6 +131,7 @@ export FCEDIT=vim
 
 # Add various command completion
 command -v kubectl > /dev/null && source <(kubectl completion bash)
+command -v talosctl > /dev/null && source <(talosctl completion bash)
 command -v oc > /dev/null && source <(oc completion bash)
 command -v helm > /dev/null && source <(helm completion bash)
 command -v fly > /dev/null && source <(fly completion --shell bash)
@@ -134,9 +140,4 @@ command -v kind > /dev/null && source <(kind completion bash)
 # Alias definitions; Keep this at the bottom
 if [ -f ~/dotfiles/aliases ]; then
 	. ~/dotfiles/aliases
-fi
-
-# Load Rust/Cargo config
-if [ -d "$HOME/.cargo" ] ; then
-	. "$HOME/.cargo/env"
 fi
