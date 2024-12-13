@@ -28,6 +28,9 @@ alias back="cd -"
 # tmux session alias
 alias mux="tmux new -s Home"
 
+# shorten ansible commands
+alias ap="ansible-playbook"
+
 # git aliases
 alias glean="find -name '*.git' -type d -exec $HOME/dotfiles/bin/gitgc '{}' ';'"
 alias gg="git log --all --graph --color=always --pretty=format:'%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'"
