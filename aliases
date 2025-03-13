@@ -13,10 +13,8 @@ fi
 # Fix UPS Driver issue
 alias upsfix="ssh pollux sudo systemctl restart nut-driver.service"
 
-# more ls aliases
-alias ll="ls -ahFo --time-style=+'%m-%d-%Y %H:%M:%S'"
-alias la="ls -AF"
-alias l="ls -F"
+# ls alias
+alias ll="ls -ahFo --time-style=+'%Y-%m-%d %H:%M:%S'"
 
 # print $PATH nicely
 alias path='echo "$PATH" | tr ":" "\n" | sort'
