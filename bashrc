@@ -103,11 +103,6 @@ if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
 fi
 
-# Add Tex Live to PATH
-if [ -d "/usr/local/texlive/2020/bin/x86_64-linux" ] ; then
-	PATH="/usr/local/texlive/2020/bin/x86_64-linux:$PATH"
-fi
-
 # Add local Python packages to PATH
 if [ -d "$HOME/.local/bin" ] ; then
 	PATH="$HOME/.local/bin:$PATH"
