@@ -123,7 +123,7 @@ set noerrorbells visualbell t_vb=
 
 " Autocomplete
 set wildmenu
-set completeopt=menu,menuone
+set completeopt=menu,menuone,preview,noselect,noinsert
 
 " Diffing
 set diffopt+=vertical
