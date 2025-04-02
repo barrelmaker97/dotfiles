@@ -37,3 +37,4 @@ alias gl="git log --color=always --pretty=format:'%C(red)%h%C(reset) -%C(auto)%d
 alias gls="git log --color=always --pretty=format:'GPGSIG%G?%C(red)%h%C(reset) -%C(auto)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' | sed -e 's/GPGSIGN\(...\)./\11/; s/GPGSIGG\(...\)./\12/; s/GPGSIG.\(...\)./\13/;' | less -RX"
 alias gu="git branch | grep -v '^*' | xargs git branch -d"
 alias gfp="git fetch --prune"
+alias gd="git diff"
