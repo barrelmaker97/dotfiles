@@ -8,12 +8,13 @@ RESET='\e[0m'
 TICK="\\r[${GREEN}✓${RESET}]"
 CROSS="\\r[${RED}✗${RESET}]"
 INFO="\\r[i]"
-DEPENDENCIES=(git vim curl yes)
+BASE_DEPENDENCIES=(git vim curl yes)
+YCM_DEPENDENCIES=(gcc g++ cmake python3)
 
 check_dependencies ()
 {
 	echo -ne "${INFO} Checking for dependencies..."
-	for DEPENDENCY in "${DEPENDENCIES[@]}"
+	for DEPENDENCY in "$@"
 	do
 		command -v "${DEPENDENCY}" > /dev/null
 		EXIT_CODE=$?
@@ -44,7 +45,7 @@ clone_or_update_repo ()
 
 update_install ()
 {
-	check_dependencies
+	check_dependencies "${BASE_DEPENDENCIES[@]}"
 	clone_or_update_repo
 	all_install
 }
@@ -110,6 +111,14 @@ sshd_install ()
 	echo -e "${TICK}"
 }
 
+ycm_install ()
+{
+	check_dependencies "${YCM_DEPENDENCIES[@]}"
+	echo -e " ${INFO} Installing youcompleteme..."
+	cd ~/.vim/plugged/YouCompleteMe || exit 1
+	python3 install.py --all
+}
+
 help ()
 {
 	echo -e "Usage: \n"
@@ -121,6 +130,7 @@ help ()
 	echo -e "\ttmux\t - install tmux configs"
 	echo -e "\tvim\t - install vim configs"
 	echo -e "\twork\t - install work configs"
+	echo -e "\tycm\t - install youcompleteme"
 	echo -e "\thelp\t - print this message\n"
 }
 
@@ -133,7 +143,7 @@ fi
 # Action parsing
 ACTION="$1"
 case "${ACTION}" in
-	all|bash|git|scripts|sshd|tmux|vim|work)
+	all|bash|git|scripts|sshd|tmux|vim|work|ycm)
 		"${ACTION}"_install
 		;;
 	help)

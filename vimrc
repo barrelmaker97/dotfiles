@@ -28,6 +28,9 @@ Plug 'scrooloose/nerdtree'
 
 " Linting
 Plug 'dense-analysis/ale'
+
+" Autocomplete
+Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 
 " Set leader
