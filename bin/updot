@@ -9,7 +9,7 @@ TICK="\\r[${GREEN}✓${RESET}]"
 CROSS="\\r[${RED}✗${RESET}]"
 INFO="\\r[i]"
 BASE_DEPENDENCIES=(git vim curl yes)
-YCM_DEPENDENCIES=(gcc g++ cmake python3)
+YCM_DEPENDENCIES=(gcc g++ cmake python3 rustup)
 
 check_dependencies ()
 {
@@ -116,7 +116,7 @@ ycm_install ()
 	check_dependencies "${YCM_DEPENDENCIES[@]}"
 	echo -e " ${INFO} Installing youcompleteme..."
 	cd ~/.vim/plugged/YouCompleteMe || exit 1
-	python3 install.py --all
+	python3 install.py --rust-completer
 }
 
 help ()
