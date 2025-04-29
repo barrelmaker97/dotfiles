@@ -180,9 +180,6 @@ highlight link StartifyNumber Type
 
 " MAPPINGS
 
-" Autocomplete remap
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " vim-fugitive
 nnoremap <Leader>gb :Git blame<CR>
 nnoremap <Leader>gs :Git<CR>
