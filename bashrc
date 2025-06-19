@@ -108,6 +108,11 @@ if [ -d "$HOME/.local/bin" ] ; then
 	PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Add local Python packages to PATH on Mac
+if [ -d "$HOME/Library/Python/3.13/bin" ] ; then
+	PATH="$HOME/Library/Python/3.13/bin:$PATH"
+fi
+
 # Load Rust/Cargo config
 if [ -d "$HOME/.cargo" ] ; then
 	. "$HOME/.cargo/env"
