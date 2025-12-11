@@ -54,6 +54,8 @@ set_prompt ()
 			local color="${ORANGE}";;
 		"zeus")
 			local color="${TEAL}";;
+		"demeter")
+			local color="${GOLD}";;
 		"soteria")
 			local color="${LIME}";;
 		*)
