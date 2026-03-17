@@ -51,11 +51,9 @@ set_prompt ()
 {
 	case "${HOSTNAME}" in
 		"castor")
-			local color="${BR_PURPLE}";;
+			local color="${TEAL}";;
 		"pollux")
 			local color="${ORANGE}";;
-		"zeus")
-			local color="${TEAL}";;
 		"demeter")
 			local color="${GOLD}";;
 		"soteria")
