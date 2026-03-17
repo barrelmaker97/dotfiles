@@ -50,6 +50,8 @@ LIME='\[\e[38;5;46m\]'
 set_prompt ()
 {
 	case "${HOSTNAME}" in
+		"castor")
+			local color="${BR_PURPLE}";;
 		"pollux")
 			local color="${ORANGE}";;
 		"zeus")
