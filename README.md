@@ -15,7 +15,7 @@ Fair warning: The installation will silently overwrite your existing dotfiles.
 
 # License
 
-Copyright (c) 2024 Nolan Cooper
+Copyright (c) 2026 Nolan Cooper
 
 This dotfiles collection is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
