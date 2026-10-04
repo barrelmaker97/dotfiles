@@ -15,5 +15,3 @@ age = "1"
 
 node = "lts"
 uv = "latest"
-"npm:@google/gemini-cli" = "latest"
-"pipx:git-filter-repo" = "latest"
