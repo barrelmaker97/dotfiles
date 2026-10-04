@@ -120,6 +120,9 @@ if [ -d "$HOME/.cargo" ] ; then
 	. "$HOME/.cargo/env"
 fi
 
+# Activate mise; before the completions below, which need its tools on PATH
+command -v mise > /dev/null && eval "$(mise activate bash)"
+
 # Cycle through options on autocomplete
 bind TAB:menu-complete
 
@@ -132,14 +135,11 @@ export FCEDIT=vim
 # Add various command completion
 command -v kubectl > /dev/null && source <(kubectl completion bash)
 command -v talosctl > /dev/null && source <(talosctl completion bash)
+command -v flux > /dev/null && source <(flux completion bash)
 command -v oc > /dev/null && source <(oc completion bash)
 command -v helm > /dev/null && source <(helm completion bash)
 command -v kind > /dev/null && source <(kind completion bash)
 command -v podman > /dev/null && source <(podman completion bash)
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Alias definitions; Keep this at the bottom
 if [ -f ~/dotfiles/aliases ]; then

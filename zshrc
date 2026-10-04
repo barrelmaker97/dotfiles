@@ -88,6 +88,9 @@ compinit
 # Load Rust environment if present
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
+# Activate mise; before the completions below, which need its tools on PATH
+[[ -x "$(command -v mise)" ]] && eval "$(mise activate zsh)"
+
 # Enable menu-complete with TAB
 bindkey '^I' menu-complete
 
@@ -100,6 +103,7 @@ export FCEDIT=vim
 # Completions for various tools
 [[ -x "$(command -v kubectl)" ]]   && source <(kubectl completion zsh)
 [[ -x "$(command -v talosctl)" ]]  && source <(talosctl completion zsh)
+[[ -x "$(command -v flux)" ]]      && source <(flux completion zsh)
 [[ -x "$(command -v oc)" ]]        && source <(oc completion zsh)
 [[ -x "$(command -v helm)" ]]      && source <(helm completion zsh)
 [[ -x "$(command -v kind)" ]]      && source <(kind completion zsh)
