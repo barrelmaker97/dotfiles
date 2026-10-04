@@ -8,7 +8,7 @@ jobs:
     name: Lint scripts
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v7
       - name: Update shellcheck
         run: sudo apt install shellcheck
       - name: Lint scripts
