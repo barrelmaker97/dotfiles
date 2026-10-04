@@ -56,6 +56,7 @@ all_install ()
 	git_install
 	scripts_install
 	vim_install
+	mise_install
 }
 
 bash_install ()
@@ -70,6 +71,20 @@ git_install ()
 {
 	echo -ne " ${INFO} Installing git configs..."
 	ln -sf "${HOME}"/dotfiles/gitconfig "${HOME}"/.gitconfig
+	echo -e "${TICK}"
+}
+
+mise_install ()
+{
+	if [ ! -x "${HOME}"/.local/bin/mise ]; then
+		echo -ne " ${INFO} Installing mise..."
+		curl -fsSL https://mise.run | sh >/dev/null 2>&1 || { echo -e "${CROSS} mise install failed"; exit 1; }
+		echo -e "${TICK}"
+	fi
+	echo -ne " ${INFO} Installing mise configs and tools..."
+	mkdir -p "${HOME}"/.config/mise
+	ln -sf "${HOME}"/dotfiles/mise.toml "${HOME}"/.config/mise/config.toml
+	"${HOME}"/.local/bin/mise install --yes >/dev/null 2>&1 || { echo -e "${CROSS} mise install failed; run mise install to see why"; exit 1; }
 	echo -e "${TICK}"
 }
 
@@ -125,6 +140,7 @@ help ()
 	echo -e "\tall\t - install all except for: sshd, tmux, work"
 	echo -e "\tbash\t - install bash configs"
 	echo -e "\tgit\t - install git configs"
+	echo -e "\tmise\t - install mise, its configs and tools"
 	echo -e "\tscripts\t - install scripts"
 	echo -e "\tsshd\t - install sshd configs"
 	echo -e "\ttmux\t - install tmux configs"
@@ -143,7 +159,7 @@ fi
 # Action parsing
 ACTION="$1"
 case "${ACTION}" in
-	all|bash|git|scripts|sshd|tmux|vim|work|ycm)
+	all|bash|git|mise|scripts|sshd|tmux|vim|work|ycm)
 		"${ACTION}"_install
 		;;
 	help)

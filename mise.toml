@@ -1,0 +1,19 @@
+# Global mise tools, linked to ~/.config/mise/config.toml by updot. A
+# project's own mise.toml overrides these inside it.
+[tools]
+# Cluster tools. Prefixes follow the cluster's minor versions: bump them
+# after upgrading the cluster, not before.
+kubectl = "1.37"
+talosctl = "1.14"
+flux2 = "2.9"
+helm = "4"
+"aqua:cloudnative-pg/cloudnative-pg/kubectl-cnpg" = "1.30"
+
+# Secrets
+sops = "3"
+age = "1"
+
+node = "lts"
+uv = "latest"
+"npm:@google/gemini-cli" = "latest"
+"pipx:git-filter-repo" = "latest"
