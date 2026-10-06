@@ -11,7 +11,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Fix UPS Driver issue
-alias upsfix="ssh pollux sudo systemctl restart nut-driver.service"
+alias upsfix="ssh pollux sudo systemctl restart nut-driver@ups"
 
 # ls alias
 alias ll="ls -ahFo --time-style=+'%Y-%m-%d %H:%M:%S'"
