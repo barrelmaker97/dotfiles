@@ -89,17 +89,6 @@ set_prompt ()
 
 PROMPT_COMMAND='set_prompt'
 
-# Enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-	if [ -f /usr/share/bash-completion/bash_completion ]; then
-		. /usr/share/bash-completion/bash_completion
-	elif [ -f /etc/bash_completion ]; then
-		. /etc/bash_completion
-	fi
-fi
-
 # Set PATH to include private bin if it exists
 if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
@@ -113,6 +102,24 @@ fi
 # Add local Python packages to PATH on Mac
 if [ -d "$HOME/Library/Python/3.13/bin" ] ; then
 	PATH="$HOME/Library/Python/3.13/bin:$PATH"
+fi
+
+# Add Homebrew to PATH on Mac (Apple Silicon)
+if [ -d "/opt/homebrew/bin" ] ; then
+	PATH="/opt/homebrew/bin:$PATH"
+fi
+
+# Load completion after PATH setup so Homebrew completion scripts find their tools.
+if ! shopt -oq posix; then
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	elif [ -f /opt/homebrew/etc/profile.d/bash_completion.sh ]; then
+		. /opt/homebrew/etc/profile.d/bash_completion.sh
+	elif [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+		. /usr/local/etc/profile.d/bash_completion.sh
+	fi
 fi
 
 # Load Rust/Cargo config
@@ -133,13 +140,14 @@ export GPG_TTY=$(tty)
 export FCEDIT=vim
 
 # Add various command completion
-command -v kubectl > /dev/null && source <(kubectl completion bash)
-command -v talosctl > /dev/null && source <(talosctl completion bash)
-command -v flux > /dev/null && source <(flux completion bash)
-command -v oc > /dev/null && source <(oc completion bash)
-command -v helm > /dev/null && source <(helm completion bash)
-command -v kind > /dev/null && source <(kind completion bash)
-command -v podman > /dev/null && source <(podman completion bash)
+# Bash 3.2 on macOS can silently skip sourcing process-substitution files.
+command -v kubectl > /dev/null && eval "$(kubectl completion bash)"
+command -v talosctl > /dev/null && eval "$(talosctl completion bash)"
+command -v flux > /dev/null && eval "$(flux completion bash)"
+command -v oc > /dev/null && eval "$(oc completion bash)"
+command -v helm > /dev/null && eval "$(helm completion bash)"
+command -v kind > /dev/null && eval "$(kind completion bash)"
+command -v podman > /dev/null && eval "$(podman completion bash)"
 
 # Alias definitions; Keep this at the bottom
 if [ -f ~/dotfiles/aliases ]; then
