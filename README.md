@@ -7,6 +7,18 @@ Backup for my dotfiles.
 
 Fair warning: The installation will silently overwrite your existing dotfiles.
 
+## Shell setup
+The Bash configs use mise for development tools, including Node.js. Link
+`mise.toml` to `~/.config/mise/config.toml` and run `mise install` to make these
+tools available outside this checkout. Remove any old NVM startup lines so they
+don't override mise, then open a new terminal or run `exec bash -l`.
+
+For completion support on macOS, install `bash-completion` with Homebrew when
+using Apple's Bash 3.2, or `bash-completion@2` when using Homebrew Bash.
+
+The `ll` alias uses macOS's full timestamp option on macOS and GNU's timestamp
+format on other systems.
+
 ## Requirements
 * Git
 * Vim >= 8.0

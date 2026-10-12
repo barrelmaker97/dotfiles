@@ -14,7 +14,10 @@ fi
 alias upsfix="ssh pollux sudo systemctl restart nut-driver@ups"
 
 # ls alias
-alias ll="ls -ahFo --time-style=+'%Y-%m-%d %H:%M:%S'"
+case "$(uname -s)" in
+	Darwin) alias ll="ls -ahFoT";;
+	*) alias ll="ls -ahFo --time-style=+'%Y-%m-%d %H:%M:%S'";;
+esac
 
 # print $PATH nicely
 alias path='echo "$PATH" | tr ":" "\n" | sort'
