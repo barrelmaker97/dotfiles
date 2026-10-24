@@ -29,7 +29,6 @@ HostKey /etc/ssh/ssh_host_ecdsa_key
 #SyslogFacility AUTH
 #LogLevel INFO
 
-Protocol 2
 AllowUsers barrelmaker
 
 # Authentication:
@@ -59,7 +58,7 @@ MaxAuthTries 3
 
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication no
-#PermitEmptyPasswords no
+PermitEmptyPasswords no
 
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
@@ -127,11 +126,11 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 
 # Mozilla Configs
 
-KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256
+KexAlgorithms -ecdh-sha2-*,diffie-hellman-*
 
-Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com
 
-MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com
 
 # Password based logins are disabled - only public key based logins are allowed.
 AuthenticationMethods publickey
@@ -148,4 +147,4 @@ LogLevel VERBOSE
 # Additionally, only tools such as systemd and auditd record the process session id.
 # On other OSes, the user session id is not necessarily recorded at all kernel-side.
 # Using regular users in combination with /bin/su or /usr/bin/sudo ensure a clear audit track.
-PermitRootLogin No
+PermitRootLogin no
